@@ -1,0 +1,130 @@
+---
+// src/components/ImpactNumbers.astro
+---
+
+<section class="py-16 bg-primary text-white">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center">
+        <div
+          class="text-4xl md:text-5xl font-bold text-secondary mb-2"
+          id="years-counter"
+        >
+          60+
+        </div>
+        <p class="text-sm md:text-base uppercase tracking-wide">
+          Years of Service
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div
+          class="text-4xl md:text-5xl font-bold text-secondary mb-2"
+          id="lives-counter"
+        >
+          15,000+
+        </div>
+        <p class="text-sm md:text-base uppercase tracking-wide">
+          Lives Transformed
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div
+          class="text-4xl md:text-5xl font-bold text-secondary mb-2"
+          id="services-counter"
+        >
+          7+
+        </div>
+        <p class="text-sm md:text-base uppercase tracking-wide">
+          Comprehensive Services
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div
+          class="text-4xl md:text-5xl font-bold text-secondary mb-2"
+          id="partners-counter"
+        >
+          10+
+        </div>
+        <p class="text-sm md:text-base uppercase tracking-wide">
+          Partner Organizations
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Simple counter animation when numbers come into view
+  const counters = {
+    years: {
+      element: document.getElementById("years-counter"),
+      target: 60,
+      current: 0,
+      suffix: "+",
+    },
+    lives: {
+      element: document.getElementById("lives-counter"),
+      target: 15000,
+      current: 0,
+      suffix: "+",
+    },
+    services: {
+      element: document.getElementById("services-counter"),
+      target: 7,
+      current: 0,
+      suffix: "+",
+    },
+    partners: {
+      element: document.getElementById("partners-counter"),
+      target: 10,
+      current: 0,
+      suffix: "+",
+    },
+  };
+
+  const animateCounter = (counter) => {
+    const target = counter.target;
+    let current = 0;
+    const increment = target / 50;
+    const updateCounter = () => {
+      if (current < target) {
+        current += increment;
+        const displayValue = Math.ceil(current);
+        counter.element.textContent = displayValue + counter.suffix;
+        setTimeout(updateCounter, 30);
+      } else {
+        counter.element.textContent = target + counter.suffix;
+      }
+    };
+    updateCounter();
+  };
+
+  // Intersection Observer to trigger animation when visible
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Find which counter this is and animate it
+          for (const key in counters) {
+            if (counters[key].element === entry.target) {
+              animateCounter(counters[key]);
+              observer.unobserve(entry.target);
+              break;
+            }
+          }
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
+
+  // Observe all counter elements
+  for (const key in counters) {
+    if (counters[key].element) {
+      observer.observe(counters[key].element);
+    }
+  }
+</script>

@@ -1,0 +1,1008 @@
+---
+// src/layouts/Layout.astro
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Nyabondo Centre for Persons with Disabilities — Rising above Disability since 1963",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1B3A6B" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts — Playfair Display (headings) + Source Sans 3 (body) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/styles/global.css" />
+
+    <style>
+      :root {
+        --primary: #1b3a6b;
+        --primary-dark: #122952;
+        --primary-light: #2a5298;
+        --secondary: #c8922a;
+        --secondary-dark: #a57419;
+        --secondary-light: #e8a93a;
+        --text: #1a1a2e;
+        --text-light: #4a5568;
+        --text-muted: #718096;
+        --background: #fafaf8;
+        --surface: #ffffff;
+        --border: #e8e8e0;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06),
+          0 1px 2px rgba(0, 0, 0, 0.04);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08),
+          0 2px 6px rgba(0, 0, 0, 0.04);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12),
+          0 4px 12px rgba(0, 0, 0, 0.06);
+        --radius-sm: 6px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Source Sans 3", sans-serif;
+        color: var(--text);
+        background: var(--background);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body.high-contrast {
+        filter: contrast(1.5) grayscale(0.2);
+      }
+
+      /* ── Accessibility toolbar ── */
+      #accessibility-toolbar {
+        background: #f0f0ea;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.75rem;
+        color: var(--text-light);
+      }
+
+      #accessibility-toolbar .toolbar-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 6px 24px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 20px;
+      }
+
+      #accessibility-toolbar button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-light);
+        font-family: inherit;
+        font-size: 0.75rem;
+        padding: 3px 6px;
+        border-radius: 4px;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+
+      #accessibility-toolbar button:hover {
+        color: var(--primary);
+        background: rgba(27, 58, 107, 0.08);
+      }
+
+      /* ── Header ── */
+      header {
+        background: var(--surface);
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+
+      .nav-brand img {
+        height: 48px;
+        width: auto;
+      }
+
+      .nav-brand-text h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--primary);
+        line-height: 1.2;
+      }
+
+      .nav-brand-text p {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        letter-spacing: 0.03em;
+      }
+
+      /* Desktop nav */
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        list-style: none;
+      }
+
+      .nav-links > li {
+        position: relative;
+      }
+
+      .nav-links > li > a {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 12px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition:
+          color 0.2s,
+          background 0.2s;
+        white-space: nowrap;
+      }
+
+      .nav-links > li > a:hover,
+      .nav-links > li:hover > a {
+        color: var(--primary);
+        background: rgba(27, 58, 107, 0.06);
+      }
+
+      .nav-links > li > a i.chevron {
+        font-size: 0.6rem;
+        opacity: 0.6;
+        transition: transform 0.2s;
+      }
+
+      .nav-links > li:hover > a i.chevron {
+        transform: rotate(180deg);
+      }
+
+      /* Dropdowns */
+      .dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        min-width: 220px;
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition:
+          opacity 0.2s,
+          transform 0.2s,
+          visibility 0.2s;
+        z-index: 200;
+      }
+
+      .nav-links > li:hover .dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+
+      .dropdown a:hover {
+        background: rgba(27, 58, 107, 0.06);
+        color: var(--primary);
+      }
+
+      .dropdown a i {
+        width: 16px;
+        text-align: center;
+        color: var(--secondary);
+        font-size: 0.8rem;
+      }
+
+      .dropdown-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 6px 8px;
+      }
+
+      /* Nav CTA */
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+
+      .btn-donate {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        background: var(--secondary);
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-donate:hover {
+        background: var(--secondary-dark);
+        transform: translateY(-1px);
+      }
+
+      .btn-help {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        background: var(--primary);
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+
+      .btn-help:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      /* Mobile menu button */
+      #mobile-menu-btn {
+        display: none;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 8px 10px;
+        cursor: pointer;
+        color: var(--text);
+        font-size: 1.1rem;
+        transition: background 0.2s;
+      }
+
+      #mobile-menu-btn:hover {
+        background: rgba(27, 58, 107, 0.06);
+      }
+
+      /* Mobile nav */
+      #mobile-nav {
+        display: none;
+        flex-direction: column;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 16px 24px 24px;
+        gap: 2px;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+
+      #mobile-nav.open {
+        display: flex;
+      }
+
+      .mobile-nav-item {
+        display: block;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+
+      .mobile-nav-item:hover {
+        background: rgba(27, 58, 107, 0.06);
+        color: var(--primary);
+      }
+
+      .mobile-nav-group {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding: 14px 12px 4px;
+      }
+
+      .mobile-nav-sub {
+        display: block;
+        padding: 8px 12px 8px 24px;
+        font-size: 0.85rem;
+        color: var(--text-light);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+
+      .mobile-nav-sub:hover {
+        background: rgba(27, 58, 107, 0.06);
+        color: var(--primary);
+      }
+
+      .mobile-cta-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+      }
+
+      .mobile-cta-row a {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+
+      .mobile-cta-row a:hover {
+        opacity: 0.85;
+      }
+
+      /* ── Footer ── */
+      footer {
+        background: var(--primary-dark);
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 80px;
+      }
+
+      .footer-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 64px 24px 0;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.2fr;
+        gap: 48px;
+      }
+
+      .footer-brand p {
+        font-size: 0.875rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.65);
+        margin-top: 16px;
+        max-width: 280px;
+      }
+
+      .footer-tagline {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 16px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--secondary-light);
+      }
+
+      .footer-col h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--secondary);
+        display: inline-block;
+      }
+
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .footer-col ul a {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.2s;
+      }
+
+      .footer-col ul a:hover {
+        color: var(--secondary-light);
+      }
+
+      .footer-col ul a i {
+        font-size: 0.75rem;
+        width: 14px;
+        color: var(--secondary);
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.65);
+        margin-bottom: 12px;
+      }
+
+      .contact-item i {
+        color: var(--secondary);
+        margin-top: 3px;
+        flex-shrink: 0;
+        width: 16px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1rem;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          color 0.2s,
+          transform 0.2s;
+      }
+
+      .social-links a:hover {
+        background: var(--secondary);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      .footer-bottom {
+        max-width: 1280px;
+        margin: 48px auto 0;
+        padding: 20px 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .footer-bottom p {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .footer-bottom-links a {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer-bottom-links a:hover {
+        color: var(--secondary-light);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 1024px) {
+        .nav-links {
+          gap: 0;
+        }
+        .nav-links > li > a {
+          padding: 8px 9px;
+          font-size: 0.82rem;
+        }
+        .footer-inner {
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+        #mobile-menu-btn {
+          display: flex;
+        }
+        .footer-inner {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          padding: 40px 24px 0;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      /* ── Skip link ── */
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: 16px;
+        z-index: 9999;
+        background: var(--primary);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        text-decoration: none;
+        transition: top 0.2s;
+      }
+
+      .skip-link:focus {
+        top: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Accessibility Toolbar -->
+    <div
+      id="accessibility-toolbar"
+      role="toolbar"
+      aria-label="Accessibility options"
+    >
+      <div class="toolbar-inner">
+        <button id="increase-font" aria-label="Increase text size">
+          <i class="fas fa-plus" aria-hidden="true"></i> Larger Text
+        </button>
+        <button id="decrease-font" aria-label="Decrease text size">
+          <i class="fas fa-minus" aria-hidden="true"></i> Smaller Text
+        </button>
+        <button id="high-contrast" aria-label="Toggle high contrast mode">
+          <i class="fas fa-circle-half-stroke" aria-hidden="true"></i> High Contrast
+        </button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header role="banner">
+      <nav class="nav-inner" aria-label="Main navigation">
+        <!-- Brand -->
+        <a href="/" class="nav-brand" aria-label="Nyabondo Centre — Home">
+          <img
+            src="/logo.png"
+            alt="Nyabondo Centre for Persons with Disabilities"
+          />
+          <div class="nav-brand-text">
+            <h1>Nyabondo Centre</h1>
+            <p>for Persons with Disabilities</p>
+          </div>
+        </a>
+
+        <!-- Desktop nav -->
+        <ul class="nav-links" role="list">
+          <li><a href="/">Home</a></li>
+
+          <!-- About Us -->
+          <li>
+            <a href="/about" aria-haspopup="true" aria-expanded="false">
+              About Us <i class="fas fa-chevron-down chevron" aria-hidden="true"
+              ></i>
+            </a>
+            <div class="dropdown" role="menu">
+              <a href="/about/our-story" role="menuitem">
+                <i class="fas fa-book-open" aria-hidden="true"></i> Our Story
+              </a>
+              <a href="/about/board" role="menuitem">
+                <i class="fas fa-user-tie" aria-hidden="true"></i> Board Members
+              </a>
+              <a href="/about/administration" role="menuitem">
+                <i class="fas fa-users-gear" aria-hidden="true"></i> Administration
+                Team
+              </a>
+              <a href="/about/values" role="menuitem">
+                <i class="fas fa-heart" aria-hidden="true"></i> Core Values
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="/partners" role="menuitem">
+                <i class="fas fa-handshake" aria-hidden="true"></i> Our Partners
+              </a>
+            </div>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a href="/services" aria-haspopup="true" aria-expanded="false">
+              Services <i class="fas fa-chevron-down chevron" aria-hidden="true"
+              ></i>
+            </a>
+            <div class="dropdown" role="menu">
+              <a href="/services/outreaches" role="menuitem">
+                <i class="fas fa-map-location-dot" aria-hidden="true"></i> Community
+                Outreaches
+              </a>
+              <a href="/services/surgeries" role="menuitem">
+                <i class="fas fa-stethoscope" aria-hidden="true"></i> Corrective
+                Surgeries
+              </a>
+              <a href="/services/therapy" role="menuitem">
+                <i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Therapy
+                Services
+              </a>
+              <a href="/services/assistive-devices" role="menuitem">
+                <i class="fas fa-wheelchair" aria-hidden="true"></i> Assistive Devices
+              </a>
+              <a href="/services/vocational-training" role="menuitem">
+                <i class="fas fa-graduation-cap" aria-hidden="true"></i> Vocational
+                Training
+              </a>
+              <a href="/services/longterm-rehab" role="menuitem">
+                <i class="fas fa-clock-rotate-left" aria-hidden="true"></i> Long-term
+                Rehabilitation
+              </a>
+            </div>
+          </li>
+
+          <li><a href="/media-stories">Media &amp; Stories</a></li>
+
+          <!-- Get Involved -->
+          <li>
+            <a href="/get-involved" aria-haspopup="true" aria-expanded="false">
+              Get Involved <i
+                class="fas fa-chevron-down chevron"
+                aria-hidden="true"></i>
+            </a>
+            <div class="dropdown" role="menu">
+              <a href="/get-involved/donate" role="menuitem">
+                <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i> Donate
+              </a>
+              <a href="/get-involved/volunteer" role="menuitem">
+                <i class="fas fa-people-carry-box" aria-hidden="true"></i> Volunteer
+              </a>
+              <a href="/get-involved/partner" role="menuitem">
+                <i class="fas fa-handshake" aria-hidden="true"></i> Partner With
+                Us
+              </a>
+            </div>
+          </li>
+
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+
+        <!-- CTA buttons -->
+        <div class="nav-cta">
+          <a href="/get-involved/donate" class="btn-donate">
+            <i class="fas fa-heart" aria-hidden="true"></i> Donate
+          </a>
+          <a href="/get-involved/volunteer" class="btn-help">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i> Get Help
+          </a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-btn"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </nav>
+
+      <!-- Mobile navigation -->
+      <nav id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <a href="/" class="mobile-nav-item">Home</a>
+
+        <span class="mobile-nav-group">About Us</span>
+        <a href="/about/our-story" class="mobile-nav-sub">Our Story</a>
+        <a href="/about/board" class="mobile-nav-sub">Board Members</a>
+        <a href="/about/administration" class="mobile-nav-sub"
+          >Administration Team</a
+        >
+        <a href="/about/values" class="mobile-nav-sub">Core Values</a>
+        <a href="/partners" class="mobile-nav-sub">Our Partners</a>
+
+        <span class="mobile-nav-group">Services</span>
+        <a href="/services/outreaches" class="mobile-nav-sub"
+          >Community Outreaches</a
+        >
+        <a href="/services/surgeries" class="mobile-nav-sub"
+          >Corrective Surgeries</a
+        >
+        <a href="/services/therapy" class="mobile-nav-sub">Therapy Services</a>
+        <a href="/services/assistive-devices" class="mobile-nav-sub"
+          >Assistive Devices</a
+        >
+        <a href="/services/vocational-training" class="mobile-nav-sub"
+          >Vocational Training</a
+        >
+        <a href="/services/longterm-rehab" class="mobile-nav-sub"
+          >Long-term Rehabilitation</a
+        >
+
+        <a href="/media-stories" class="mobile-nav-item">Media &amp; Stories</a>
+
+        <span class="mobile-nav-group">Get Involved</span>
+        <a href="/get-involved/donate" class="mobile-nav-sub">Donate</a>
+        <a href="/get-involved/volunteer" class="mobile-nav-sub">Volunteer</a>
+        <a href="/get-involved/partner" class="mobile-nav-sub"
+          >Partner With Us</a
+        >
+
+        <a href="/contact" class="mobile-nav-item">Contact</a>
+
+        <div class="mobile-cta-row">
+          <a
+            href="/get-involved/donate"
+            style="background:var(--secondary);color:#fff;"
+          >
+            <i class="fas fa-heart"></i> Donate
+          </a>
+          <a
+            href="/get-involved/volunteer"
+            style="background:var(--primary);color:#fff;"
+          >
+            Get Help
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+      <div class="footer-inner">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <img
+            src="/logo-white.png"
+            alt="Nyabondo Centre for Persons with Disabilities"
+            style="height:56px;width:auto;"
+          />
+          <p>
+            For over six decades, Nyabondo Centre has been restoring dignity,
+            independence, and opportunity to persons with disabilities across
+            Kenya — through compassionate care, skilled rehabilitation, and an
+            unwavering commitment to inclusion.
+          </p>
+          <span class="footer-tagline">
+            <i class="fas fa-star" aria-hidden="true"></i> Rising above Disability
+            since 1963
+          </span>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <a href="/about/our-story"
+                ><i class="fas fa-chevron-right"></i> Our Story</a>
+            </li>
+            <li>
+              <a href="/services"
+                ><i class="fas fa-chevron-right"></i> Our Services</a>
+            </li>
+            <li>
+              <a href="/media-stories"
+                ><i class="fas fa-chevron-right"></i> Media &amp; Stories</a>
+            </li>
+            <li>
+              <a href="/get-involved/donate"
+                ><i class="fas fa-chevron-right"></i> Support Our Work</a>
+            </li>
+            <li>
+              <a href="/contact"
+                ><i class="fas fa-chevron-right"></i> Contact Us</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <div class="contact-item">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+            <span>0733 384 352</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <a
+              href="mailto:nyabdisabled2003@gmail.com"
+              style="color:rgba(255,255,255,0.65);text-decoration:none;"
+            >
+              nyabdisabled2003@gmail.com
+            </a>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-location-dot" aria-hidden="true"></i>
+            <span>P.O. Box 75-40109, Sondu, Kenya</span>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div class="footer-col">
+          <h3>Stay Connected</h3>
+          <p
+            style="font-size:0.85rem;color:rgba(255,255,255,0.55);margin-bottom:16px;line-height:1.6;"
+          >
+            Follow our journey and stay updated on the lives we are transforming
+            every day.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f" aria-hidden="true"></i></a
+            >
+            <a href="#" aria-label="Twitter / X"
+              ><i class="fab fa-x-twitter" aria-hidden="true"></i></a
+            >
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram" aria-hidden="true"></i></a
+            >
+            <a href="#" aria-label="YouTube"
+              ><i class="fab fa-youtube" aria-hidden="true"></i></a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2024 Nyabondo Centre for Persons with Disabilities. All rights
+          reserved.
+        </p>
+        <div class="footer-bottom-links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu
+      const mobileBtn = document.getElementById("mobile-menu-btn");
+      const mobileNav = document.getElementById("mobile-nav");
+      if (mobileBtn && mobileNav) {
+        mobileBtn.addEventListener("click", () => {
+          const isOpen = mobileNav.classList.toggle("open");
+          mobileBtn.setAttribute("aria-expanded", String(isOpen));
+          mobileBtn.querySelector("i").className = isOpen
+            ? "fas fa-xmark"
+            : "fas fa-bars";
+        });
+      }
+
+      // Text size
+      let fontSize = 16;
+      document
+        .getElementById("increase-font")
+        ?.addEventListener("click", () => {
+          if (fontSize < 20) {
+            fontSize += 2;
+            document.body.style.fontSize = fontSize + "px";
+          }
+        });
+      document
+        .getElementById("decrease-font")
+        ?.addEventListener("click", () => {
+          if (fontSize > 14) {
+            fontSize -= 2;
+            document.body.style.fontSize = fontSize + "px";
+          }
+        });
+
+      // High contrast
+      let hc = false;
+      document
+        .getElementById("high-contrast")
+        ?.addEventListener("click", () => {
+          hc = !hc;
+          document.body.classList.toggle("high-contrast", hc);
+        });
+    </script>
+  </body>
+</html>

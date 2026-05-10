@@ -1,0 +1,61 @@
+---
+// src/components/Hero.astro
+---
+
+<section
+  class="relative bg-gradient-to-r from-primary to-primary-dark text-white"
+>
+  <!-- Background image with overlay -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/hero-children-therapy.jpg"
+      alt="Children receiving therapy at Nyabondo Centre"
+      class="w-full h-full object-cover opacity-20"
+    />
+  </div>
+
+  <div class="relative z-10 container mx-auto px-4 py-24 md:py-32 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1
+        class="font-heading text-4xl md:text-6xl font-bold mb-6 animate-fade-in"
+      >
+        Rising above Disability
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 opacity-90">
+        Providing Quality Rehabilitation and Medical Services to Persons with
+        Disabilities in Kenya since 1963
+      </p>
+      <div
+        class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+      >
+        <a
+          href="/get-involved/donate"
+          class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary-dark transition-colors transform hover:scale-105"
+        >
+          Support Our Mission
+        </a>
+        <a
+          href="/get-involved/volunteer"
+          class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors transform hover:scale-105"
+        >
+          Request Services
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave separator -->
+  <div class="absolute bottom-0 left-0 w-full">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 320"
+      class="w-full"
+    >
+      <path
+        fill="#F9FAFB"
+        fill-opacity="1"
+        d="M0,256L48,240C96,224,192,192,288,192C384,192,480,224,576,224C672,224,768,192,864,192C960,192,1056,224,1152,224C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+      ></path>
+    </svg>
+  </div>
+</section>
