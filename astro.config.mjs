@@ -1,8 +1,18 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  integrations: [tailwind()],
-  site: 'https://nyabondo-centre.vercel.app',
-  output: 'static',
+  site: "https://nyabondocpwds.org",
+
+  integrations: [
+    sitemap(),
+  ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  adapter: vercel(),
 });
