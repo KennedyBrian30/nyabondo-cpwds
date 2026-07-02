@@ -2,11 +2,10 @@ backend:
   name: github
   repo: KennedyBrian30/nyabondo-cpwds
   branch: main
+  auth_endpoint: https://www.nyabondo-cpwds.org/api/auth
 
 publish_mode: simple
-
 site_url: https://nyabondo-cpwds.org
-
 media_folder: public/images/uploads
 public_folder: /images/uploads
 
@@ -19,6 +18,11 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Description, name: description, widget: text }
-      - { label: Date, name: pubDate, widget: datetime }  # Changed to match your schema
-      - { label: Featured Image, name: image, widget: image }
+      - { label: Excerpt, name: excerpt, widget: text, required: false }
+      - { label: Publication Date, name: pubDate, widget: datetime }
+      - { label: Author, name: author, widget: string, required: false }
+      - { label: Category, name: category, widget: string, required: false }
+      - { label: Featured Image, name: image, widget: image, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Tags, name: tags, widget: list, required: false }
       - { label: Body, name: body, widget: markdown }
