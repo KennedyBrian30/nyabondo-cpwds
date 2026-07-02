@@ -1,0 +1,955 @@
+---
+// src/pages/programs/longterm-rehab.astro
+import Layout from "../../layouts/Layout.astro";
+
+// Breadcrumb data
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Programmes", href: "/programs" },
+  { label: "Long‑term Rehabilitation for Children", href: "/programs/longterm-rehab" },
+];
+
+// Related programmes for interlinking
+const relatedProgrammes = [
+  {
+    title: "Community Based Inclusive Development (CBID)",
+    href: "/programs/cbid",
+    description: "Early identification and referral pathways that connect children with complex needs to long‑term care.",
+    icon: "fas fa-hand-holding-heart",
+  },
+  {
+    title: "Physical Rehabilitation & Corrective Surgeries",
+    href: "/programs/physical-rehabilitation",
+    description: "Surgeries and therapy that may precede or accompany long‑term rehabilitation.",
+    icon: "fas fa-scalpel",
+  },
+  {
+    title: "Social Inclusion & Protection",
+    href: "/programs/social-inclusion",
+    description: "Support groups and protection for families caring for children with severe disabilities.",
+    icon: "fas fa-people-group",
+  },
+  {
+    title: "SHINE Project",
+    href: "/programs/shine",
+    description: "Strengthening rehabilitation systems and access to quality care for children with disabilities.",
+    icon: "fas fa-seedling",
+  },
+];
+
+// Images – reusing existing assets
+const heroImg = "/images/services/service-therapy.webp";
+const therapyImg = "/images/hero/hero-rehabilitation-therapy.webp";
+const cerebralPalsyImg = "/images/hero/hero-post-op.webp";
+const familyImg = "/images/stories/story-joyline-recovery.webp";
+---
+
+<Layout title="Long‑term Rehabilitation for Children | Nyabondo Centre for Persons with Disabilities">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {breadcrumbs.map((crumb, i) => (
+          <li>
+            {i < breadcrumbs.length - 1 ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+            {i < breadcrumbs.length - 1 && (
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="programme-hero">
+    <div class="container">
+      <div class="programme-hero-grid">
+        <div class="programme-hero-content">
+          <span class="section-eyebrow">Specialised Care</span>
+          <h1 class="programme-title">
+            Long‑term Rehabilitation <span class="accent">for Children</span>
+          </h1>
+          <p class="programme-lead">
+            Structured, programme‑based therapy for children with cerebral palsy,
+            complex neurological conditions, and severe disabilities – delivered
+            over weeks and months to achieve measurable progress.
+          </p>
+          <div class="programme-hero-stats">
+            <div class="stat">
+              <span class="stat-num">200+</span>
+              <span class="stat-label">Children Enrolled Annually</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">6–12 months</span>
+              <span class="stat-label">Typical Programme Duration</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">85%</span>
+              <span class="stat-label">Show Functional Improvement</span>
+            </div>
+          </div>
+        </div>
+        <div class="programme-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="A therapist guiding a child through long‑term rehabilitation exercises at Nyabondo Centre"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">Structured physiotherapy session</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Long‑term Rehab -->
+  <section class="intro" aria-labelledby="intro-heading">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-text reveal-left">
+          <span class="section-eyebrow">Our Approach</span>
+          <h2 id="intro-heading" class="section-title">Beyond Short‑Term Therapy</h2>
+          <p>
+            Some children require more than a few outpatient sessions. Those with
+            cerebral palsy, spina bifida, severe brain injuries, or progressive
+            neuromuscular conditions need consistent, long‑term, interdisciplinary
+            care to maintain function, prevent contractures, and maximise
+            independence.
+          </p>
+          <p>
+            Nyabondo’s long‑term rehabilitation programme provides residential or
+            day‑care based therapy over extended periods, typically 6 to 12 months.
+            Each child receives an individualised plan that includes physiotherapy,
+            occupational therapy, speech therapy (where available), assistive
+            devices, and family training.
+          </p>
+          <div class="intro-highlights">
+            <span><i class="fas fa-calendar-week"></i> Programme‑based (not episodic)</span>
+            <span><i class="fas fa-children"></i> Holistic child development</span>
+            <span><i class="fas fa-hospital-user"></i> In‑patient or day care</span>
+          </div>
+        </div>
+        <div class="intro-image reveal-right">
+          <picture>
+            <source srcset="/images/services/service-therapy.webp" type="image/webp" />
+            <img
+              src="/images/services/service-therapy.webp"
+              alt="A child receiving occupational therapy at Nyabondo"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Components -->
+  <section class="components" aria-labelledby="components-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">What We Provide</span>
+        <h2 id="components-heading" class="section-title">
+          A Structured, Multidisciplinary Programme
+        </h2>
+        <p class="section-subtitle">
+          Each child’s journey is coordinated by a team of specialists who track
+          progress against clear milestones.
+        </p>
+      </div>
+
+      <div class="components-grid">
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-person-walking"></i></div>
+          <h3>Individualised Physiotherapy</h3>
+          <p>Daily or weekly sessions focused on gross motor skills, gait training, muscle strengthening, and preventing contractures.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-hand-peace"></i></div>
+          <h3>Occupational Therapy</h3>
+          <p>Fine motor development, self‑care skills (feeding, dressing), and adaptive equipment to increase independence.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-wheelchair"></i></div>
+          <h3>Assistive Technology</h3>
+          <p>Custom seating, standing frames, walkers, and mobility aids fitted on‑site by our orthopaedic technologists.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-microphone-alt"></i></div>
+          <h3>Speech & Communication Therapy</h3>
+          <p>Support for children with communication difficulties, including alternative and augmentative communication (AAC) where needed.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-family"></i></div>
+          <h3>Family Training & Counselling</h3>
+          <p>Parents and caregivers learn home therapy routines, positioning, and management of daily care – ensuring progress continues after discharge.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Progress Monitoring & Reviews</h3>
+          <p>Regular assessments by the rehabilitation team, with adjustments to the care plan every 4–6 weeks. Discharge planning begins early.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cerebral Palsy Care Spotlight -->
+  <section class="cp-spotlight" aria-labelledby="cp-heading">
+    <div class="container">
+      <div class="cp-grid">
+        <div class="cp-image reveal-left">
+          <picture>
+            <source srcset="/images/hero/hero-rehabilitation-therapy.webp" type="image/webp" />
+            <img
+              src="/images/hero/hero-rehabilitation-therapy.webp"
+              alt="Therapist working with a child with cerebral palsy"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+        <div class="cp-text reveal-right">
+          <span class="section-eyebrow">Specialist Focus</span>
+          <h2 id="cp-heading">Cerebral Palsy & Complex Neurological Conditions</h2>
+          <p>
+            A large proportion of our long‑term rehabilitation caseload consists of
+            children with cerebral palsy (CP). We use evidence‑based techniques,
+            including neurodevelopmental therapy (NDT), positioning, serial casting
+            for contractures, and parent‑led home programmes.
+          </p>
+          <div class="cp-stats">
+            <div><strong>60%</strong> of long‑term patients have CP</div>
+            <div><strong>3x/week</strong> therapy intensity for moderate/severe cases</div>
+            <div><strong>90%</strong> of caregivers report reduced stress after training</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admission Pathway -->
+  <section class="admission" aria-labelledby="admission-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">How to Enrol</span>
+        <h2 id="admission-heading" class="section-title">The Long‑term Rehabilitation Pathway</h2>
+      </div>
+      <div class="pathway">
+        <div class="pathway-step">
+          <div class="step-num">1</div>
+          <h3>Referral & Assessment</h3>
+          <p>Referred by CBID outreach, county hospital, or directly by family. Multidisciplinary assessment determines suitability.</p>
+        </div>
+        <div class="pathway-step">
+          <div class="step-num">2</div>
+          <h3>Individualised Care Plan</h3>
+          <p>Team sets goals (e.g., head control, sitting, standing, feeding) and weekly therapy schedule.</p>
+        </div>
+        <div class="pathway-step">
+          <div class="step-num">3</div>
+          <h3>Residential or Day Care</h3>
+          <p>Children from distant counties can stay at our centre with a caregiver. Day programme available for local families.</p>
+        </div>
+        <div class="pathway-step">
+          <div class="step-num">4</div>
+          <h3>Review & Transition</h3>
+          <p>Progress reviewed every 6 weeks. Gradual transition to home‑based care with follow‑up visits.</p>
+        </div>
+      </div>
+      <div class="admission-note">
+        <i class="fas fa-phone-alt"></i> To refer a child or request more information, please contact our rehabilitation coordinator.
+        <a href="/contact">Contact us →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Story -->
+  <section class="success-spotlight" aria-labelledby="story-heading">
+    <div class="container">
+      <div class="spotlight-wrapper">
+        <div class="spotlight-text reveal-left">
+          <span class="section-eyebrow">A Mother’s Testimony</span>
+          <h2 id="story-heading">“She can now sit and feed herself”</h2>
+          <blockquote>
+            “My daughter has cerebral palsy. Before coming to Nyabondo, she could
+            not hold up her head. After eight months of therapy, she sits
+            independently and uses a spoon. The therapists also taught me
+            exercises to do at home. I never thought this was possible.”
+          </blockquote>
+          <cite>— Mary, mother of 6‑year‑old Esther</cite>
+          <div class="story-milestones">
+            <span><i class="fas fa-check-circle"></i> Head control achieved</span>
+            <span><i class="fas fa-check-circle"></i> Independent sitting</span>
+            <span><i class="fas fa-check-circle"></i> Self‑feeding started</span>
+          </div>
+        </div>
+        <div class="spotlight-image reveal-right">
+          <picture>
+            <source srcset="/images/stories/story-joyline-recovery.webp" type="image/webp" />
+            <img
+              src="/images/stories/story-joyline-recovery.webp"
+              alt="A happy child after rehabilitation"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Programmes -->
+  <section class="related-programmes" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">Supporting Services & Programmes</h2>
+        <p class="section-subtitle">
+          Long‑term rehabilitation is most effective when combined with these other
+          interventions.
+        </p>
+      </div>
+      <div class="related-grid">
+        {relatedProgrammes.map((prog, i) => (
+          <a href={prog.href} class="related-card reveal-up" style={`--delay: ${i * 60}ms`}>
+            <div class="related-icon" aria-hidden="true"><i class={prog.icon}></i></div>
+            <h3>{prog.title}</h3>
+            <p>{prog.description}</p>
+            <span class="related-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-involve">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Help a Child Gain Independence</h2>
+          <p>
+            Your support can fund therapy sessions, assistive devices, or family
+            training – giving a child with severe disabilities a chance at a
+            better life.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/get-involved/donate" class="btn btn-green">
+            <i class="fas fa-heart"></i> Sponsor a Child
+          </a>
+          <a href="/get-involved/partner" class="btn btn-primary-outline">
+            Partner with Us <i class="fas fa-handshake"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero */
+  .programme-hero {
+    padding: 64px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+  }
+  .programme-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .programme-hero-content {
+    padding-right: 20px;
+  }
+  .programme-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .programme-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .programme-lead {
+    font-size: 1.12rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .programme-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .programme-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .programme-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Intro */
+  .intro {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .intro-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 24px;
+  }
+  .intro-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .intro-highlights span {
+    background: rgba(0, 150, 199, 0.08);
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .intro-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Components Grid */
+  .components {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .component-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .component-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+  }
+  .component-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(0, 150, 199, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 24px;
+  }
+  .component-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .component-card p {
+    color: var(--text-light);
+    line-height: 1.65;
+    font-size: 0.9rem;
+  }
+
+  /* CP Spotlight */
+  .cp-spotlight {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .cp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .cp-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .cp-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .cp-stats {
+    background: var(--background);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cp-stats div {
+    font-size: 0.9rem;
+  }
+  .cp-stats strong {
+    color: var(--primary);
+    font-size: 1.1rem;
+  }
+
+  /* Admission Pathway */
+  .admission {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .pathway {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .pathway-step {
+    flex: 1;
+    min-width: 200px;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .pathway-step h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .pathway-step p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+  .admission-note {
+    text-align: center;
+    background: rgba(0, 150, 199, 0.08);
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+  .admission-note a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 8px;
+  }
+
+  /* Success Spotlight */
+  .success-spotlight {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .spotlight-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .spotlight-text blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    border-left: 4px solid var(--primary);
+    padding-left: 24px;
+    margin: 20px 0;
+    line-height: 1.6;
+  }
+  .spotlight-text cite {
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-style: normal;
+    display: block;
+    margin-bottom: 24px;
+  }
+  .story-milestones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .story-milestones span {
+    font-size: 0.8rem;
+    background: rgba(46, 139, 87, 0.1);
+    padding: 4px 12px;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .spotlight-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Related Programmes */
+  .related-programmes {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-involve {
+    padding: 60px 0 80px;
+  }
+  .cta-card {
+    background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255,255,255,0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border: 2px solid var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal-left.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal-right.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .components-grid, .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .programme-hero-grid, .intro-grid, .cp-grid, .spotlight-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .components-grid, .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .pathway {
+      flex-direction: column;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .programme-hero-stats {
+      justify-content: center;
+    }
+    .programme-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up, .reveal-left, .reveal-right");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" }
+    );
+    els.forEach(el => io.observe(el));
+  })();
+</script>

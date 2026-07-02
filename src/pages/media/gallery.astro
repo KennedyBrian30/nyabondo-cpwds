@@ -1,0 +1,579 @@
+---
+// src/pages/media/gallery.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Media", href: "/media" },
+  { label: "Gallery", href: "/media/gallery" },
+];
+
+const galleryCategories = [
+  {
+    id: "therapy",
+    title: "Therapy Services",
+    description: "Our dedicated physiotherapists and occupational therapists work with children and adults to restore movement, strength, and functional independence.",
+    icon: "fas fa-hand-holding-heart",
+    images: [
+      { src: "/images/gallery/therapy-2.webp", alt: "A child on KAFOs exercising using a walking frame" },
+      { src: "/images/gallery/therapy-1.webp", alt: "Occupational therapist helping a patient with fine motor skills" },
+      { src: "/images/gallery/therapy-3.webp", alt: "Child undergoing physiotherapy session at Nyabondo Centre" },
+      { src: "/images/gallery/therapy-4.webp", alt: "Therapy session with a patient using parallel bars" }
+    ]
+  },
+  {
+    id: "assistive-devices",
+    title: "Assistive Technology Devices",
+    description: "Custom-made prosthetics, orthotics, walking aids, and mobility equipment crafted using appropriate technology to meet individual needs.",
+    icon: "fas fa-wheelchair",
+    images: [
+      { src: "/images/gallery/assistive-1.webp", alt: "Orthopaedic technologist aligning a prosthetic limb" },
+      { src: "/images/gallery/assistive-2.webp", alt: "Mr. Agoro trial-fitting a below knee prosthesis" },
+      { src: "/images/gallery/assistive-3.webp", alt: "Mobility aids being prepared for distribution" },
+      { src: "/images/gallery/assistive-4.webp", alt: "A custom-fabricated Knee Ankle Foot Orthosis" }
+    ]
+  },
+  {
+    id: "surgeries",
+    title: "Corrective Surgeries",
+    description: "Skilled orthopaedic and reconstructive procedures restoring mobility and quality of life for persons with disabilities.",
+    icon: "fas fa-stethoscope",
+    images: [
+      { src: "/images/gallery/surgery-1.webp", alt: "Surgeons performing a corrective orthopaedic procedure" },
+      { src: "/images/gallery/surgery-2.webp", alt: "Post-surgery care for a child at Nyabondo Centre" },
+      { src: "/images/gallery/surgery-3.webp", alt: "Orthopaedic surgery team in the operating theatre" },
+      { src: "/images/gallery/surgery-4.webp", alt: "Child recovering after corrective surgery" }
+    ]
+  },
+  {
+    id: "community-outreach",
+    title: "Community Outreach",
+    description: "Our outreach teams bring rehabilitation services, awareness, and support directly to communities across Kisumu, Homa Bay, and neighbouring counties.",
+    icon: "fas fa-users",
+    images: [
+      { src: "/images/gallery/outreach-1.webp", alt: "Community members gathered for a Nyabondo outreach event" },
+      { src: "/images/gallery/outreach-2.webp", alt: "Health workers conducting community screening and awareness" },
+      { src: "/images/gallery/outreach-3.webp", alt: "Outreach team engaging with community members" },
+      { src: "/images/gallery/outreach-4.webp", alt: "Early identification and assessment during community outreach" }
+    ]
+  },
+  {
+    id: "vocational-training",
+    title: "Vocational Training",
+    description: "Equipping youths with disabilities with practical skills in dressmaking, weaving, hairdressing, shoe making, basket weaving, and computer literacy.",
+    icon: "fas fa-graduation-cap",
+    images: [
+      { src: "/images/gallery/vocational-1.webp", alt: "Youth learning dressmaking and tailoring skills" },
+      { src: "/images/gallery/vocational-2.webp", alt: "Weaving and basket making training session" },
+      { src: "/images/gallery/vocational-3.webp", alt: "Hairdressing and beauty training for youths with disabilities" },
+      { src: "/images/gallery/vocational-4.webp", alt: "Computer literacy class at Nyabondo Centre" }
+    ]
+  },
+  {
+    id: "ben-mapp",
+    title: "BEN MAPP II Project",
+    description: "Building Effective Networks Multi-Annual Programme Plan Phase II – strengthening community based rehabilitation across Kisumu and Homa Bay Counties.",
+    icon: "fas fa-network-wired",
+    images: [
+      { src: "/images/gallery/ben-mapp-1.webp", alt: "BEN MAPP II community outreach and engagement activities" },
+      { src: "/images/gallery/ben-mapp-2.webp", alt: "BEN MAPP II training session with community health workers" },
+      { src: "/images/gallery/ben-mapp-3.webp", alt: "BEN MAPP II Official Opening of Kadibo EARC unit" },
+      { src: "/images/gallery/ben-mapp-4.webp", alt: "Cheshire team pays Nyabondo a courtesy call" }
+    ]
+  },
+  {
+    id: "shine",
+    title: "SHINE Project",
+    description: "Strengthening capacities for Holistic and Inclusive Need-based rehabilitative services that Empower individuals and communities in Kisumu and Homa Bay Counties (2026-2029).",
+    icon: "fas fa-star",
+    images: [
+      { src: "/images/gallery/shine-1.webp", alt: "SHINE Project community engagement and awareness activities" },
+      { src: "/images/gallery/shine-2.webp", alt: "SHINE Project supporting clients to acquire assistive devices" },
+      { src: "/images/gallery/shine-3.webp", alt: "SHINE Project supporting corrective surgeries to needy kids" },
+      { src: "/images/gallery/shine-4.webp", alt: "SHINE Project pre-vocational education" }
+    ]
+  },
+  {
+    id: "cbm-car",
+    title: "CBM Car Donation",
+    description: "Christian Blind Mission's generous donation of a vehicle to support Nyabondo Centre's community outreach and rehabilitation services.",
+    icon: "fas fa-car",
+    images: [
+      { src: "/images/gallery/cbm-car-2.webp", alt: "CBM vehicle donation handover ceremony at Nyabondo Centre" },
+      { src: "/images/gallery/cbm-car-1.webp", alt: "Cake cutting during the official ceremony" },
+      { src: "/images/gallery/cbm-car-3.webp", alt: "The new outreach vehicle ready for community visits" },
+      { src: "/images/gallery/cbm-car-4.webp", alt: "Community members taking a look at the new car" }
+    ]
+  }
+];
+---
+
+<Layout title="Gallery | Nyabondo Centre for Persons with Disabilities">
+
+  <!-- BREADCRUMB -->
+  <nav class="gallery-bc" aria-label="Breadcrumb">
+    <div class="gallery-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="gallery-hero">
+    <div class="gallery-container">
+      <div class="gallery-hero-content">
+        <span class="gallery-eyebrow">Visual Stories</span>
+        <h1>Gallery</h1>
+        <p>
+          Browse through our photo collections showcasing the work we do —
+          from corrective surgeries and therapy sessions to community outreaches
+          and vocational training.
+        </p>
+      </div>
+    </div>
+    <div class="gallery-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"
+        ></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- GALLERY CATEGORIES -->
+  <section class="gallery-categories">
+    <div class="gallery-container">
+      {galleryCategories.map((category, catIndex) => (
+        <div class="gallery-category" id={category.id}>
+          <div class="gallery-category-header">
+            <div class="gallery-category-icon">
+              <i class={category.icon} aria-hidden="true"></i>
+            </div>
+            <div class="gallery-category-info">
+              <h2>{category.title}</h2>
+              <p>{category.description}</p>
+            </div>
+          </div>
+          <div class="gallery-grid">
+            {category.images.map((image, imgIndex) => (
+              <div class="gallery-item" style={`--delay: ${imgIndex * 80}ms`}>
+                <picture>
+                  <source srcset={image.src} type="image/webp" />
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                  />
+                </picture>
+                <div class="gallery-item-caption">
+                  <p>{image.alt}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="gallery-cta">
+    <div class="gallery-container">
+      <div class="gallery-cta-card">
+        <h2>Share Your Photos</h2>
+        <p>
+          Have photos from a Nyabondo event or activity? We'd love to see them!
+          Contact us to share your images or stories.
+        </p>
+        <div class="gallery-cta-buttons">
+          <a href="/contact" class="gallery-btn gallery-btn-primary">
+            <i class="fas fa-envelope"></i> Contact Us
+          </a>
+          <a href="/get-involved/donate" class="gallery-btn gallery-btn-outline">
+            <i class="fas fa-heart"></i> Support Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* =============================================
+     GALLERY PAGE STYLES
+  ============================================= */
+  :root {
+    --gallery-primary: #0096c7;
+    --gallery-primary-dark: #006d94;
+    --gallery-primary-light: #48b8d8;
+    --gallery-green: #2e8b57;
+    --gallery-text: #0d2b38;
+    --gallery-text-light: #2e5a6b;
+    --gallery-bg: #f4fcff;
+    --gallery-surface: #ffffff;
+    --gallery-border: #c7e9f4;
+    --gallery-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --gallery-radius: 14px;
+    --gallery-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .gallery-bc {
+    background: var(--gallery-surface);
+    border-bottom: 1px solid var(--gallery-border);
+    padding: 12px 0;
+  }
+  .gallery-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gallery-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .gallery-bc a {
+    color: var(--gallery-primary);
+    text-decoration: none;
+  }
+  .gallery-bc a:hover {
+    text-decoration: underline;
+  }
+  .gallery-bc span {
+    color: var(--gallery-text-light);
+  }
+  .gallery-bc i {
+    font-size: 0.65rem;
+    color: var(--gallery-text-light);
+  }
+
+  /* Hero */
+  .gallery-hero {
+    background: linear-gradient(
+      135deg,
+      var(--gallery-primary-dark) 0%,
+      var(--gallery-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .gallery-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .gallery-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gallery-primary-light);
+    margin-bottom: 12px;
+  }
+  .gallery-eyebrow::before,
+  .gallery-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .gallery-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .gallery-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .gallery-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .gallery-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  /* Gallery Categories */
+  .gallery-categories {
+    padding: 64px 0 80px;
+    background: var(--gallery-bg);
+  }
+  .gallery-category {
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--gallery-border);
+  }
+  .gallery-category:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .gallery-category-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  .gallery-category-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: rgba(0, 150, 199, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--gallery-primary);
+  }
+  .gallery-category-info h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gallery-text);
+    margin-bottom: 6px;
+  }
+  .gallery-category-info p {
+    font-size: 0.95rem;
+    color: var(--gallery-text-light);
+    line-height: 1.6;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .gallery-item {
+    border-radius: var(--gallery-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s var(--gallery-ease);
+    aspect-ratio: 4/3;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: galleryFadeIn 0.6s var(--gallery-ease) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+  @keyframes galleryFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 32px rgba(0, 150, 199, 0.2);
+    z-index: 2;
+  }
+  .gallery-item picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--gallery-ease);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+  .gallery-item-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s var(--gallery-ease);
+  }
+  .gallery-item:hover .gallery-item-caption {
+    opacity: 1;
+  }
+  .gallery-item-caption p {
+    font-size: 0.8rem;
+    color: white;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* CTA Banner */
+  .gallery-cta {
+    padding: 60px 0 80px;
+    background: var(--gallery-surface);
+  }
+  .gallery-cta-card {
+    background: linear-gradient(
+      135deg,
+      var(--gallery-primary-dark) 0%,
+      var(--gallery-primary) 100%
+    );
+    border-radius: var(--gallery-radius);
+    padding: 48px 40px;
+    text-align: center;
+    color: white;
+  }
+  .gallery-cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  .gallery-cta-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .gallery-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .gallery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    border: 2px solid transparent;
+  }
+  .gallery-btn:hover {
+    transform: translateY(-2px);
+  }
+  .gallery-btn-primary {
+    background: white;
+    color: var(--gallery-primary);
+  }
+  .gallery-btn-primary:hover {
+    background: #e0f5fc;
+  }
+  .gallery-btn-outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.6);
+    color: white;
+  }
+  .gallery-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-category-header {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+    .gallery-category-info h2 {
+      font-size: 1.3rem;
+    }
+    .gallery-category-info p {
+      font-size: 0.9rem;
+    }
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .gallery-cta-card {
+      padding: 32px 24px;
+    }
+    .gallery-cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .gallery-btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .gallery-item-caption {
+      opacity: 1;
+      padding: 8px 12px;
+    }
+    .gallery-item-caption p {
+      font-size: 0.7rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .gallery-item {
+      aspect-ratio: 4/3;
+    }
+    .gallery-category {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+    }
+    .gallery-category-info h2 {
+      font-size: 1.1rem;
+    }
+    .gallery-category-info p {
+      font-size: 0.85rem;
+    }
+    .gallery-category-icon {
+      width: 44px;
+      height: 44px;
+      font-size: 1.1rem;
+    }
+  }
+</style>

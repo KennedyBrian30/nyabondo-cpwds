@@ -1,0 +1,566 @@
+---
+// src/pages/get-involved/volunteer.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Get Involved", href: "/get-involved" },
+  { label: "Volunteer", href: "/get-involved/volunteer" },
+];
+
+const volunteerRoles = [
+  {
+    title: "Medical Volunteers",
+    description:
+      "Doctors, surgeons, nurses, physiotherapists, occupational therapists, and clinical officers.",
+    commitment: "Flexible – 1 week to 3 months",
+    requirements:
+      "Valid license/degree, experience in rehabilitation preferred.",
+  },
+  {
+    title: "Therapy Assistants",
+    description:
+      "Help with exercises, mobilise patients, prepare therapy equipment.",
+    commitment: "2–4 weeks minimum",
+    requirements:
+      "Basic physiotherapy knowledge or training; empathy and patience.",
+  },
+  {
+    title: "Orthopaedic Technologist / Prosthetist",
+    description:
+      "Assist in orthopaedic workshop: fabricate and repair assistive devices.",
+    commitment: "1 month or longer",
+    requirements: "Diploma in Orthopaedic Technology or relevant experience.",
+  },
+  {
+    title: "Vocational Trainers",
+    description:
+      "Teach tailoring, computer literacy, hairdressing, shoemaking, or basket weaving.",
+    commitment: "2 weeks minimum",
+    requirements:
+      "Expertise in the trade, ability to teach youths with disabilities.",
+  },
+  {
+    title: "Administrative Support",
+    description:
+      "Help with data entry, donor communication, social media, photography, grant writing.",
+    commitment: "Flexible – remote or onsite",
+    requirements: "Computer literacy, communication skills.",
+  },
+  {
+    title: "Maintenance & Logistics",
+    description:
+      "Assist with facility upkeep, equipment repair, driving, or organising material donations.",
+    commitment: "Flexible",
+    requirements:
+      "Practical skills, valid driving license for transport roles.",
+  },
+];
+---
+
+<Layout title="Volunteer | Nyabondo Centre for Persons with Disabilities">
+  <!-- BREADCRUMB -->
+  <nav class="volunteer-bc" aria-label="Breadcrumb">
+    <div class="volunteer-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="volunteer-hero">
+    <div class="volunteer-container">
+      <div class="volunteer-hero-content">
+        <span class="volunteer-eyebrow">Give Your Time</span>
+        <h1>Volunteer at Nyabondo</h1>
+        <p>
+          Share your skills, learn from our team, and make a tangible difference
+          in the lives of persons with disabilities. Volunteers are a vital part
+          of our family.
+        </p>
+      </div>
+    </div>
+    <div class="volunteer-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ROLES GRID -->
+  <section class="volunteer-roles">
+    <div class="volunteer-container">
+      <h2>Areas Where You Can Help</h2>
+      <div class="volunteer-roles-grid">
+        {
+          volunteerRoles.map((role) => (
+            <div class="volunteer-role-card">
+              <h3>{role.title}</h3>
+              <p>{role.description}</p>
+              <div class="volunteer-role-details">
+                <span>
+                  <i class="fas fa-clock" /> {role.commitment}
+                </span>
+                <span>
+                  <i class="fas fa-clipboard-list" /> {role.requirements}
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY VOLUNTEER -->
+  <section class="volunteer-why">
+    <div class="volunteer-container">
+      <div class="volunteer-why-card">
+        <i class="fas fa-smile"></i>
+        <h3>What You Gain</h3>
+        <ul>
+          <li>Hands-on experience in a rehabilitation centre</li>
+          <li>Cross‑cultural exchange and community immersion</li>
+          <li>Certificate of appreciation and reference letter</li>
+          <li>The joy of seeing someone walk, smile, or gain independence</li>
+        </ul>
+        <p>Accommodation can be arranged for long‑term volunteers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="volunteer-process">
+    <div class="volunteer-container">
+      <h2>How to Become a Volunteer</h2>
+      <div class="volunteer-steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>Fill out the online application form below.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            We will contact you to discuss your skills, availability, and
+            placement.
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>Complete a simple orientation (online or onsite).</div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div>Start changing lives!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUNTEER APPLICATION FORM -->
+  <section class="volunteer-form-section">
+    <div class="volunteer-container">
+      <div class="volunteer-form-card">
+        <h2>Apply to Volunteer</h2>
+        <form
+          action="/api/volunteer-apply"
+          method="POST"
+          class="volunteer-form"
+        >
+          <div class="volunteer-form-row">
+            <input
+              type="text"
+              name="full_name"
+              placeholder="Full Name *"
+              required
+            />
+            <input type="email" name="email" placeholder="Email *" required />
+          </div>
+          <div class="volunteer-form-row">
+            <input type="tel" name="phone" placeholder="Phone *" required />
+            <input
+              type="text"
+              name="location"
+              placeholder="Your Location (City/Country)"
+            />
+          </div>
+          <select name="role_interest" required>
+            <option value="">Select Primary Role Interest *</option>
+            <option>Medical Volunteer</option>
+            <option>Therapy Assistant</option>
+            <option>Orthopaedic Technologist</option>
+            <option>Vocational Trainer</option>
+            <option>Administrative Support</option>
+            <option>Maintenance & Logistics</option>
+            <option>Other</option>
+          </select>
+          <input
+            type="text"
+            name="availability"
+            placeholder="Availability (e.g., March 2025, 2 weeks)"
+          />
+          <textarea
+            name="qualifications"
+            rows="3"
+            placeholder="Briefly describe your qualifications or experience"
+          ></textarea>
+          <textarea
+            name="motivation"
+            rows="3"
+            placeholder="Why do you want to volunteer at Nyabondo?"></textarea>
+          <button type="submit" class="volunteer-btn volunteer-btn-primary"
+            >Submit Application</button
+          >
+        </form>
+        <p class="volunteer-note">
+          * After submitting, our volunteer coordinator will respond within 5–7
+          days. For urgent inquiries, call <a href="tel:+254733384352"
+            >0733 384 352</a
+          >.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="volunteer-testimonial">
+    <div class="volunteer-container">
+      <div class="volunteer-testimonial-card">
+        <i class="fas fa-quote-left"></i>
+        <blockquote>
+          Volunteering at Nyabondo as a physiotherapy student was life‑changing.
+          I learned more in one month than a year in class, and the patients'
+          resilience inspired me daily.
+        </blockquote>
+        <cite>— Sarah, Physiotherapy volunteer (2024)</cite>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== Volunteer Page Styles ===== */
+  :root {
+    --volunteer-primary: #0096c7;
+    --volunteer-primary-dark: #006d94;
+    --volunteer-primary-light: #48b8d8;
+    --volunteer-green: #2e8b57;
+    --volunteer-text: #0d2b38;
+    --volunteer-text-light: #2e5a6b;
+    --volunteer-bg: #f4fcff;
+    --volunteer-surface: #ffffff;
+    --volunteer-border: #c7e9f4;
+    --volunteer-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --volunteer-radius: 14px;
+  }
+  .volunteer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .volunteer-bc {
+    background: var(--volunteer-surface);
+    border-bottom: 1px solid var(--volunteer-border);
+    padding: 12px 0;
+  }
+  .volunteer-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .volunteer-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .volunteer-bc a {
+    color: var(--volunteer-primary);
+    text-decoration: none;
+  }
+  .volunteer-bc span {
+    color: var(--volunteer-text-light);
+  }
+  .volunteer-hero {
+    background: linear-gradient(
+      135deg,
+      var(--volunteer-primary-dark) 0%,
+      var(--volunteer-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .volunteer-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .volunteer-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--volunteer-primary-light);
+    margin-bottom: 12px;
+  }
+  .volunteer-eyebrow::before,
+  .volunteer-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .volunteer-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .volunteer-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .volunteer-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .volunteer-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  .volunteer-roles {
+    padding: 64px 0;
+    background: var(--volunteer-surface);
+  }
+  .volunteer-roles h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .volunteer-roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .volunteer-role-card {
+    background: var(--volunteer-bg);
+    border-radius: var(--volunteer-radius);
+    padding: 24px;
+    border: 1px solid var(--volunteer-border);
+    transition: transform 0.2s;
+  }
+  .volunteer-role-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--volunteer-shadow);
+  }
+  .volunteer-role-card h3 {
+    color: var(--volunteer-primary);
+    margin-bottom: 12px;
+  }
+  .volunteer-role-details {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--volunteer-text-light);
+  }
+  .volunteer-role-details i {
+    width: 20px;
+    color: var(--volunteer-green);
+  }
+
+  .volunteer-why {
+    padding: 48px 0;
+    background: var(--volunteer-bg);
+  }
+  .volunteer-why-card {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--volunteer-surface);
+    border-radius: var(--volunteer-radius);
+    padding: 40px;
+  }
+  .volunteer-why-card i {
+    font-size: 3rem;
+    color: var(--volunteer-primary-light);
+    margin-bottom: 16px;
+  }
+  .volunteer-why-card ul {
+    text-align: left;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  .volunteer-why-card li {
+    margin-bottom: 8px;
+  }
+
+  .volunteer-process {
+    padding: 64px 0;
+    background: var(--volunteer-surface);
+    text-align: center;
+  }
+  .volunteer-process h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    margin-bottom: 48px;
+  }
+  .volunteer-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+  }
+  .step {
+    flex: 1;
+    min-width: 180px;
+    text-align: center;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--volunteer-primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+
+  .volunteer-form-section {
+    padding: 64px 0;
+    background: var(--volunteer-bg);
+  }
+  .volunteer-form-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--volunteer-surface);
+    border-radius: var(--volunteer-radius);
+    padding: 48px;
+    box-shadow: var(--volunteer-shadow);
+  }
+  .volunteer-form-card h2 {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .volunteer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .volunteer-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .volunteer-form input,
+  .volunteer-form select,
+  .volunteer-form textarea {
+    padding: 12px;
+    border: 1px solid var(--volunteer-border);
+    border-radius: 6px;
+    font-family: inherit;
+  }
+  .volunteer-btn-primary {
+    background: var(--volunteer-primary);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+  .volunteer-btn-primary:hover {
+    background: var(--volunteer-primary-dark);
+  }
+  .volunteer-note {
+    font-size: 0.85rem;
+    color: var(--volunteer-text-light);
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  .volunteer-testimonial {
+    padding: 64px 0;
+    background: var(--volunteer-surface);
+  }
+  .volunteer-testimonial-card {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    background: var(--volunteer-bg);
+    border-radius: var(--volunteer-radius);
+    border-left: 4px solid var(--volunteer-primary);
+  }
+  .volunteer-testimonial-card i {
+    font-size: 2rem;
+    color: var(--volunteer-primary-light);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+  .volunteer-testimonial-card blockquote {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin: 0 0 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .volunteer-roles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .volunteer-roles-grid {
+      grid-template-columns: 1fr;
+    }
+    .volunteer-steps {
+      flex-direction: column;
+      align-items: center;
+    }
+    .volunteer-form-row {
+      grid-template-columns: 1fr;
+    }
+    .volunteer-form-card {
+      padding: 32px 24px;
+    }
+  }
+</style>

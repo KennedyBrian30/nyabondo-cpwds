@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: KennedyBrian30/nyabondo-cpwds
+  branch: main
+
+publish_mode: simple
+
+site_url: https://nyabondocpwds.org
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: case-studies
+    label: Case Studies
+    folder: src/content/case-studies
+    create: true
+    slug: "{{slug}}"
+
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Featured Image, name: image, widget: image }
+      - { label: Body, name: body, widget: markdown }

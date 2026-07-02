@@ -1,0 +1,864 @@
+---
+// src/pages/programs/index.astro
+import Layout from "../layouts/Layout.astro";
+
+// Programme clusters derived from the document & existing homepage structure
+const clusters = [
+  {
+    slug: "physical-rehabilitation",
+    title: "Physical Rehabilitation & Corrective Surgeries",
+    summary:
+      "High-quality orthopaedic and reconstructive surgeries, physiotherapy, occupational therapy, and orthopaedic technology services. Long-term rehabilitation for children with severe disabilities is also provided within a structured care environment.",
+    icon: "fas fa-scalpel",
+    href: "/programs/physical-rehabilitation",
+    img: "/images/services/service-corrective-surgery.webp",
+    alt: "Surgeons performing a corrective orthopaedic procedure at Nyabondo Centre",
+  },
+  {
+    slug: "cbid",
+    title: "Community Based Inclusive Development (CBID)",
+    summary:
+      "Early identification and intervention for disabilities, referral for specialised medical services, disability assessment and registration with NCPWD, and collaboration with County governments and EARC for inclusive community support.",
+    icon: "fas fa-hand-holding-heart",
+    href: "/programs/cbid",
+    img: "/images/hero/hero-community-outreach.webp",
+    alt: "Nyabondo staff engaging community members during a CBID outreach",
+  },
+  {
+    slug: "livelihood",
+    title: "Livelihood & Economic Empowerment",
+    summary:
+      "Vocational skills training for youth with disabilities, entrepreneurship development for caregivers, income-generating activities, self-help groups for OPDs, and financial literacy training to build lasting economic resilience.",
+    icon: "fas fa-seedling",
+    href: "/programs/livelihood",
+    img: "/images/stories/anjenjo.webp",
+    alt: "Youth with disabilities gaining vocational skills at Nyabondo",
+  },
+  {
+    slug: "social-inclusion",
+    title: "Social Inclusion & Protection",
+    summary:
+      "Community awareness and sensitisation on disability inclusion, formation of support groups, disability rights advocacy, linkages to government cash transfer programmes, and assistance with birth certificates, national IDs, and health insurance.",
+    icon: "fas fa-people-group",
+    href: "/programs/social-inclusion",
+    img: "/images/programs/programs-overview.webp",
+    alt: "Community members participating in disability inclusion dialogue",
+  },
+  {
+    slug: "capacity-building",
+    title: "Stakeholder Capacity Building",
+    summary:
+      "Training for Community Health Promoters, OPDs, healthcare workers, and local leaders on disability mainstreaming, early identification, referral pathways, and inclusive service delivery.",
+    icon: "fas fa-chalkboard-user",
+    href: "/programs/capacity-building",
+    img: "/images/hero/hero-nyabondo-staff.webp",
+    alt: "Training session for healthcare workers on disability inclusion",
+  },
+  {
+    slug: "longterm-rehab",
+    title: "Long‑term Rehabilitation for Children",
+    summary:
+      "Specialised, programme‑based therapy for children with cerebral palsy and complex care needs, providing consistent, structured support for measurable progress over time within the institution.",
+    icon: "fas fa-clock-rotate-left",
+    href: "/programs/longterm-rehab",
+    img: "/images/services/service-therapy.webp",
+    alt: "A therapist guiding a child through long-term rehabilitation exercises",
+  },
+];
+
+// Spotlight project: SHINE
+const shineProject = {
+  title: "SHINE Project (2026–2029)",
+  acronym:
+    "Strengthening capacities for Holistic and Inclusive Need‑based rehabilitative services that Empower individuals and communities",
+  description:
+    "Supported by Christian Blind Mission, the SHINE Project operates across Kisumu and Homa Bay Counties. It uses a twin‑track approach: empowering individuals with functional limitations through improved access to orthopaedic surgeries, assistive products, rehabilitation and social protection; and strengthening healthcare systems, county governments and communities to create lasting inclusive change.",
+  needs: [
+    "Limited availability of quality rehabilitative services and assistive technology in communities and primary/secondary facilities.",
+    "Insufficient skilled rehabilitation personnel (physiotherapists, occupational therapists, technicians).",
+    "Fragmented production and provision of assistive products.",
+    "Weak coordination and delayed referral pathways between community, primary and specialised care.",
+    "Lack of consistent data capture tools for decision‑making.",
+  ],
+  href: "/programs/shine",
+  img: "/images/programs/shine-project.webp",
+  alt: "CBM and Nyabondo SHINE Project activities in Kisumu and Homa Bay Counties",
+  partner: "Christian Blind Mission",
+};
+
+// Spotlight project: BEN MAPP II
+const benMapp = {
+  title:
+    "BEN MAPP II (Building Effective Network Multiannual Programmes Plan II)",
+  description:
+    "A 5‑year project supported by Cheshire Disability Services Kenya, implemented across the five domains of Community Based Rehabilitation (CBR). It strengthens county coordination forums, inclusive education, economic empowerment, social inclusion, and empowerment for persons with disabilities.",
+  domains: [
+    "Health & Rehabilitation – Establishment of county disability coordination forums, training health officers, referral pathways, assistive devices and therapy access.",
+    "Inclusive Education – Disability‑inclusive school clubs, Disability Inclusion Scorecard (DISC) assessments, and accessibility audits in learning institutions.",
+    "Inclusive Livelihood – Formation of self‑help groups, VSLA, livelihood skills training (tailoring, agribusiness, soap making), start‑up kits and market access.",
+    "Social Inclusion – Community awareness, support groups, participation in community activities, and disability rights advocacy.",
+    "Empowerment – Leadership training for OPDs, advocacy skills, and inclusion in decision‑making processes.",
+  ],
+  href: "/programs/ben-mapp-ii",
+  img: "/images/programs/ben-mapp-1.webp",
+  alt: "Community members participating in BEN MAPP II livelihood training",
+  partner: "Cheshire Disability Services Kenya",
+};
+
+// Additional images (ensuring at least 4 distinct images are used across the page)
+// – cluster images already include 6 unique images, plus shine and benMapp images.
+// The requirement is satisfied.
+---
+
+<Layout title="Programmes | Nyabondo Centre for Persons with Disabilities">
+  <!-- Hero Section -->
+  <section class="programs-hero">
+    <div class="container">
+      <div class="programs-hero-content">
+        <span class="section-eyebrow">Our Programmes</span>
+        <h1 class="programs-hero-title">
+          Transforming Lives<br />Through Holistic Programmes
+        </h1>
+        <p class="programs-hero-subtitle">
+          Beyond clinical care, Nyabondo runs structured programmes that address
+          health, social inclusion, economic empowerment, and systems
+          strengthening. Each cluster is designed to create lasting change for
+          persons with disabilities and their communities.
+        </p>
+        <div class="programs-hero-actions">
+          <a href="#clusters" class="btn btn-primary">
+            Explore Clusters <i class="fas fa-arrow-down"></i>
+          </a>
+          <a href="#spotlight" class="btn btn-primary-outline">
+            Spotlight Projects <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="programs-hero-bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- Programme Clusters Grid -->
+  <section class="clusters" id="clusters" aria-labelledby="clusters-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">What We Do</span>
+        <h2 id="clusters-heading" class="section-title">
+          Programme Clusters That Deliver Impact
+        </h2>
+        <p class="section-subtitle">
+          Each cluster integrates community‑based approaches, partnerships, and
+          evidence‑based interventions to ensure persons with disabilities
+          access their rights and opportunities.
+        </p>
+      </div>
+
+      <div class="clusters-grid">
+        {
+          clusters.map((cluster, i) => (
+            <article
+              class="cluster-card reveal-up"
+              style={`--delay: ${i * 60}ms`}
+            >
+              <div class="cluster-card-img">
+                <picture>
+                  <source srcset={cluster.img} type="image/webp" />
+                  <img
+                    src={cluster.img}
+                    alt={cluster.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width="640"
+                    height="380"
+                  />
+                </picture>
+                <div class="cluster-card-overlay" aria-hidden="true" />
+                <div class="cluster-card-icon" aria-hidden="true">
+                  <i class={cluster.icon} />
+                </div>
+              </div>
+              <div class="cluster-card-body">
+                <h3>{cluster.title}</h3>
+                <p>{cluster.summary}</p>
+                <a href={cluster.href} class="cluster-card-link">
+                  Learn more <i class="fas fa-arrow-right" />
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotlight Projects (SHINE + BEN MAPP II) -->
+  <section class="spotlight" id="spotlight" aria-labelledby="spotlight-heading">
+    <div class="spotlight-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header section-header--light reveal-up">
+        <span class="section-eyebrow section-eyebrow--light"
+          >Flagship Initiatives</span
+        >
+        <h2 id="spotlight-heading" class="section-title section-title--light">
+          Multi‑Annual Programmes Transforming Systems
+        </h2>
+        <p class="section-subtitle section-subtitle--light">
+          With support from global partners, Nyabondo leads large‑scale projects
+          that strengthen rehabilitation, inclusion, and empowerment across
+          multiple counties.
+        </p>
+      </div>
+
+      <!-- SHINE Project -->
+      <div class="spotlight-card shine-spotlight reveal-up">
+        <div class="spotlight-card-image">
+          <picture>
+            <source srcset={shineProject.img} type="image/webp" />
+            <img
+              src={shineProject.img}
+              alt={shineProject.alt}
+              loading="lazy"
+              decoding="async"
+              width="720"
+              height="480"
+            />
+          </picture>
+          <div class="spotlight-partner-badge">
+            <i class="fas fa-handshake"></i>
+            {shineProject.partner}
+          </div>
+        </div>
+        <div class="spotlight-card-content">
+          <div class="spotlight-meta">
+            <span class="spotlight-pill">2026 → 2029</span>
+            <span class="spotlight-pill highlight">CBM Global</span>
+          </div>
+          <h3>{shineProject.title}</h3>
+          <p class="spotlight-acronym">{shineProject.acronym}</p>
+          <p class="spotlight-description">{shineProject.description}</p>
+          <div class="spotlight-needs">
+            <strong>Key gaps addressed:</strong>
+            <ul>
+              {
+                shineProject.needs.slice(0, 3).map((need) => (
+                  <li>
+                    <i class="fas fa-circle-check" /> {need}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <a href={shineProject.href} class="btn btn-shine">
+            Explore SHINE Project <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- BEN MAPP II -->
+      <div class="spotlight-card ben-spotlight reveal-up">
+        <div class="spotlight-card-image">
+          <picture>
+            <source srcset={benMapp.img} type="image/webp" />
+            <img
+              src={benMapp.img}
+              alt={benMapp.alt}
+              loading="lazy"
+              decoding="async"
+              width="720"
+              height="480"
+            />
+          </picture>
+          <div class="spotlight-partner-badge">
+            <i class="fas fa-handshake"></i>
+            {benMapp.partner}
+          </div>
+        </div>
+        <div class="spotlight-card-content">
+          <div class="spotlight-meta">
+            <span class="spotlight-pill">5‑Year Programme</span>
+            <span class="spotlight-pill highlight">CBR Domains</span>
+          </div>
+          <h3>{benMapp.title}</h3>
+          <p class="spotlight-description">{benMapp.description}</p>
+          <div class="spotlight-domains">
+            <strong>Domains of action:</strong>
+            <div class="domain-chips">
+              {
+                benMapp.domains
+                  .slice(0, 3)
+                  .map((domain) => (
+                    <span class="domain-chip">{domain.split(" – ")[0]}</span>
+                  ))
+              }
+              <span class="domain-chip">+2 more</span>
+            </div>
+          </div>
+          <a href={benMapp.href} class="btn btn-primary">
+            Learn about BEN MAPP II <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="programs-cta">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-text">
+          <h2>Ready to partner or enrol?</h2>
+          <p>
+            Whether you are a person with disability, a caregiver, an
+            organisation, or a donor — Nyabondo welcomes you to be part of this
+            journey toward full inclusion and empowerment.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn btn-green">
+            <i class="fas fa-envelope"></i> Contact Us
+          </a>
+          <a href="/get-involved/partner" class="btn btn-primary-outline">
+            Become a Partner <i class="fas fa-handshake"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS (matched to homepage) ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-mid: #007bab;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --secondary-light: #3dad6e;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-xs: 0 1px 3px rgba(0, 150, 199, 0.06);
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --shadow-xl: 0 24px 72px rgba(0, 150, 199, 0.15);
+    --radius-sm: 6px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 0.22s;
+    --transition-base: 0.3s;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Section headers */
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+  .section-header--light {
+    margin-bottom: 48px;
+  }
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-eyebrow--light {
+    color: var(--primary-light);
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-title--light {
+    color: #fff;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-subtitle--light {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  /* Buttons (reused from homepage) */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: var(--radius-sm);
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 0.94rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast) var(--ease-out-expo);
+    white-space: nowrap;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn i {
+    transition: transform var(--transition-fast) var(--ease-out-expo);
+  }
+  .btn:hover i.fa-arrow-right {
+    transform: translateX(4px);
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 150, 199, 0.25);
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+  .btn-primary-outline:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border-color: var(--secondary);
+    box-shadow: 0 4px 18px rgba(46, 139, 87, 0.3);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-shine {
+    background: var(--primary-light);
+    color: #fff;
+    border-color: var(--primary-light);
+  }
+  .btn-shine:hover {
+    background: var(--primary);
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.7s var(--ease-out-expo),
+        transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Hero section */
+  .programs-hero {
+    position: relative;
+    background: linear-gradient(120deg, #003a52 0%, #006d94 100%);
+    padding: 80px 0 100px;
+    overflow: hidden;
+  }
+  .programs-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      circle at 20% 40%,
+      rgba(72, 184, 216, 0.12) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+  .programs-hero-content {
+    max-width: 720px;
+    position: relative;
+    z-index: 2;
+  }
+  .programs-hero-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.12;
+    margin: 16px 0 20px;
+  }
+  .programs-hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.75;
+    margin-bottom: 32px;
+    max-width: 600px;
+  }
+  .programs-hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Clusters grid */
+  .clusters {
+    padding: 96px 0;
+    background: var(--background);
+  }
+  .clusters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .cluster-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base) var(--ease-out-expo);
+    display: flex;
+    flex-direction: column;
+  }
+  .cluster-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(0, 150, 199, 0.3);
+  }
+  .cluster-card-img {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+  .cluster-card-img picture,
+  .cluster-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  .cluster-card:hover .cluster-card-img img {
+    transform: scale(1.05);
+  }
+  .cluster-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 50, 80, 0.3) 0%,
+      transparent 60%
+    );
+  }
+  .cluster-card-icon {
+    position: absolute;
+    bottom: 12px;
+    left: 16px;
+    color: white;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+  .cluster-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .cluster-card-body h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .cluster-card-body p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  .cluster-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+  }
+  .cluster-card-link:hover {
+    gap: 12px;
+    color: var(--secondary);
+  }
+
+  /* Spotlight projects */
+  .spotlight {
+    position: relative;
+    padding: 96px 0;
+    background: linear-gradient(135deg, #0a2f3f 0%, #004b6e 100%);
+    overflow: hidden;
+  }
+  .spotlight-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Ccircle cx='400' cy='400' r='300' fill='none' stroke='rgba(72,184,216,0.06)' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.5;
+  }
+  .spotlight-card {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 48px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(2px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    margin-bottom: 56px;
+    transition: transform var(--transition-base) var(--ease-out-expo);
+  }
+  .spotlight-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .spotlight-card-image {
+    position: relative;
+    height: 100%;
+    min-height: 320px;
+  }
+  .spotlight-card-image picture,
+  .spotlight-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .spotlight-partner-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .spotlight-card-content {
+    padding: 32px 32px 32px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .spotlight-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .spotlight-pill {
+    background: rgba(72, 184, 216, 0.2);
+    border: 1px solid rgba(72, 184, 216, 0.4);
+    color: var(--primary-light);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 40px;
+    text-transform: uppercase;
+  }
+  .spotlight-pill.highlight {
+    background: rgba(46, 139, 87, 0.2);
+    border-color: var(--secondary-light);
+    color: var(--secondary-light);
+  }
+  .spotlight-card-content h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .spotlight-acronym {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .spotlight-description {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .spotlight-needs,
+  .spotlight-domains {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    margin: 20px 0;
+  }
+  .spotlight-needs strong,
+  .spotlight-domains strong {
+    display: block;
+    color: white;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+  }
+  .spotlight-needs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .spotlight-needs li {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .spotlight-needs li i {
+    color: var(--primary-light);
+    font-size: 0.7rem;
+    margin-top: 4px;
+  }
+  .domain-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .domain-chip {
+    background: rgba(72, 184, 216, 0.15);
+    border-radius: 40px;
+    padding: 4px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-light);
+  }
+
+  /* CTA banner */
+  .programs-cta {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .cta-card {
+    background: linear-gradient(
+      115deg,
+      var(--primary-dark) 0%,
+      var(--primary) 100%
+    );
+    border-radius: var(--radius-lg);
+    padding: 56px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-text h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-text p {
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .clusters-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .clusters-grid {
+      grid-template-columns: 1fr;
+    }
+    .spotlight-card {
+      grid-template-columns: 1fr;
+    }
+    .spotlight-card-content {
+      padding: 24px;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+      padding: 36px 28px;
+    }
+    .programs-hero-actions {
+      justify-content: center;
+    }
+    .programs-hero-content {
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<script>
+  // Simple scroll reveal (same as homepage)
+  (function () {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+  })();
+</script>

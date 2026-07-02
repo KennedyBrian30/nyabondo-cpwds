@@ -1,0 +1,1153 @@
+---
+// src/pages/services/therapy.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Therapy Services", href: "/services/therapy" },
+];
+
+const relatedServices = [
+  {
+    title: "Corrective Surgeries",
+    href: "/services/surgeries",
+    description:
+      "Post‑operative physiotherapy is essential for optimal surgical outcomes.",
+    icon: "fas fa-stethoscope",
+  },
+  {
+    title: "Assistive Devices",
+    href: "/services/assistive-devices",
+    description:
+      "Mobility aids, orthotics, and adaptive equipment prescribed by therapists.",
+    icon: "fas fa-wheelchair",
+  },
+  {
+    title: "In‑patient & Out‑patient Services",
+    href: "/services/outpatient-inpatient",
+    description:
+      "Therapy is available for both inpatients and outpatients in our SHA-accredited facility.",
+    icon: "fas fa-hospital",
+  },
+  {
+    title: "Long‑term Rehabilitation",
+    href: "/programs/longterm-rehab",
+    description:
+      "Extended therapy for children with cerebral palsy and complex conditions.",
+    icon: "fas fa-clock-rotate-left",
+  },
+];
+
+const heroImg = "/images/services/service-therapy.webp";
+const physioImg = "/images/hero/hero-rehabilitation-therapy.webp";
+const otImg = "/images/hero/hero-community-outreach.webp";
+const paediatricImg = "/images/services/service-therapy.webp";
+---
+
+<Layout
+  title="Therapy Services | Nyabondo Centre for Persons with Disabilities"
+>
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {
+          breadcrumbs.map((crumb, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={crumb.href}>{crumb.label}</a>
+              ) : (
+                <span aria-current="page">{crumb.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section (improved) -->
+  <section class="service-hero">
+    <div class="hero-bg-pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="service-hero-grid">
+        <div class="service-hero-content">
+          <span class="section-eyebrow"
+            >Restoring Movement, Rebuilding Independence</span
+          >
+          <h1 class="service-title">
+            Physiotherapy & <span class="accent">Occupational Therapy</span>
+          </h1>
+          <p class="service-lead">
+            Individualised therapy programmes for children and adults –
+            restoring mobility, strength, and the ability to perform daily
+            activities with confidence.
+          </p>
+          <div class="service-hero-stats">
+            <div class="stat">
+              <span class="stat-num">50,000+</span>
+              <span class="stat-label">Therapy Sessions</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">20+</span>
+              <span class="stat-label">Therapists</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">SHA</span>
+              <span class="stat-label">Accredited</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn-primary">Book Appointment</a>
+            <a href="#overview" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        <div class="service-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="A physiotherapist working with a patient during a therapy session at Nyabondo Centre"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">
+            Individualised physiotherapy session
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview (mobile: image after heading) -->
+  <section id="overview" class="overview" aria-labelledby="overview-heading">
+    <div class="container">
+      <div class="overview-grid reveal-up">
+        <div class="overview-text">
+          <span class="section-eyebrow">Holistic Rehabilitation</span>
+          <h2 id="overview-heading">
+            Helping You Move, Function, and Live Better
+          </h2>
+          <div class="overview-image-mobile" aria-hidden="true">
+            <picture>
+              <source srcset={physioImg} type="image/webp" />
+              <img
+                src={physioImg}
+                alt="Therapist guiding a patient through rehabilitation exercises"
+                loading="lazy"
+              />
+            </picture>
+          </div>
+          <p>
+            Our therapy department provides comprehensive physiotherapy and
+            occupational therapy services to persons with disabilities of all
+            ages. Whether you're recovering from surgery, living with a chronic
+            condition, or seeking to maximise your child's developmental
+            potential, our team of qualified therapists works with you to create
+            an individualised treatment plan.
+          </p>
+          <p>
+            We take a person‑centred, goal‑oriented approach – focusing on what
+            matters most to you and your family. Therapy is available on an
+            outpatient basis or as part of inpatient rehabilitation for those
+            requiring intensive daily sessions.
+          </p>
+        </div>
+        <div class="overview-image desktop-only">
+          <picture>
+            <source srcset={physioImg} type="image/webp" />
+            <img
+              src={physioImg}
+              alt="Therapist guiding a patient through rehabilitation exercises"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Physiotherapy Section -->
+  <section class="physiotherapy" aria-labelledby="physio-heading">
+    <div class="container">
+      <div class="service-block reveal-up">
+        <div class="block-icon"><i class="fas fa-person-walking"></i></div>
+        <div class="block-content">
+          <h2 id="physio-heading">Physiotherapy</h2>
+          <p class="block-lead">Restoring movement, strength, and function</p>
+          <div class="block-image-mobile">
+            <picture>
+              <source srcset={physioImg} type="image/webp" />
+              <img src={physioImg} alt="Physiotherapy session" loading="lazy" />
+            </picture>
+          </div>
+          <p>
+            Our physiotherapists work with children and adults with a wide range
+            of conditions, including cerebral palsy, post‑surgical recovery,
+            fractures, spinal cord injuries, stroke, and developmental delays.
+          </p>
+          <div class="block-grid">
+            <div class="block-card">
+              <i class="fas fa-dumbbell"></i>
+              <h3>Strength & Conditioning</h3>
+              <p>
+                Progressive exercises to rebuild muscle strength after illness,
+                injury, or surgery.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-walking"></i>
+              <h3>Gait Training</h3>
+              <p>
+                Relearning to walk correctly using parallel bars, walkers, and
+                other assistive devices.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-hand-peace"></i>
+              <h3>Range of Motion</h3>
+              <p>
+                Stretching and mobilisation techniques to prevent and treat
+                joint contractures.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-brain"></i>
+              <h3>Neurodevelopmental Therapy (NDT)</h3>
+              <p>
+                Specialised handling techniques for children with cerebral palsy
+                and other neurological conditions.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-bolt"></i>
+              <h3>Balance & Coordination</h3>
+              <p>Exercises to improve stability and prevent falls.</p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-heartbeat"></i>
+              <h3>Pain Management</h3>
+              <p>
+                Therapeutic modalities including heat, cold, ultrasound, and
+                TENS.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Occupational Therapy Section -->
+  <section class="occupational" aria-labelledby="ot-heading">
+    <div class="container">
+      <div class="service-block reveal-up">
+        <div class="block-icon"><i class="fas fa-hand-sparkles"></i></div>
+        <div class="block-content">
+          <h2 id="ot-heading">Occupational Therapy</h2>
+          <p class="block-lead">
+            Enabling participation in daily life activities
+          </p>
+          <div class="block-image-mobile">
+            <picture>
+              <source srcset={otImg} type="image/webp" />
+              <img
+                src={otImg}
+                alt="Occupational therapy session"
+                loading="lazy"
+              />
+            </picture>
+          </div>
+          <p>
+            Occupational therapy focuses on the things you need and want to do
+            every day – eating, dressing, writing, playing, working. Our OTs
+            help children and adults develop the skills to live as independently
+            as possible.
+          </p>
+          <div class="block-grid">
+            <div class="block-card">
+              <i class="fas fa-utensils"></i>
+              <h3>Activities of Daily Living (ADL)</h3>
+              <p>
+                Training in self‑care tasks: feeding, bathing, dressing,
+                grooming, and toileting.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-pencil-alt"></i>
+              <h3>Fine Motor Development</h3>
+              <p>
+                Hand strengthening, grasp patterns, and handwriting skills for
+                children.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-plug"></i>
+              <h3>Sensory Integration</h3>
+              <p>
+                Therapy for children with sensory processing difficulties, often
+                associated with autism or developmental delays.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-laptop"></i>
+              <h3>Adaptive Equipment</h3>
+              <p>
+                Prescribing and training in the use of specialised utensils,
+                dressing aids, and communication devices.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-chair"></i>
+              <h3>Seating & Positioning</h3>
+              <p>
+                Assessment for custom seating, wheelchairs, and postural support
+                to improve comfort and function.
+              </p>
+            </div>
+            <div class="block-card">
+              <i class="fas fa-home"></i>
+              <h3>Home Assessments</h3>
+              <p>
+                Recommendations for home modifications to improve safety and
+                accessibility.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paediatric Focus (mobile: image after heading) -->
+  <section class="paediatric" aria-labelledby="paeds-heading">
+    <div class="container">
+      <div class="paediatric-grid reveal-up">
+        <div class="paediatric-text">
+          <span class="section-eyebrow">Specialised Paediatric Therapy</span>
+          <h2 id="paeds-heading">
+            Helping Children Reach Their Full Potential
+          </h2>
+          <div class="paediatric-image-mobile">
+            <picture>
+              <source srcset={paediatricImg} type="image/webp" />
+              <img
+                src={paediatricImg}
+                alt="A therapist working with a child during a therapy session"
+                loading="lazy"
+              />
+            </picture>
+          </div>
+          <p>
+            Children with cerebral palsy, developmental delay, spina bifida, and
+            other conditions benefit from early and consistent therapy. Our
+            paediatric therapists use play‑based techniques to engage children
+            while working on motor milestones, hand function, and independence.
+          </p>
+          <ul>
+            <li>
+              <i class="fas fa-check-circle"></i> Early intervention for infants
+              (0–3 years)
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> School readiness and fine motor
+              groups
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Parent coaching and home programmes
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Collaboration with teachers for
+              classroom adaptations
+            </li>
+          </ul>
+          <div class="paediatric-note">
+            <i class="fas fa-child"></i> For children with complex needs, we offer
+            long‑term programme‑based therapy.
+            <a href="/programs/longterm-rehab"
+              >Learn about long‑term rehabilitation →</a
+            >
+          </div>
+        </div>
+        <div class="paediatric-image desktop-only">
+          <picture>
+            <source srcset={paediatricImg} type="image/webp" />
+            <img
+              src={paediatricImg}
+              alt="Therapist working with a child"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Therapy Pathway -->
+  <section class="pathway" aria-labelledby="pathway-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Your Therapy Journey</span>
+        <h2 id="pathway-heading" class="section-title">
+          From Assessment to Independence
+        </h2>
+      </div>
+      <div class="pathway-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Initial Assessment</h3>
+          <p>
+            Comprehensive evaluation by a physiotherapist or occupational
+            therapist.
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Goal Setting</h3>
+          <p>
+            Collaborative goal setting with you and your family – what matters
+            most to you?
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Individualised Plan</h3>
+          <p>
+            Regular sessions (weekly or daily) with home exercises to practice
+            between visits.
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Review & Adapt</h3>
+          <p>
+            Progress reviewed every 4–6 weeks. Plan adjusted as goals are
+            achieved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Services -->
+  <section class="related-services" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">
+          Services That Complement Therapy
+        </h2>
+        <p class="section-subtitle">
+          Therapy works best when combined with other interventions – we offer a
+          complete continuum.
+        </p>
+      </div>
+      <div class="related-grid">
+        {
+          relatedServices.map((service, i) => (
+            <a
+              href={service.href}
+              class="related-card reveal-up"
+              style={`--delay: ${i * 60}ms`}
+            >
+              <div class="related-icon">
+                <i class={service.icon} />
+              </div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <span class="related-arrow">
+                <i class="fas fa-arrow-right" />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-therapy">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Ready to Start Your Therapy Journey?</h2>
+          <p>
+            Contact us to schedule an initial assessment. Our team will work
+            with you to develop a personalised plan that meets your unique needs
+            and goals.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn btn-green">
+            <i class="fas fa-calendar-check"></i> Book an Appointment
+          </a>
+          <a href="/get-involved/donate" class="btn btn-primary-outline">
+            Support Therapy Services <i class="fas fa-heart"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero (improved) */
+  .service-hero {
+    position: relative;
+    padding: 60px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+    overflow: hidden;
+  }
+  .hero-bg-pattern {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 150, 199, 0.03) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    transform: rotate(15deg);
+  }
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .service-hero-content {
+    padding-right: 20px;
+  }
+  .service-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .service-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .service-lead {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .service-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+    border: 2px solid transparent;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+  }
+  .btn-outline {
+    background: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .btn-outline:hover {
+    background: var(--primary);
+    color: white;
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border-color: var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+  .service-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .service-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Overview */
+  .overview {
+    padding: 60px 0;
+    background: var(--surface);
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .overview-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+  .overview-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .overview-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .overview-image-mobile,
+  .block-image-mobile,
+  .paediatric-image-mobile {
+    display: none;
+  }
+
+  /* Service Blocks */
+  .physiotherapy,
+  .occupational {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .occupational {
+    background: var(--surface);
+  }
+  .service-block {
+    display: flex;
+    gap: 40px;
+  }
+  .block-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 150, 199, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary);
+  }
+  .block-content {
+    flex: 1;
+  }
+  .block-content h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  .block-lead {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .block-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .block-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .block-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .block-card i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .block-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .block-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Paediatric Focus */
+  .paediatric {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .paediatric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .paediatric-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .paediatric-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .paediatric-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  .paediatric-text li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .paediatric-text li i {
+    color: var(--secondary);
+  }
+  .paediatric-note {
+    background: rgba(0, 150, 199, 0.08);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    margin-top: 20px;
+  }
+  .paediatric-note a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Pathway */
+  .pathway {
+    padding: 60px 0;
+    background: var(--surface);
+  }
+  .pathway-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+  .step {
+    flex: 1;
+    min-width: 180px;
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin: 0 auto 12px;
+  }
+  .step h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .step p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+  .step-arrow {
+    color: var(--primary-light);
+    font-size: 1.2rem;
+  }
+
+  /* Related Services */
+  .related-services {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-therapy {
+    padding: 60px 0;
+  }
+  .cta-card {
+    background: linear-gradient(
+      115deg,
+      var(--primary-dark) 0%,
+      var(--primary) 100%
+    );
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.7s var(--ease-out-expo),
+        transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .block-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .service-block {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .block-icon {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .service-hero-grid,
+    .overview-grid,
+    .paediatric-grid {
+      grid-template-columns: 1fr;
+    }
+    .block-grid,
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .pathway-steps {
+      flex-direction: column;
+    }
+    .step-arrow {
+      transform: rotate(90deg);
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .service-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+    .service-hero-stats {
+      justify-content: center;
+    }
+    .hero-actions {
+      justify-content: center;
+    }
+
+    /* Mobile: hide desktop images, show mobile images after heading */
+    .desktop-only {
+      display: none;
+    }
+    .overview-image-mobile,
+    .block-image-mobile,
+    .paediatric-image-mobile {
+      display: block;
+      margin: 20px 0;
+    }
+    .overview-image-mobile img,
+    .block-image-mobile img,
+    .paediatric-image-mobile img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+    .overview-text h2,
+    .block-content h2,
+    .paediatric-text h2 {
+      margin-bottom: 0;
+    }
+    /* Ensure text flows after image */
+    .overview-text p:first-of-type,
+    .block-content p,
+    .paediatric-text p {
+      margin-top: 20px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+  })();
+</script>

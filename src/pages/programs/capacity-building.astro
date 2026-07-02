@@ -1,0 +1,723 @@
+---
+// src/pages/programs/capacity-building.astro
+import Layout from "../../layouts/Layout.astro";
+
+// Breadcrumb data
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Programmes", href: "/programs" },
+  { label: "Stakeholder Capacity Building", href: "/programs/capacity-building" },
+];
+
+// Related programmes for interlinking
+const relatedProgrammes = [
+  {
+    title: "Community Based Inclusive Development (CBID)",
+    href: "/programs/cbid",
+    description: "Training of CHPs and community volunteers is a core CBID activity – early identification and referral pathways.",
+    icon: "fas fa-hand-holding-heart",
+  },
+  {
+    title: "Physical Rehabilitation & Corrective Surgeries",
+    href: "/programs/physical-rehabilitation",
+    description: "Healthcare worker training on disability inclusion and rehabilitation referrals.",
+    icon: "fas fa-scalpel",
+  },
+  {
+    title: "SHINE Project",
+    href: "/programs/shine",
+    description: "Invests in skilled rehabilitation personnel and data capture tools for better decision‑making.",
+    icon: "fas fa-seedling",
+  },
+  {
+    title: "BEN MAPP II",
+    href: "/programs/ben-mapp-ii",
+    description: "Trains senior health officers, CHAs, and CHPs on disability mainstreaming and referral protocols.",
+    icon: "fas fa-chalkboard-user",
+  },
+];
+
+// Images – reusing existing assets
+const heroImg = "/images/hero/hero-nyabondo-staff.webp";
+const trainingImg = "/images/hero/hero-community-outreach.webp";
+---
+
+<Layout title="Stakeholder Capacity Building | Nyabondo Centre for Persons with Disabilities">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {breadcrumbs.map((crumb, i) => (
+          <li>
+            {i < breadcrumbs.length - 1 ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+            {i < breadcrumbs.length - 1 && (
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="programme-hero">
+    <div class="container">
+      <div class="programme-hero-grid">
+        <div class="programme-hero-content">
+          <span class="section-eyebrow">Strengthening Systems</span>
+          <h1 class="programme-title">
+            Stakeholder <span class="accent">Capacity Building</span>
+          </h1>
+          <p class="programme-lead">
+            Equipping healthcare workers, Community Health Promoters, local leaders,
+            and OPDs with the skills to identify, refer, and include persons with
+            disabilities.
+          </p>
+          <div class="programme-hero-stats">
+            <div class="stat">
+              <span class="stat-num">500+</span>
+              <span class="stat-label">CHPs Trained</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">120+</span>
+              <span class="stat-label">Health Workers Trained</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">45+</span>
+              <span class="stat-label">Local Leaders Trained</span>
+            </div>
+          </div>
+        </div>
+        <div class="programme-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="Nyabondo staff conducting a training session for community health workers"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">Training of Community Health Promoters</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Training Areas -->
+  <section class="trainings" aria-labelledby="trainings-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">What We Do</span>
+        <h2 id="trainings-heading" class="section-title">Who We Train & Why</h2>
+        <p class="section-subtitle">
+          Sustainable inclusion requires that everyone who touches the life of a person with disability – from health worker to village elder – understands disability rights and referral pathways.
+        </p>
+      </div>
+
+      <div class="trainings-grid">
+        <article class="training-card reveal-up">
+          <div class="training-icon"><i class="fas fa-hand-holding-medical"></i></div>
+          <h3>Community Health Promoters (CHPs)</h3>
+          <p>Training on early identification of disabilities, basic screening, referral pathways, and home‑based follow‑up. CHPs become the eyes and ears of the health system in remote villages.</p>
+        </article>
+        <article class="training-card reveal-up">
+          <div class="training-icon"><i class="fas fa-stethoscope"></i></div>
+          <h3>Healthcare Workers</h3>
+          <p>Hospital staff, clinical officers, and nurses receive training on disability mainstreaming, respectful communication, and making clinical services accessible to persons with disabilities.</p>
+        </article>
+        <article class="training-card reveal-up">
+          <div class="training-icon"><i class="fas fa-chalkboard-user"></i></div>
+          <h3>Trainers of Trainers (ToT)</h3>
+          <p>Community Health Assistants (CHAs) are trained as ToTs to cascade disability inclusion skills to CHPs at sub‑county level, ensuring sustainability.</p>
+        </article>
+        <article class="training-card reveal-up">
+          <div class="training-icon"><i class="fas fa-city"></i></div>
+          <h3>Local Leaders & NGAOs</h3>
+          <p>Chiefs, religious leaders, and National Government Administrative Officers (NGAOs) learn about disability rights, referral coordination, and how to support inclusive community planning.</p>
+        </article>
+        <article class="training-card reveal-up">
+          <div class="training-icon"><i class="fas fa-handshake"></i></div>
+          <h3>Organisations of Persons with Disabilities (OPDs)</h3>
+          <p>Leadership, governance, advocacy skills, and how to hold service providers accountable – strengthening OPDs to become effective self‑advocates.</p>
+        </article>
+        <article class="training-card reveal-up">
+          <div class="training-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Data Capture & Referral Tools</h3>
+          <p>Consistent use of standardised referral forms and disability data registers – improving coordination and evidence‑based decision‑making.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Outcomes -->
+  <section class="outcomes" aria-labelledby="outcomes-heading">
+    <div class="container">
+      <div class="outcomes-grid reveal-up">
+        <div class="outcomes-text">
+          <span class="section-eyebrow">Impact</span>
+          <h2 id="outcomes-heading">What Changes After Training?</h2>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Earlier identification of children with disabilities – before complications set in.</li>
+            <li><i class="fas fa-check-circle"></i> Fewer missed referrals and stronger feedback loops between community and facility.</li>
+            <li><i class="fas fa-check-circle"></i> More persons with disabilities registered with NCPWD and accessing cash transfers.</li>
+            <li><i class="fas fa-check-circle"></i> Reduced stigma and discrimination in health facilities and communities.</li>
+            <li><i class="fas fa-check-circle"></i> OPDs that advocate effectively for inclusive county budgets and services.</li>
+          </ul>
+        </div>
+        <div class="outcomes-image">
+          <picture>
+            <source srcset={trainingImg} type="image/webp" />
+            <img
+              src={trainingImg}
+              alt="Community members participating in a disability inclusion training session"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flagship Projects -->
+  <section class="projects" aria-labelledby="projects-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">System Strengthening</span>
+        <h2 id="projects-heading" class="section-title">Capacity Building at Scale</h2>
+        <p class="section-subtitle">
+          Our training programmes are amplified through multi‑annual projects that reach entire counties.
+        </p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>SHINE Project (2026–2029)</h3>
+          <p>Addresses insufficient skilled rehabilitation personnel by training physiotherapists, occupational therapists, and rehabilitation technicians. Also introduces consistent data capture tools for better decision‑making.</p>
+          <a href="/programs/shine" class="btn-link">Learn more →</a>
+        </div>
+        <div class="project-card">
+          <h3>BEN MAPP II</h3>
+          <p>Trains senior health facility officers on disability mainstreaming, CHAs as ToTs, and sub‑county CHPs on referral pathways. Includes routine coaching and mentorship sessions.</p>
+          <a href="/programs/ben-mapp-ii" class="btn-link">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Programmes -->
+  <section class="related-programmes" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">Related Programmes</h2>
+      </div>
+      <div class="related-grid">
+        {relatedProgrammes.map((prog, i) => (
+          <a href={prog.href} class="related-card reveal-up" style={`--delay: ${i * 60}ms`}>
+            <div class="related-icon"><i class={prog.icon}></i></div>
+            <h3>{prog.title}</h3>
+            <p>{prog.description}</p>
+            <span class="related-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-involve">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Support Training & Capacity Building</h2>
+          <p>
+            Your donation can fund a training workshop for CHPs, produce training
+            materials, or help us reach more healthcare workers.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/get-involved/donate" class="btn btn-green">
+            <i class="fas fa-heart"></i> Donate Now
+          </a>
+          <a href="/get-involved/partner" class="btn btn-primary-outline">
+            Partner with Us <i class="fas fa-handshake"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero */
+  .programme-hero {
+    padding: 64px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+  }
+  .programme-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .programme-hero-content {
+    padding-right: 20px;
+  }
+  .programme-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .programme-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .programme-lead {
+    font-size: 1.12rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .programme-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .programme-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .programme-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Trainings Grid */
+  .trainings {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .trainings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .training-card {
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .training-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+  }
+  .training-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(0, 150, 199, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 24px;
+  }
+  .training-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .training-card p {
+    color: var(--text-light);
+    line-height: 1.65;
+    font-size: 0.9rem;
+  }
+
+  /* Outcomes */
+  .outcomes {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .outcomes-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+  }
+  .outcomes-text li {
+    margin-bottom: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 1rem;
+  }
+  .outcomes-text li i {
+    color: var(--secondary);
+    font-size: 1.1rem;
+  }
+  .outcomes-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Projects */
+  .projects {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .project-card {
+    background: linear-gradient(145deg, #ffffff, #f8fefc);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    border: 1px solid var(--border);
+  }
+  .project-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--primary);
+  }
+  .project-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .btn-link {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Related Programmes */
+  .related-programmes {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-involve {
+    padding: 60px 0 80px;
+  }
+  .cta-card {
+    background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255,255,255,0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border: 2px solid var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .trainings-grid, .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .programme-hero-grid, .outcomes-grid, .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .trainings-grid, .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .programme-hero-stats {
+      justify-content: center;
+    }
+    .programme-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" }
+    );
+    els.forEach(el => io.observe(el));
+  })();
+</script>

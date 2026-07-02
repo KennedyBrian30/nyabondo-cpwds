@@ -1,0 +1,984 @@
+---
+// src/pages/programs/social-inclusion.astro
+import Layout from "../../layouts/Layout.astro";
+
+// Breadcrumb data
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Programmes", href: "/programs" },
+  { label: "Social Inclusion & Protection", href: "/programs/social-inclusion" },
+];
+
+// Related programmes for interlinking
+const relatedProgrammes = [
+  {
+    title: "Community Based Inclusive Development (CBID)",
+    href: "/programs/cbid",
+    description: "Early identification and referral pathways that connect individuals to social protection and inclusion programmes.",
+    icon: "fas fa-hand-holding-heart",
+  },
+  {
+    title: "Livelihood & Economic Empowerment",
+    href: "/programs/livelihood",
+    description: "Economic independence complements social inclusion – VSLA groups and IGAs build community bonds.",
+    icon: "fas fa-seedling",
+  },
+  {
+    title: "Long‑term Rehabilitation for Children",
+    href: "/programs/longterm-rehab",
+    description: "Children with severe disabilities and their families benefit from support groups and protection linkages.",
+    icon: "fas fa-clock-rotate-left",
+  },
+  {
+    title: "SHINE Project",
+    href: "/programs/shine",
+    description: "Strengthening social protection and community inclusion as part of the twin‑track approach.",
+    icon: "fas fa-seedling",
+  },
+];
+
+// Images – reusing existing assets
+const heroImg = "/images/hero/hero-community-outreach.webp";
+const advocacyImg = "/images/programs/programs-overview.webp";
+const registrationImg = "/images/about/about-nyabondo-centre.webp";
+const supportGroupImg = "/images/hero/hero-nyabondo-staff.webp";
+---
+
+<Layout title="Social Inclusion & Protection | Nyabondo Centre for Persons with Disabilities">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {breadcrumbs.map((crumb, i) => (
+          <li>
+            {i < breadcrumbs.length - 1 ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+            {i < breadcrumbs.length - 1 && (
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="programme-hero">
+    <div class="container">
+      <div class="programme-hero-grid">
+        <div class="programme-hero-content">
+          <span class="section-eyebrow">Rights & Belonging</span>
+          <h1 class="programme-title">
+            Social Inclusion <span class="accent">& Protection</span>
+          </h1>
+          <p class="programme-lead">
+            Breaking down barriers – from stigma and isolation to legal rights
+            and government benefits. We ensure persons with disabilities are
+            seen, heard, and included.
+          </p>
+          <div class="programme-hero-stats">
+            <div class="stat">
+              <span class="stat-num">15,000+</span>
+              <span class="stat-label">Registered with NCPWD</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">200+</span>
+              <span class="stat-label">Support Groups Active</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">50+</span>
+              <span class="stat-label">Community Dialogues Held</span>
+            </div>
+          </div>
+        </div>
+        <div class="programme-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="Community members gathered at a disability inclusion awareness event"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">Community sensitisation in Kisumu County</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Social Inclusion -->
+  <section class="intro" aria-labelledby="intro-heading">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-text reveal-left">
+          <span class="section-eyebrow">Our Approach</span>
+          <h2 id="intro-heading" class="section-title">More Than Just Medical Care</h2>
+          <p>
+            Disability is not just a health issue – it is a social and human
+            rights issue. Many persons with disabilities in Kenya face stigma,
+            exclusion from community activities, barriers to education and
+            employment, and limited access to government programmes.
+          </p>
+          <p>
+            Nyabondo’s Social Inclusion and Protection programme tackles these
+            barriers head‑on. We raise awareness, build support networks,
+            advocate for rights, and link individuals to critical social
+            protection services – from disability registration to cash transfers
+            and health insurance.
+          </p>
+          <div class="intro-highlights">
+            <span><i class="fas fa-users"></i> Support Groups</span>
+            <span><i class="fas fa-gavel"></i> Rights Advocacy</span>
+            <span><i class="fas fa-id-card"></i> Legal Documentation</span>
+            <span><i class="fas fa-hand-holding-usd"></i> Cash Transfers</span>
+          </div>
+        </div>
+        <div class="intro-image reveal-right">
+          <picture>
+            <source srcset={supportGroupImg} type="image/webp" />
+            <img
+              src={supportGroupImg}
+              alt="Disability support group meeting at Nyabondo Centre"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Components -->
+  <section class="components" aria-labelledby="components-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">What We Do</span>
+        <h2 id="components-heading" class="section-title">
+          Building Inclusive Communities, Protecting Rights
+        </h2>
+        <p class="section-subtitle">
+          Our activities span awareness, group formation, advocacy, and direct
+          linkages to government benefits.
+        </p>
+      </div>
+
+      <div class="components-grid">
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-bullhorn"></i></div>
+          <h3>Community Awareness & Sensitisation</h3>
+          <p>Door‑to‑door campaigns, community barazas, radio shows, and school programmes to break stigma and promote disability inclusion.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-hands-helping"></i></div>
+          <h3>Disability Support Groups</h3>
+          <p>Formation and strengthening of peer support groups where persons with disabilities and caregivers share experiences, learn together, and advocate collectively.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-fist-raised"></i></div>
+          <h3>Disability Rights Advocacy</h3>
+          <p>Training on the Persons with Disabilities Act, accessibility rights, and how to demand inclusive services from county governments and institutions.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-id-card"></i></div>
+          <h3>Registration with NCPWD</h3>
+          <p>Assisting persons with disabilities to complete disability assessment and register with the National Council for Persons with Disabilities – the gateway to government benefits.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <h3>Linkages to Cash Transfer Programmes</h3>
+          <p>Connecting eligible households to the Cash Transfer for Persons with Severe Disabilities (CTPWD) and other social protection schemes.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-file-alt"></i></div>
+          <h3>Birth Certificates & National IDs</h3>
+          <p>Assistance with obtaining essential legal documents, often a barrier to accessing education, voting, and formal employment.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-ambulance"></i></div>
+          <h3>Health Insurance Access</h3>
+          <p>Enrolment support for the Social Health Authority (SHA) and other health insurance schemes, including subsidies for persons with disabilities.</p>
+        </article>
+        <article class="component-card reveal-up">
+          <div class="component-icon"><i class="fas fa-comments"></i></div>
+          <h3>Community Dialogues & Campaigns</h3>
+          <p>Facilitated dialogues between persons with disabilities, local leaders, and service providers to identify gaps and co‑create solutions.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Protection Flowchart -->
+  <section class="protection-pathway" aria-labelledby="protection-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">From Registration to Benefits</span>
+        <h2 id="protection-heading" class="section-title">The Social Protection Pathway</h2>
+        <p class="section-subtitle">
+          A clear, supported journey from disability identification to accessing
+          government and community benefits.
+        </p>
+      </div>
+      <div class="pathway reveal-up">
+        <div class="pathway-step">
+          <div class="step-num">1</div>
+          <h3>Disability Assessment</h3>
+          <p>Conducted by Nyabondo or county health team – determines degree of disability.</p>
+        </div>
+        <div class="pathway-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="pathway-step">
+          <div class="step-num">2</div>
+          <h3>NCPWD Registration</h3>
+          <p>We assist with forms, documentation, and follow‑up to ensure registration is complete.</p>
+        </div>
+        <div class="pathway-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="pathway-step">
+          <div class="step-num">3</div>
+          <h3>Entitlements Activated</h3>
+          <p>Cash transfer, tax exemptions, education support, and health insurance subsidies.</p>
+        </div>
+        <div class="pathway-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="pathway-step">
+          <div class="step-num">4</div>
+          <h3>Community Integration</h3>
+          <p>Linked to support groups, livelihood programmes, and advocacy networks.</p>
+        </div>
+      </div>
+      <div class="protection-note">
+        <i class="fas fa-hand-holding-heart"></i> Nyabondo works closely with the
+        National Council for Persons with Disabilities (NCPWD) and County
+        Governments to ensure seamless registration and benefit access.
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study: Support Group Impact -->
+  <section class="case-study" aria-labelledby="case-heading">
+    <div class="container">
+      <div class="case-grid">
+        <div class="case-text reveal-left">
+          <span class="section-eyebrow">Voices from the Community</span>
+          <h2 id="case-heading">“We are no longer alone”</h2>
+          <blockquote>
+            “Before our support group, I felt ashamed of my child’s disability.
+            Now we meet every month – we share problems, learn from each other,
+            and even started a savings group. Three of our members have started
+            small businesses. The group gave me back my hope.”
+          </blockquote>
+          <cite>— Grace, caregiver and support group leader, Homa Bay</cite>
+          <div class="case-stats">
+            <div><strong>45</strong> members in her group</div>
+            <div><strong>80%</strong> have registered with NCPWD</div>
+            <div><strong>12</strong> children now in school</div>
+          </div>
+        </div>
+        <div class="case-image reveal-right">
+          <picture>
+            <source srcset="/images/programs/programs-overview.webp" type="image/webp" />
+            <img
+              src="/images/programs/programs-overview.webp"
+              alt="Women in a disability support group meeting"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnerships & Projects -->
+  <section class="integration" aria-labelledby="integration-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Flagship Collaborations</span>
+        <h2 id="integration-heading" class="section-title">
+          Social Inclusion at Scale
+        </h2>
+        <p class="section-subtitle">
+          Our social inclusion work is amplified through multi‑annual projects
+          with global partners.
+        </p>
+      </div>
+      <div class="integration-grid">
+        <div class="integration-card">
+          <div class="card-badge">SHINE Project 2026–2029</div>
+          <i class="fas fa-seedling"></i>
+          <h3>Societal Track: Systems Change</h3>
+          <p>The SHINE Project’s societal track educates and equips healthcare systems, communities, and county governments to create lasting inclusive change – including social protection linkages.</p>
+          <a href="/programs/shine" class="btn-link">Learn more →</a>
+        </div>
+        <div class="integration-card">
+          <div class="card-badge">BEN MAPP II</div>
+          <i class="fas fa-chalkboard-user"></i>
+          <h3>Social Inclusion Domain</h3>
+          <p>Under BEN MAPP II, social inclusion activities include community awareness, formation of disability support groups, promotion of participation in community activities, and rights advocacy.</p>
+          <a href="/programs/ben-mapp-ii" class="btn-link">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Programmes -->
+  <section class="related-programmes" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">Programmes That Complement Social Inclusion</h2>
+        <p class="section-subtitle">
+          Full inclusion requires health, economic empowerment, and community
+          support working together.
+        </p>
+      </div>
+      <div class="related-grid">
+        {relatedProgrammes.map((prog, i) => (
+          <a href={prog.href} class="related-card reveal-up" style={`--delay: ${i * 60}ms`}>
+            <div class="related-icon"><i class={prog.icon}></i></div>
+            <h3>{prog.title}</h3>
+            <p>{prog.description}</p>
+            <span class="related-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-involve">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Support Inclusion & Protection</h2>
+          <p>
+            Your donation can help register a person with NCPWD, fund a community
+            dialogue, or support a disability support group.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/get-involved/donate" class="btn btn-green">
+            <i class="fas fa-heart"></i> Donate Now
+          </a>
+          <a href="/get-involved/partner" class="btn btn-primary-outline">
+            Partner with Us <i class="fas fa-handshake"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero */
+  .programme-hero {
+    padding: 64px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+  }
+  .programme-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .programme-hero-content {
+    padding-right: 20px;
+  }
+  .programme-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .programme-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .programme-lead {
+    font-size: 1.12rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .programme-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .programme-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .programme-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Intro */
+  .intro {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .intro-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 24px;
+  }
+  .intro-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .intro-highlights span {
+    background: rgba(0, 150, 199, 0.08);
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .intro-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Components Grid */
+  .components {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .component-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .component-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+  }
+  .component-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 150, 199, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+  }
+  .component-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .component-card p {
+    color: var(--text-light);
+    line-height: 1.65;
+    font-size: 0.85rem;
+  }
+
+  /* Protection Pathway */
+  .protection-pathway {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .pathway {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .pathway-step {
+    flex: 1;
+    min-width: 180px;
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .pathway-step h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .pathway-step p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+  .pathway-arrow {
+    color: var(--primary-light);
+    font-size: 1.5rem;
+  }
+  .protection-note {
+    text-align: center;
+    background: rgba(0, 150, 199, 0.08);
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Case Study */
+  .case-study {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .case-text blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    border-left: 4px solid var(--primary);
+    padding-left: 24px;
+    margin: 20px 0;
+    line-height: 1.6;
+  }
+  .case-text cite {
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-style: normal;
+    display: block;
+    margin-bottom: 24px;
+  }
+  .case-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    background: var(--surface);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+  }
+  .case-stats div strong {
+    color: var(--primary);
+    font-size: 1.2rem;
+  }
+  .case-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Integration Cards */
+  .integration {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .integration-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .integration-card {
+    background: linear-gradient(145deg, #ffffff, #f8fefc);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .card-badge {
+    display: inline-block;
+    background: var(--primary-light);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 40px;
+    margin-bottom: 16px;
+  }
+  .integration-card i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .integration-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  .integration-card p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+  .btn-link {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Related Programmes */
+  .related-programmes {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-involve {
+    padding: 60px 0 80px;
+  }
+  .cta-card {
+    background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255,255,255,0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border: 2px solid var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal-left.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal-right.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .components-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .pathway {
+      flex-direction: column;
+    }
+    .pathway-arrow {
+      transform: rotate(90deg);
+    }
+  }
+  @media (max-width: 768px) {
+    .programme-hero-grid, .intro-grid, .case-grid, .integration-grid {
+      grid-template-columns: 1fr;
+    }
+    .components-grid, .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .programme-hero-stats {
+      justify-content: center;
+    }
+    .programme-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up, .reveal-left, .reveal-right");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" }
+    );
+    els.forEach(el => io.observe(el));
+  })();
+</script>

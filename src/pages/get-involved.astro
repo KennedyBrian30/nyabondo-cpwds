@@ -1,0 +1,555 @@
+---
+// src/pages/get-involved
+import Layout from "../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Get Involved", href: "/get-involved" },
+];
+
+const waysToHelp = [
+  {
+    icon: "fas fa-hand-holding-heart",
+    title: "Donate",
+    description:
+      "Your financial gift directly funds surgeries, therapy sessions, assistive devices, and community outreaches. Every shilling transforms a life.",
+    buttonText: "Make a Donation",
+    buttonLink: "/get-involved/donate",
+    color: "green",
+  },
+  {
+    icon: "fas fa-handshake",
+    title: "Become a Partner",
+    description:
+      "Organisations can partner with us through funding, technical support, or advocacy. Join a network that is scaling disability inclusion across Kenya.",
+    buttonText: "Partner With Us",
+    buttonLink: "/get-involved/partner",
+    color: "primary",
+  },
+  {
+    icon: "fas fa-user-plus",
+    title: "Volunteer",
+    description:
+      "Share your skills — medical, therapeutic, administrative, or technical. Volunteers bring fresh energy and expertise to our teams.",
+    buttonText: "Volunteer Today",
+    buttonLink: "/get-involved/volunteer",
+    color: "blue",
+  },
+];
+
+const impactNumbers = [
+  { num: "12,000+", label: "Surgeries Supported" },
+  { num: "50,000+", label: "Lives Touched" },
+  { num: "300+", label: "Outreaches Funded" },
+  { num: "60+", label: "Years of Service" },
+];
+---
+
+<Layout title="Get Involved | Nyabondo Centre for Persons with Disabilities">
+  <!-- BREADCRUMB -->
+  <nav class="gi-bc" aria-label="Breadcrumb">
+    <div class="gi-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="gi-hero">
+    <div class="gi-container">
+      <div class="gi-hero-content">
+        <span class="gi-eyebrow">Make a Difference</span>
+        <h1>Get Involved</h1>
+        <p>
+          Your support — whether financial, professional, or personal — helps
+          Nyabondo Centre restore dignity and independence to persons with
+          disabilities across Kenya. Join our mission today.
+        </p>
+      </div>
+    </div>
+    <div class="gi-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- QUICK IMPACT NUMBERS -->
+  <section class="gi-impact">
+    <div class="gi-container">
+      <div class="gi-impact-grid">
+        {
+          impactNumbers.map((item) => (
+            <div class="gi-impact-card">
+              <span class="gi-impact-num">{item.num}</span>
+              <span class="gi-impact-label">{item.label}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE WAYS TO HELP -->
+  <section class="gi-ways">
+    <div class="gi-container">
+      <div class="gi-ways-header">
+        <h2>Three Ways You Can Help</h2>
+        <p>Choose the path that fits your capacity and passion.</p>
+      </div>
+      <div class="gi-ways-grid">
+        {
+          waysToHelp.map((way) => (
+            <div class={`gi-way-card gi-way-card--${way.color}`}>
+              <div class="gi-way-icon" aria-hidden="true">
+                <i class={way.icon} />
+              </div>
+              <h3>{way.title}</h3>
+              <p>{way.description}</p>
+              <a href={way.buttonLink} class="gi-btn gi-btn-${way.color}">
+                {way.buttonText}{" "}
+                <i class="fas fa-arrow-right" aria-hidden="true" />
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY SUPPORT (brief testimonial / quote) -->
+  <section class="gi-quote">
+    <div class="gi-container">
+      <div class="gi-quote-card">
+        <i class="fas fa-quote-left" aria-hidden="true"></i>
+        <blockquote>
+          Without the support of donors and partners, my son would never have
+          received the surgery that let him walk. Nyabondo gave him a future.
+        </blockquote>
+        <cite>— Mother of a former patient</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES / CTA BANNER -->
+  <section class="gi-cta">
+    <div class="gi-container">
+      <div class="gi-cta-card">
+        <h2>Still Have Questions?</h2>
+        <p>
+          Our team is happy to discuss how you or your organisation can best
+          support Nyabondo Centre.
+        </p>
+        <div class="gi-cta-buttons">
+          <a href="/contact" class="gi-btn gi-btn-white">
+            Contact Us <i class="fas fa-envelope"></i>
+          </a>
+          <a href="/media/testimonials" class="gi-btn gi-btn-outline-light">
+            Read Success Stories
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* =============================================
+     GET INVOLVED PAGE STYLES
+  ============================================= */
+  :root {
+    --gi-primary: #0096c7;
+    --gi-primary-dark: #006d94;
+    --gi-primary-light: #48b8d8;
+    --gi-green: #2e8b57;
+    --gi-green-dark: #1f6b40;
+    --gi-text: #0d2b38;
+    --gi-text-light: #2e5a6b;
+    --gi-bg: #f4fcff;
+    --gi-surface: #ffffff;
+    --gi-border: #c7e9f4;
+    --gi-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --gi-radius: 14px;
+    --gi-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gi-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .gi-bc {
+    background: var(--gi-surface);
+    border-bottom: 1px solid var(--gi-border);
+    padding: 12px 0;
+  }
+  .gi-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gi-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .gi-bc a {
+    color: var(--gi-primary);
+    text-decoration: none;
+  }
+  .gi-bc a:hover {
+    text-decoration: underline;
+  }
+  .gi-bc span {
+    color: var(--gi-text-light);
+  }
+  .gi-bc i {
+    font-size: 0.65rem;
+    color: var(--gi-text-light);
+  }
+
+  /* Hero */
+  .gi-hero {
+    background: linear-gradient(
+      135deg,
+      var(--gi-primary-dark) 0%,
+      var(--gi-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .gi-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .gi-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gi-primary-light);
+    margin-bottom: 12px;
+  }
+  .gi-eyebrow::before,
+  .gi-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .gi-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .gi-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .gi-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .gi-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  /* Quick Impact Numbers */
+  .gi-impact {
+    padding: 48px 0;
+    background: var(--gi-surface);
+    border-bottom: 1px solid var(--gi-border);
+  }
+  .gi-impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  .gi-impact-card {
+    padding: 16px;
+  }
+  .gi-impact-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gi-primary);
+    margin-bottom: 6px;
+  }
+  .gi-impact-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gi-text-light);
+  }
+
+  /* Three Ways Cards */
+  .gi-ways {
+    padding: 80px 0;
+    background: var(--gi-bg);
+  }
+  .gi-ways-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+  .gi-ways-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--gi-text);
+    margin-bottom: 12px;
+  }
+  .gi-ways-header p {
+    font-size: 1rem;
+    color: var(--gi-text-light);
+  }
+  .gi-ways-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .gi-way-card {
+    background: var(--gi-surface);
+    border-radius: var(--gi-radius);
+    padding: 40px 28px;
+    text-align: center;
+    transition:
+      transform 0.3s var(--gi-ease),
+      box-shadow 0.3s;
+    border: 1px solid var(--gi-border);
+  }
+  .gi-way-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--gi-shadow);
+  }
+  .gi-way-card--green .gi-way-icon {
+    background: rgba(46, 139, 87, 0.12);
+    color: var(--gi-green);
+  }
+  .gi-way-card--primary .gi-way-icon {
+    background: rgba(0, 150, 199, 0.12);
+    color: var(--gi-primary);
+  }
+  .gi-way-card--blue .gi-way-icon {
+    background: rgba(72, 184, 216, 0.12);
+    color: var(--gi-primary-light);
+  }
+  .gi-way-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+  .gi-way-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--gi-text);
+  }
+  .gi-way-card p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--gi-text-light);
+    margin-bottom: 28px;
+  }
+  .gi-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      transform 0.2s,
+      background 0.2s;
+    border: 2px solid transparent;
+  }
+  .gi-btn-green {
+    background: var(--gi-green);
+    color: white;
+  }
+  .gi-btn-green:hover {
+    background: var(--gi-green-dark);
+    transform: translateY(-2px);
+  }
+  .gi-btn-primary {
+    background: var(--gi-primary);
+    color: white;
+  }
+  .gi-btn-primary:hover {
+    background: var(--gi-primary-dark);
+    transform: translateY(-2px);
+  }
+  .gi-btn-blue {
+    background: var(--gi-primary-light);
+    color: white;
+  }
+  .gi-btn-blue:hover {
+    background: var(--gi-primary);
+    transform: translateY(-2px);
+  }
+  .gi-btn-white {
+    background: white;
+    color: var(--gi-primary);
+  }
+  .gi-btn-white:hover {
+    background: #e0f5fc;
+    transform: translateY(-2px);
+  }
+  .gi-btn-outline-light {
+    background: transparent;
+    border-color: white;
+    color: white;
+  }
+  .gi-btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Quote Section */
+  .gi-quote {
+    padding: 64px 0;
+    background: var(--gi-surface);
+  }
+  .gi-quote-card {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--gi-bg);
+    padding: 48px 40px;
+    border-radius: var(--gi-radius);
+    border-left: 4px solid var(--gi-primary);
+  }
+  .gi-quote-card i {
+    font-size: 2.5rem;
+    color: var(--gi-primary-light);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+  .gi-quote-card blockquote {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    font-style: italic;
+    color: var(--gi-text);
+    margin: 0 0 20px;
+  }
+  .gi-quote-card cite {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gi-text-light);
+    font-style: normal;
+  }
+
+  /* CTA Banner */
+  .gi-cta {
+    padding: 80px 0;
+    background: linear-gradient(
+      135deg,
+      var(--gi-primary-dark) 0%,
+      var(--gi-primary) 100%
+    );
+  }
+  .gi-cta-card {
+    text-align: center;
+    color: white;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .gi-cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 16px;
+  }
+  .gi-cta-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 32px;
+  }
+  .gi-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .gi-impact-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .gi-ways-grid {
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gi-ways-grid {
+      grid-template-columns: 1fr;
+    }
+    .gi-impact-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .gi-quote-card {
+      padding: 32px 24px;
+    }
+    .gi-quote-card blockquote {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gi-impact-grid {
+      grid-template-columns: 1fr;
+    }
+    .gi-way-card {
+      padding: 32px 20px;
+    }
+  }
+</style>

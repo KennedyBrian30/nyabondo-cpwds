@@ -1,0 +1,719 @@
+---
+// src/pages/about/administration.astro
+import Layout from "../../layouts/Layout.astro";
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Administration", href: "/about/administration" },
+];
+
+// Leadership team (5 members)
+const leadership = [
+  {
+    name: "Sr. Ludovena Anyango Onyino",
+    title: "Administrator",
+    image: "/images/team/sr-ludovena.webp",
+    bio: "Sister Ludovena leads Nyabondo Centre with quiet determination and a heart full of compassion. Every morning she walks the wards, not as an administrator but as a sister to those who suffer. She knows most of the children by name, remembers their surgeries, and celebrates their small victories. Under her leadership, the Centre has expanded outreach programmes and strengthened partnerships, yet she remains deeply grounded in the sisters' original mission: to restore dignity to every person with a disability. Her door is always open to families, staff, and partners alike."
+  },
+  {
+    name: "Mr. Ponplaus Ouma Agoro",
+    title: "Programmes Manager",
+    image: "/images/team/ponplaus-agoro.webp",
+    bio: `Ponplaus Agoro serves as the Programmes Manager at Nyabondo Centre for Persons with Disabilities, where he provides strategic leadership and oversight for the organization's disability inclusion, rehabilitation, health, education, and community development programmes. With over a decade of experience in project management, programme coordination, partnership development, and donor-funded initiatives, Ponplaus plays a pivotal role in translating organizational vision into impactful interventions that improve the lives of persons with disabilities. He coordinates programme planning, implementation, monitoring, reporting, stakeholder engagement, and resource mobilization, ensuring that projects are delivered efficiently, effectively, and in compliance with donor requirements. Ponplaus currently leads the implementation of the <a href='/programs/shine' class='admin-bio-link'>SHINE Project (2026–2029)</a> in partnership with County Governments of Homa-Bay and Kisumu, supported by CBM Kenya, and the <a href='/programs/ben-mapp-ii' class='admin-bio-link'>Building Effective Networks Multi-Annual Programme Plan (BEN MAPP II)</a> in Kisumu County, supported by Cheshire Disability Services Kenya. Through his leadership, these programmes are strengthening rehabilitation services, disability inclusion, inclusive education, community empowerment, and access to essential services for persons with disabilities. Known for his meticulous planning, strong organizational skills, and collaborative leadership style, Ponplaus has successfully coordinated multi-stakeholder initiatives involving government agencies, development partners, organizations of persons with disabilities, faith-based institutions, and community structures. His commitment to accountability, innovation, and results-driven programming has contributed significantly to the growth and impact of Nyabondo Centre's programmes. Passionate about disability rights and inclusive development, Ponplaus remains dedicated to building strategic partnerships and advancing opportunities that promote dignity, independence, and full participation of persons with disabilities in society. He welcomes collaboration with organizations and individuals who share the vision of creating inclusive communities where no one is left behind.`
+  },
+  {
+    name: "Ms. Pamella Anyumba",
+    title: "Head of Finance",
+    image: "/images/team/pamella-anyumba.webp",
+    bio: "Pamella keeps the Centre financially healthy and transparent. She manages budgets, donor funds, and internal controls with precision. Her work ensures that every shilling donated goes directly to rehabilitation services, staff welfare, and infrastructure. Partners trust her detailed reporting, and her team has digitised many financial processes for greater accountability."
+  },
+  {
+    name: "Mr. Walter Ouma Otieno",
+    title: "Finance Officer",
+    image: "/images/team/walter-amollo.webp",
+    bio: "Walter Ouma Otieno is the Finance Officer at Nyabondo Centre for Persons with Disabilities, bringing over nine years of professional experience in financial management, accounting, and organizational administration. He holds a Bachelor of Commerce (Accounting) degree earned in 2016 and is a CPA Finalist. He is currently pursuing a Master of Business Administration (MBA) in Accounting and Auditing at the Open University of Kenya, reflecting his commitment to continuous professional growth and excellence in financial leadership. Throughout his tenure at Nyabondo, Walter has played a pivotal role in modernizing the organization's financial operations — notably, he successfully led the transition of the Centre's accounting systems and processes from manual procedures to digital platforms, enhancing efficiency, accuracy, accountability, and financial reporting. His areas of expertise include financial management, budgeting, accounting systems, financial reporting, internal controls, and process improvement. Walter is passionate about leveraging technology and innovative practices to strengthen organizational performance and support sustainable service delivery. Beyond his professional responsibilities, he is an enthusiastic lifelong learner with a keen interest in acquiring new skills and knowledge that contribute to personal and professional development."
+  },
+  {
+    name: "Ms. Hellen Kerubo",
+    title: "Secretary / Receptionist",
+    image: "/images/team/hellen-kerubo.webp",
+    bio: "Hellen is the welcoming face of Nyabondo Centre. As Secretary and Receptionist, she ensures that every visitor, patient, and family member feels valued and heard from the moment they arrive. She manages appointments, coordinates communications, provides administrative support to the leadership team, and maintains the Centre's front office with professionalism and warmth. Her calm demeanour and attention to detail help create a compassionate and orderly environment, setting the tone for a positive experience at the Centre."
+  }
+];
+
+// Extended team members (12, starting with Victor Otieno)
+const teamMembers = [
+  {
+    name: "Dr. Victor Otieno",
+    title: "Head of Medical Services",
+    image: "/images/team/victor-otieno.webp",
+  },
+  {
+    name: "Mr. Amos Wafula",
+    title: "Physiotherapist",
+    image: "/images/team/amos-wafula.webp",
+  },
+  {
+    name: "Ms. Millicent Achieng",
+    title: "Occupational Therapist",
+    image: "/images/team/millicent-achieng.webp",
+  },
+  {
+    name: "Mr. John Otieno",
+    title: "Orthopaedic Technologist",
+    image: "/images/team/john-otieno.webp",
+  },
+  {
+    name: "Ms. Everlyne Akinyi",
+    title: "Community Outreach Coordinator",
+    image: "/images/team/everlyne-akinyi.webp",
+  },
+  {
+    name: "Mr. Bernard Omondi",
+    title: "Social Worker",
+    image: "/images/team/bernard-omondi.webp",
+  },
+  {
+    name: "Sr. Mary Goretti",
+    title: "Head Nurse",
+    image: "/images/team/mary-goretti.webp",
+  },
+  {
+    name: "Ms. Vivian Achieng",
+    title: "Administrative Assistant",
+    image: "/images/team/vivian-achieng.webp",
+  },
+  {
+    name: "Mr. Samuel Ochieng",
+    title: "Vocational Trainer",
+    image: "/images/team/samuel-ochieng.webp",
+  },
+  {
+    name: "Mr. Peter Odhiambo",
+    title: "Driver / Logistics",
+    image: "/images/team/peter-odhiambo.webp",
+  },
+  {
+    name: "Ms. Florence Atieno",
+    title: "Cook / Catering",
+    image: "/images/team/florence-atieno.webp",
+  },
+  {
+    name: "Mr. James Oloo",
+    title: "Security Supervisor",
+    image: "/images/team/james-oloo.webp",
+  }
+];
+---
+
+<Layout title="Administration | Nyabondo Centre for Persons with Disabilities">
+  <!-- BREADCRUMB -->
+  <nav class="admin-bc" aria-label="Breadcrumb">
+    <div class="admin-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="admin-hero">
+    <div class="admin-container">
+      <div class="admin-hero-content">
+        <span class="admin-eyebrow">Our Leadership</span>
+        <h1>Administration &amp; Team</h1>
+        <p>
+          Nyabondo Centre is guided by a dedicated team of professionals and
+          religious sisters who bring expertise, compassion, and integrity to
+          every aspect of our work.
+        </p>
+      </div>
+    </div>
+    <div class="admin-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP SECTION (5 members) -->
+  <section class="admin-leadership">
+    <div class="admin-container">
+      <div class="admin-leadership-grid">
+        {
+          leadership.map((person, idx) => {
+            // Truncate bio for preview (max 150 chars, break at space)
+            const previewLength = 150;
+            let preview = person.bio;
+            let fullBio = person.bio;
+            if (fullBio.length > previewLength) {
+              let truncated = fullBio.substring(0, previewLength);
+              let lastSpace = truncated.lastIndexOf(' ');
+              if (lastSpace > 0) {
+                truncated = truncated.substring(0, lastSpace);
+              }
+              preview = truncated + '…';
+            } else {
+              preview = fullBio;
+            }
+            return (
+              <div class="admin-leader-card" data-idx={idx}>
+                <div class="admin-leader-image">
+                  <picture>
+                    <source srcset={person.image} type="image/webp" />
+                    <img
+                      src={person.image}
+                      alt={`${person.name}, ${person.title}`}
+                      loading="lazy"
+                      width="300"
+                      height="300"
+                    />
+                  </picture>
+                </div>
+                <div class="admin-leader-info">
+                  <h2 class="admin-leader-name">{person.name}</h2>
+                  <p class="admin-leader-title">{person.title}</p>
+                  <div class="admin-leader-statement">
+                    <p class="admin-statement-preview">
+                      {preview}
+                      {fullBio.length > previewLength && (
+                        <button class="admin-readmore" aria-label={`Read more about ${person.name}`}>
+                          Read more
+                        </button>
+                      )}
+                    </p>
+                    <p class="admin-statement-full" style="display:none;">
+                      <span set:html={fullBio}></span>
+                      {fullBio.length > previewLength && (
+                        <button class="admin-readless" aria-label={`Read less about ${person.name}`}>
+                          Read less
+                        </button>
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+ 
+  <!-- CORE VALUES QUICK STATS -->
+  <section class="admin-values">
+    <div class="admin-container">
+      <div class="admin-values-grid">
+        <div class="admin-value-card">
+          <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+          <h3>Integrity</h3>
+          <p>Honesty, fairness, and transparency in all we do.</p>
+        </div>
+        <div class="admin-value-card">
+          <i class="fas fa-praying-hands" aria-hidden="true"></i>
+          <h3>Spirituality</h3>
+          <p>Our work is consecrated to God, serving the less fortunate.</p>
+        </div>
+        <div class="admin-value-card">
+          <i class="fas fa-users" aria-hidden="true"></i>
+          <h3>Inclusivity</h3>
+          <p>Every person with a disability belongs and matters.</p>
+        </div>
+        <div class="admin-value-card">
+          <i class="fas fa-chart-line" aria-hidden="true"></i>
+          <h3>Excellence</h3>
+          <p>We strive to exceed expectations in rehabilitation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="admin-cta">
+    <div class="admin-container">
+      <div class="admin-cta-card">
+        <h2>Join Our Mission</h2>
+        <p>
+          Whether you are a partner, a donor, or a skilled professional looking
+          to volunteer, Nyabondo welcomes you. Together we can rise above
+          disability.
+        </p>
+        <div class="admin-cta-buttons">
+          <a href="/get-involved/donate" class="admin-btn admin-btn-green">
+            <i class="fas fa-heart" aria-hidden="true"></i> Donate Now
+          </a>
+          <a href="/contact" class="admin-btn admin-btn-outline">
+            Contact Us <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* =============================================
+     ADMIN PAGE STYLES (mirrors main design system)
+  ============================================= */
+  :root {
+    --admin-primary: #0096c7;
+    --admin-primary-dark: #006d94;
+    --admin-primary-light: #48b8d8;
+    --admin-green: #2e8b57;
+    --admin-green-dark: #1f6b40;
+    --admin-text: #0d2b38;
+    --admin-text-light: #2e5a6b;
+    --admin-bg: #f4fcff;
+    --admin-surface: #ffffff;
+    --admin-border: #c7e9f4;
+    --admin-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --admin-radius: 14px;
+    --admin-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .admin-bc {
+    background: var(--admin-surface);
+    border-bottom: 1px solid var(--admin-border);
+    padding: 12px 0;
+  }
+  .admin-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .admin-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .admin-bc a {
+    color: var(--admin-primary);
+    text-decoration: none;
+  }
+  .admin-bc a:hover {
+    text-decoration: underline;
+  }
+  .admin-bc span {
+    color: var(--admin-text-light);
+  }
+  .admin-bc i {
+    font-size: 0.65rem;
+    color: var(--admin-text-light);
+  }
+
+  /* Hero */
+  .admin-hero {
+    background: linear-gradient(
+      135deg,
+      var(--admin-primary-dark) 0%,
+      var(--admin-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .admin-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .admin-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--admin-primary-light);
+    margin-bottom: 12px;
+  }
+  .admin-eyebrow::before,
+  .admin-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .admin-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .admin-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .admin-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .admin-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  /* Leadership Grid – 3 columns for 5 cards */
+  .admin-leadership {
+    padding: 96px 0;
+    background: var(--admin-bg);
+  }
+  .admin-leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+  .admin-leader-card {
+    background: var(--admin-surface);
+    border-radius: var(--admin-radius);
+    overflow: hidden;
+    box-shadow: var(--admin-shadow);
+    transition:
+      transform 0.3s var(--admin-ease),
+      box-shadow 0.3s;
+  }
+  .admin-leader-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 150, 199, 0.15);
+  }
+  .admin-leader-image img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+  }
+  .admin-leader-info {
+    padding: 28px;
+  }
+  .admin-leader-name {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--admin-text);
+    margin-bottom: 6px;
+  }
+  .admin-leader-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--admin-primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .admin-leader-statement {
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: var(--admin-text-light);
+  }
+  .admin-statement-preview {
+    display: block;
+  }
+  .admin-statement-full {
+    display: none;
+  }
+  .admin-readmore,
+  .admin-readless {
+    background: none;
+    border: none;
+    color: var(--admin-primary);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 0 0 6px;
+    font-size: 0.9rem;
+  }
+  .admin-readmore:hover,
+  .admin-readless:hover {
+    text-decoration: underline;
+  }
+
+  /* ===== Link styling inside bios ===== */
+  .admin-statement-full .admin-bio-link {
+    color: var(--admin-primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .admin-statement-full .admin-bio-link:hover {
+    color: var(--admin-primary-dark);
+    text-decoration-color: var(--admin-primary-light);
+  }
+
+  /* Extended Team */
+  .admin-team {
+    padding: 80px 0;
+    background: var(--admin-surface);
+  }
+  .admin-section-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+  .admin-section-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--admin-text);
+    margin-bottom: 12px;
+  }
+  .admin-section-header p {
+    font-size: 1rem;
+    color: var(--admin-text-light);
+  }
+  .admin-team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .admin-team-card {
+    background: var(--admin-bg);
+    border-radius: var(--admin-radius);
+    padding: 20px;
+    text-align: center;
+    transition:
+      transform 0.25s,
+      box-shadow 0.25s;
+    border: 1px solid var(--admin-border);
+  }
+  .admin-team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--admin-shadow);
+  }
+  .admin-team-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 16px;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .admin-team-info h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--admin-text);
+    margin-bottom: 4px;
+  }
+  .admin-team-info p {
+    font-size: 0.8rem;
+    color: var(--admin-primary);
+    font-weight: 500;
+  }
+
+  /* Values Section */
+  .admin-values {
+    background: linear-gradient(120deg, #eef9ff 0%, #ffffff 100%);
+    padding: 72px 0;
+  }
+  .admin-values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .admin-value-card {
+    text-align: center;
+    padding: 24px 16px;
+    background: white;
+    border-radius: var(--admin-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  .admin-value-card i {
+    font-size: 2.2rem;
+    color: var(--admin-primary);
+    margin-bottom: 12px;
+  }
+  .admin-value-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .admin-value-card p {
+    font-size: 0.85rem;
+    color: var(--admin-text-light);
+  }
+
+  /* CTA */
+  .admin-cta {
+    padding: 80px 0;
+    background: var(--admin-bg);
+  }
+  .admin-cta-card {
+    background: linear-gradient(
+      135deg,
+      var(--admin-primary-dark) 0%,
+      var(--admin-primary) 100%
+    );
+    border-radius: var(--admin-radius);
+    padding: 56px 48px;
+    text-align: center;
+    color: white;
+  }
+  .admin-cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 16px;
+  }
+  .admin-cta-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .admin-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      transform 0.2s,
+      background 0.2s;
+  }
+  .admin-btn-green {
+    background: var(--admin-green);
+    color: white;
+  }
+  .admin-btn-green:hover {
+    background: var(--admin-green-dark);
+    transform: translateY(-2px);
+  }
+  .admin-btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+  .admin-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .admin-leadership-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .admin-team-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .admin-values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .admin-leadership-grid {
+      grid-template-columns: 1fr;
+    }
+    .admin-leader-image img {
+      height: 260px;
+    }
+    .admin-team-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .admin-values-grid {
+      grid-template-columns: 1fr;
+    }
+    .admin-cta-card {
+      padding: 40px 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .admin-team-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .admin-team-card {
+      padding: 12px;
+    }
+    .admin-team-image img {
+      width: 90px;
+      height: 90px;
+    }
+    .admin-team-info h3 {
+      font-size: 0.85rem;
+    }
+    .admin-team-info p {
+      font-size: 0.7rem;
+    }
+    .admin-leader-name {
+      font-size: 1.2rem;
+    }
+    .admin-leader-info {
+      padding: 20px;
+    }
+  }
+</style>
+
+<script>
+  // Toggle between preview and full bio for each leader card
+  document.querySelectorAll('.admin-leader-card').forEach((card) => {
+    const preview = card.querySelector('.admin-statement-preview');
+    const full = card.querySelector('.admin-statement-full');
+    if (!preview || !full) return;
+
+    const readmoreBtn = preview.querySelector('.admin-readmore');
+    const readlessBtn = full.querySelector('.admin-readless');
+
+    if (readmoreBtn) {
+      readmoreBtn.addEventListener('click', () => {
+        preview.style.display = 'none';
+        full.style.display = 'block';
+      });
+    }
+    if (readlessBtn) {
+      readlessBtn.addEventListener('click', () => {
+        preview.style.display = 'block';
+        full.style.display = 'none';
+      });
+    }
+  });
+</script>

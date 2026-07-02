@@ -1,0 +1,1346 @@
+---
+// src/pages/services/outpatient-inpatient.astro
+import Layout from "../../layouts/Layout.astro";
+
+// Breadcrumb data
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  {
+    label: "In‑patient & Out‑patient Services",
+    href: "/services/outpatient-inpatient",
+  },
+];
+
+// In-page directory, mirrors a hospital service index
+const quickNav = [
+  { label: "Outpatient Care", href: "#outpatient" },
+  { label: "Conditions We Treat", href: "#conditions" },
+  { label: "Inpatient Care", href: "#inpatient" },
+  { label: "Post-Operative Care", href: "#postop" },
+  { label: "Accreditation", href: "#accreditation" },
+  { label: "How to Access", href: "#access" },
+];
+
+// Conditions / ailments commonly diagnosed and managed on site
+const conditionCategories = [
+  {
+    category: "Chronic & Lifestyle Conditions",
+    icon: "fas fa-heart-pulse",
+    items: ["Diabetes", "Hypertension", "Asthma", "Arthritis & joint pain"],
+  },
+  {
+    category: "Infectious Diseases",
+    icon: "fas fa-virus",
+    items: [
+      "Tuberculosis (TB)",
+      "Malaria",
+      "Typhoid",
+      "Pneumonia",
+      "Skin & wound infections",
+      "Urinary tract infections",
+    ],
+  },
+  {
+    category: "Neurological Conditions",
+    icon: "fas fa-brain",
+    items: [
+      "Epilepsy",
+      "Chronic headaches & migraines",
+      "Cerebral palsy follow‑up",
+    ],
+  },
+  {
+    category: "General & Acute Illness",
+    icon: "fas fa-thermometer-half",
+    items: [
+      "Respiratory infections",
+      "Gastro‑intestinal illness",
+      "Anaemia",
+      "Minor injuries & trauma",
+    ],
+  },
+];
+
+// Related services for interlinking
+const relatedServices = [
+  {
+    title: "Corrective Surgeries",
+    href: "/services/surgeries",
+    description:
+      "Many surgical patients receive pre‑ and post‑operative care in our inpatient ward.",
+    icon: "fas fa-stethoscope",
+  },
+  {
+    title: "Therapy Services",
+    href: "/services/therapy",
+    description:
+      "Inpatients receive daily physiotherapy and occupational therapy as part of their rehabilitation.",
+    icon: "fas fa-hand-holding-heart",
+  },
+  {
+    title: "Assistive Devices",
+    href: "/services/assistive-devices",
+    description:
+      "Our orthopaedic workshop provides mobility aids for patients during and after hospital stay.",
+    icon: "fas fa-wheelchair",
+  },
+  {
+    title: "Vocational Training",
+    href: "/services/vocational-training",
+    description:
+      "Long‑term patients can access skills training during rehabilitation.",
+    icon: "fas fa-graduation-cap",
+  },
+];
+
+// Images
+const heroImg = "/images/services/service-inpatient-care.webp";
+const outpatientImg = "/images/hero/hero-nyabondo-staff.webp";
+const wardImg = "/images/hero/hero-post-op.webp";
+const shaImg = "/images/partners/ministry-of-health-kenya.webp";
+---
+
+<Layout
+  title="In‑patient & Out‑patient Services | Nyabondo Centre for Persons with Disabilities"
+>
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {
+          breadcrumbs.map((crumb, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={crumb.href}>{crumb.label}</a>
+              ) : (
+                <span aria-current="page">{crumb.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="service-hero">
+    <div class="container">
+      <div class="service-hero-grid">
+        <div class="service-hero-content">
+          <span class="section-eyebrow">Clinical Services Directory</span>
+          <h1 class="service-title">
+            In‑patient & <span class="accent">Out‑patient</span> Medical Services
+          </h1>
+          <p class="service-lead">
+            <strong>Outpatient and inpatient medical services for all</strong> —
+            comprehensive clinical care for persons with disabilities and the wider
+            community alike, from routine consultations to post‑operative recovery
+            and residential rehabilitation.
+          </p>
+          <div class="service-hero-badges">
+            <span class="badge badge-trust"
+              ><i class="fas fa-shield-halved"></i> SHA Accredited</span
+            >
+            <span class="badge"
+              ><i class="fas fa-hospital-user"></i> 24/7 Inpatient Care</span
+            >
+            <span class="badge"
+              ><i class="fas fa-clock"></i> Outpatient Clinics</span
+            >
+            <span class="badge"
+              ><i class="fas fa-people-group"></i> Open to Everyone</span
+            >
+          </div>
+        </div>
+        <div class="service-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="A patient receiving inpatient care at Nyabondo Centre"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">
+            Compassionate inpatient care
+          </div>
+        </div>
+      </div>
+
+      <!-- In-page directory -->
+      <nav class="quick-nav" aria-label="Section directory">
+        <span class="quick-nav-label"
+          ><i class="fas fa-list-ul"></i> On this page</span
+        >
+        <ul>
+          {
+            quickNav.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- "Open to all" statement banner -->
+  <section class="care-banner" aria-labelledby="care-banner-text">
+    <div class="container care-banner-inner">
+      <i class="fas fa-circle-check" aria-hidden="true"></i>
+      <p id="care-banner-text">
+        Whether you live with a disability or not, every member of the community
+        is welcome here. <strong>No referral. No condition required.</strong> We
+        provide both outpatient consultations and full inpatient admission under
+        one roof, for adults and children alike.
+      </p>
+    </div>
+  </section>
+
+  <!-- Outpatient Services -->
+  <section
+    id="outpatient"
+    class="outpatient"
+    aria-labelledby="outpatient-heading"
+  >
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Out‑Patient Services</span>
+        <h2 id="outpatient-heading" class="section-title">
+          Walk‑In Clinics for Everyone
+        </h2>
+        <p class="section-subtitle">
+          No referral needed. No disability required. Our outpatient department
+          is open to all community members seeking quality medical care.
+        </p>
+      </div>
+
+      <div class="outpatient-grid">
+        <div class="outpatient-card reveal-up">
+          <i class="fas fa-stethoscope"></i>
+          <h3>General Medical Consultations</h3>
+          <p>
+            Routine check‑ups, diagnosis and treatment of common illnesses,
+            chronic disease management (diabetes, hypertension, etc.).
+          </p>
+        </div>
+        <div class="outpatient-card reveal-up">
+          <i class="fas fa-band-aid"></i>
+          <h3>Minor Procedures & Wound Care</h3>
+          <p>
+            Suturing, dressing changes, abscess drainage, and minor surgical
+            procedures.
+          </p>
+        </div>
+        <div class="outpatient-card reveal-up">
+          <i class="fas fa-syringe"></i>
+          <h3>Vaccinations & Immunisations</h3>
+          <p>
+            Routine childhood vaccines, tetanus, flu shots, and travel vaccines.
+          </p>
+        </div>
+        <div class="outpatient-card reveal-up">
+          <i class="fas fa-flask"></i>
+          <h3>Laboratory Services</h3>
+          <p>
+            Blood tests, urinalysis, malaria testing, and other diagnostic
+            services.
+          </p>
+        </div>
+        <div class="outpatient-card reveal-up">
+          <i class="fas fa-capsules"></i>
+          <h3>Pharmacy Services</h3>
+          <p>
+            On‑site dispensary with prescribed medications at affordable prices.
+          </p>
+        </div>
+        <div class="outpatient-card reveal-up">
+          <i class="fas fa-heartbeat"></i>
+          <h3>Chronic Disease Clinics</h3>
+          <p>Specialised follow‑up for patients with long‑term conditions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conditions We Treat -->
+  <section
+    id="conditions"
+    class="conditions"
+    aria-labelledby="conditions-heading"
+  >
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Diagnosis & Treatment</span>
+        <h2 id="conditions-heading" class="section-title">
+          Conditions We Treat
+        </h2>
+        <p class="section-subtitle">
+          From everyday illnesses to complex chronic conditions, our clinicians
+          diagnose and manage ailments such as <strong
+            >diabetes, tuberculosis, epilepsy, typhoid, malaria, and a wide
+            range of infections</strong
+          > — alongside many other conditions affecting children and adults.
+        </p>
+      </div>
+
+      <div class="conditions-grid">
+        {
+          conditionCategories.map((cat, i) => (
+            <div
+              class="condition-card reveal-up"
+              style={`--delay: ${i * 60}ms`}
+            >
+              <div class="condition-card-head">
+                <i class={cat.icon} />
+                <h3>{cat.category}</h3>
+              </div>
+              <ul class="condition-tags">
+                {cat.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <p class="conditions-note">
+        <i class="fas fa-circle-info"></i> Not sure if we treat your condition? Call
+        our outpatient desk and our clinical team will advise you.
+      </p>
+    </div>
+  </section>
+
+  <!-- Inpatient Services -->
+  <section id="inpatient" class="inpatient" aria-labelledby="inpatient-heading">
+    <div class="container">
+      <div class="inpatient-grid reveal-up">
+        <div class="inpatient-image">
+          <picture>
+            <source srcset={wardImg} type="image/webp" />
+            <img
+              src={wardImg}
+              alt="A child receiving post‑operative care in Nyabondo's inpatient ward"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+        <div class="inpatient-text">
+          <span class="section-eyebrow">In‑Patient Services</span>
+          <h2 id="inpatient-heading">24/7 Care for Those Who Need It Most</h2>
+          <p>
+            Our inpatient ward provides comfortable, safe accommodation for
+            patients requiring:
+          </p>
+          <ul>
+            <li>
+              <i class="fas fa-check-circle"></i> Post‑operative recovery after corrective
+              surgeries
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Intensive rehabilitation therapy
+              (daily physiotherapy/occupational therapy)
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Long‑term residential rehabilitation
+              for children with severe disabilities
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Acute medical conditions requiring
+              hospitalisation
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Palliative and supportive care
+            </li>
+          </ul>
+          <p class="inpatient-note">
+            <i class="fas fa-people-roof"></i> Family members are encouraged to stay
+            with children and participate in care. Our facility includes family accommodation
+            areas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Post‑Operative Care Focus -->
+  <section id="postop" class="postop" aria-labelledby="postop-heading">
+    <div class="container">
+      <div class="postop-card reveal-up">
+        <div class="postop-icon"><i class="fas fa-notes-medical"></i></div>
+        <div class="postop-content">
+          <h2 id="postop-heading">
+            Specialised Post‑Operative & Follow‑Up Care
+          </h2>
+          <p>
+            As a centre that performs hundreds of corrective surgeries annually,
+            we have developed robust post‑operative protocols. Our team monitors
+            surgical wounds, manages pain, provides physiotherapy, and ensures
+            patients are fully rehabilitated before discharge. Regular follow‑up
+            clinics track long‑term outcomes.
+          </p>
+          <div class="postop-stats">
+            <div>
+              <strong>98%</strong><span
+                >follow‑up rate for surgical patients</span>
+            </div>
+            <div>
+              <strong>Weekly</strong><span>post‑op review clinics</span>
+            </div>
+            <div><strong>24/7</strong><span>nursing care</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHA Accreditation Notice -->
+  <section
+    id="accreditation"
+    class="accreditation"
+    aria-labelledby="sha-heading"
+  >
+    <div class="container">
+      <div class="sha-card reveal-up">
+        <div class="sha-icon">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <div class="sha-content">
+          <h2 id="sha-heading">Social Health Authority (SHA) Accredited</h2>
+          <p>
+            Nyabondo Centre is fully accredited by the Social Health Authority,
+            meaning patients covered by SHA can access our services with minimal
+            out‑of‑pocket costs. We also accept NHIF and other insurance
+            schemes. Our admissions team is ready to assist with insurance
+            verification.
+          </p>
+          <div class="credential-chips">
+            <span class="chip"
+              ><i class="fas fa-shield-halved"></i> SHA Accredited</span
+            >
+            <span class="chip"
+              ><i class="fas fa-id-card"></i> NHIF Accepted</span
+            >
+            <span class="chip"
+              ><i class="fas fa-user-nurse"></i> 24/7 Nursing</span
+            >
+          </div>
+        </div>
+        <div class="sha-logo">
+          <picture>
+            <source srcset={shaImg} type="image/webp" />
+            <img
+              src={shaImg}
+              alt="Ministry of Health Kenya logo"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Access Services -->
+  <section id="access" class="access" aria-labelledby="access-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Getting Care</span>
+        <h2 id="access-heading" class="section-title">
+          How to Access Our Services
+        </h2>
+      </div>
+      <div class="access-steps">
+        <div class="access-step reveal-up">
+          <div class="step-num">1</div>
+          <h3>Walk In or Call</h3>
+          <p>
+            No appointment needed for general outpatient consultations. For
+            surgical inquiries, please call ahead.
+          </p>
+        </div>
+        <div class="access-step reveal-up">
+          <div class="step-num">2</div>
+          <h3>Registration</h3>
+          <p>
+            Present your ID and SHA/NHIF card if available. Our team will assist
+            with registration.
+          </p>
+        </div>
+        <div class="access-step reveal-up">
+          <div class="step-num">3</div>
+          <h3>Consultation</h3>
+          <p>
+            See a clinical officer or doctor for assessment, diagnosis, and
+            treatment plan.
+          </p>
+        </div>
+        <div class="access-step reveal-up">
+          <div class="step-num">4</div>
+          <h3>Admission or Discharge</h3>
+          <p>
+            If needed, you will be admitted to the inpatient ward. Otherwise,
+            collect medications and follow‑up instructions.
+          </p>
+        </div>
+      </div>
+      <div class="access-contact">
+        <span
+          ><i class="fas fa-phone-alt"></i> For inquiries: <strong
+            >+254 XXX XXX XXX</strong
+          > | Email: <strong>info@nyabondo.org</strong></span
+        >
+        <a href="/contact" class="btn-link"
+          >Contact Us <i class="fas fa-arrow-right"></i></a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Services -->
+  <section class="related-services" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">
+          Services That Complement Your Care
+        </h2>
+        <p class="section-subtitle">
+          Many patients combine inpatient/outpatient care with these specialised
+          services.
+        </p>
+      </div>
+      <div class="related-grid">
+        {
+          relatedServices.map((service, i) => (
+            <a
+              href={service.href}
+              class="related-card reveal-up"
+              style={`--delay: ${i * 60}ms`}
+            >
+              <div class="related-icon">
+                <i class={service.icon} />
+              </div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <span class="related-arrow">
+                <i class="fas fa-arrow-right" />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-book">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Ready to Visit?</h2>
+          <p>
+            Walk in during our operating hours, or call ahead to schedule a
+            surgical consultation or inpatient admission.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn btn-green">
+            <i class="fas fa-phone"></i> Call Us Now
+          </a>
+          <a href="/get-involved/donate" class="btn btn-primary-outline">
+            Support Our Work <i class="fas fa-heart"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #086e8f;
+    --primary-dark: #054d63;
+    --primary-light: #4ba3bd;
+    --secondary: #2c7a55;
+    --secondary-dark: #1d5b3e;
+    --accent: #b07f2e;
+    --accent-dark: #8a611f;
+    --accent-bg: #fbf2e2;
+    --text: #102832;
+    --text-light: #38555f;
+    --text-muted: #648690;
+    --background: #f6fafb;
+    --surface: #ffffff;
+    --border: #d8e7eb;
+    --border-light: #e9f2f4;
+    --shadow-sm: 0 2px 10px rgba(8, 40, 50, 0.06);
+    --shadow-md: 0 8px 28px rgba(8, 40, 50, 0.08);
+    --shadow-lg: 0 18px 50px rgba(8, 40, 50, 0.12);
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 56px;
+  }
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  /* Hero */
+  .service-hero {
+    padding: 56px 0 0;
+    background: linear-gradient(120deg, #eff8fb 0%, #ffffff 100%);
+  }
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 48px;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+  .service-hero-content {
+    padding-right: 20px;
+  }
+  .service-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .service-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .service-lead {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .service-lead strong {
+    color: var(--text);
+  }
+  .service-hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 7px 16px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .badge-trust {
+    background: var(--accent-bg);
+    border-color: rgba(176, 127, 46, 0.35);
+    color: var(--accent-dark);
+  }
+  .service-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .service-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Quick nav / directory strip */
+  .quick-nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+    padding: 18px 0;
+  }
+  .quick-nav-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .quick-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .quick-nav a {
+    display: inline-block;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 7px 14px;
+    border-radius: 30px;
+    transition: all 0.2s var(--ease-out-expo);
+  }
+  .quick-nav a:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  /* "Open to all" banner */
+  .care-banner {
+    background: var(--primary-dark);
+  }
+  .care-banner-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+  }
+  .care-banner-inner i {
+    color: #aee4f2;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .care-banner-inner p {
+    color: #eaf7fb;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .care-banner-inner p strong {
+    color: #fff;
+  }
+
+  /* Outpatient Grid */
+  .outpatient {
+    padding: 72px 0;
+    background: var(--background);
+  }
+  .outpatient-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .outpatient-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 30px 28px;
+    border: 1px solid var(--border-light);
+    border-top: 3px solid var(--primary);
+    transition: all 0.25s var(--ease-out-expo);
+  }
+  .outpatient-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .outpatient-card i {
+    font-size: 1.7rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .outpatient-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .outpatient-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Conditions We Treat */
+  .conditions {
+    padding: 72px 0;
+    background: var(--surface);
+  }
+  .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .condition-card {
+    background: var(--background);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+  .condition-card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .condition-card-head i {
+    font-size: 1.3rem;
+    color: var(--secondary);
+    flex-shrink: 0;
+  }
+  .condition-card-head h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .condition-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .condition-tags li {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--secondary-dark);
+    background: rgba(44, 122, 85, 0.09);
+    border: 1px solid rgba(44, 122, 85, 0.18);
+    padding: 5px 12px;
+    border-radius: 30px;
+  }
+  .conditions-note {
+    text-align: center;
+    margin-top: 36px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .conditions-note i {
+    color: var(--primary);
+    margin-right: 6px;
+  }
+
+  /* Inpatient Section */
+  .inpatient {
+    padding: 72px 0;
+    background: var(--background);
+  }
+  .inpatient-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .inpatient-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .inpatient-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  .inpatient-text li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .inpatient-text li i {
+    color: var(--secondary);
+    margin-top: 3px;
+  }
+  .inpatient-note {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    margin-top: 20px;
+    font-size: 0.92rem;
+  }
+
+  /* Post-Operative Focus */
+  .postop {
+    padding: 72px 0;
+    background: var(--surface);
+  }
+  .postop-card {
+    display: flex;
+    gap: 28px;
+    background: var(--background);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    border: 1px solid var(--border);
+  }
+  .postop-icon {
+    font-size: 2.3rem;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+  .postop-content h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+  .postop-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .postop-stats div {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 140px;
+  }
+  .postop-stats strong {
+    font-size: 1.25rem;
+    color: var(--accent-dark);
+    font-family: "Playfair Display", serif;
+  }
+  .postop-stats span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  /* Accreditation */
+  .accreditation {
+    padding: 16px 0 56px;
+    background: var(--surface);
+  }
+  .sha-card {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    background: var(--accent-bg);
+    border: 1px solid rgba(176, 127, 46, 0.3);
+    border-left: 5px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 32px 36px;
+  }
+  .sha-icon {
+    font-size: 2.4rem;
+    color: var(--accent-dark);
+    flex-shrink: 0;
+  }
+  .sha-content {
+    flex: 1;
+  }
+  .sha-content h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .credential-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .chip {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+    background: var(--surface);
+    border: 1px solid rgba(176, 127, 46, 0.35);
+    padding: 6px 14px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sha-logo {
+    width: 76px;
+    flex-shrink: 0;
+  }
+  .sha-logo img {
+    max-width: 100%;
+  }
+
+  /* Access Steps */
+  .access {
+    padding: 72px 0;
+    background: var(--background);
+  }
+  .access-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .access-step {
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    padding: 28px 22px;
+    border-radius: var(--radius-md);
+  }
+  .step-num {
+    width: 44px;
+    height: 44px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin: 0 auto 16px;
+  }
+  .access-step h3 {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+  .access-step p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .access-contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    padding: 20px 28px;
+    border-radius: var(--radius-md);
+    font-size: 0.92rem;
+    color: var(--text-light);
+  }
+  .access-contact strong {
+    color: var(--text);
+  }
+  .access-contact .btn-link {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .access-contact .btn-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Related Services */
+  .related-services {
+    padding: 72px 0;
+    background: var(--surface);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 26px 22px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s var(--ease-out-expo);
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.7rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-book {
+    padding: 64px 0 80px;
+    background: var(--background);
+  }
+  .cta-card {
+    background: linear-gradient(
+      115deg,
+      var(--primary-dark) 0%,
+      var(--primary) 100%
+    );
+    border-radius: var(--radius-lg);
+    padding: 48px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border: 2px solid var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.7s var(--ease-out-expo),
+        transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .outpatient-grid,
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .conditions-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .access-steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .sha-card {
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+  @media (max-width: 768px) {
+    .service-hero-grid,
+    .inpatient-grid,
+    .postop-card {
+      grid-template-columns: 1fr;
+      flex-direction: column;
+    }
+    .outpatient-grid,
+    .related-grid,
+    .conditions-grid,
+    .access-steps {
+      grid-template-columns: 1fr;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .service-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+    .service-hero-badges {
+      justify-content: center;
+    }
+    .quick-nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .access-contact {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+  })();
+</script>
+

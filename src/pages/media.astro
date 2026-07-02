@@ -1,0 +1,534 @@
+---
+// src/pages/media/index.astro
+import Layout from "../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Media", href: "/media" },
+];
+
+const mediaSections = [
+  {
+    title: "Events",
+    description: "Stay updated on our upcoming events, workshops, and community outreach activities. See how we're engaging with communities and raising awareness about disability inclusion.",
+    href: "/media/events",
+    icon: "fas fa-calendar-days",
+    color: "var(--primary)",
+    bgColor: "rgba(0, 150, 199, 0.08)",
+  },
+  {
+    title: "Gallery",
+    description: "Browse through our photo collections showcasing the work we do — from corrective surgeries and therapy sessions to community outreaches and vocational training.",
+    href: "/media/gallery",
+    icon: "fas fa-images",
+    color: "var(--secondary)",
+    bgColor: "rgba(46, 139, 87, 0.08)",
+  },
+  {
+    title: "Case Studies",
+    description: "Read in-depth stories of individuals whose lives have been transformed through our rehabilitation services, surgeries, and assistive technology programs.",
+    href: "/media/case-studies",
+    icon: "fas fa-file-lines",
+    color: "#8B5CF6",
+    bgColor: "rgba(139, 92, 246, 0.08)",
+  },
+  {
+    title: "Testimonials",
+    description: "Hear directly from our beneficiaries, their families, and partners about the impact Nyabondo Centre has had on their lives and communities.",
+    href: "/media/testimonials",
+    icon: "fas fa-quote-left",
+    color: "#F59E0B",
+    bgColor: "rgba(245, 158, 11, 0.08)",
+  },
+];
+---
+
+<Layout title="Media | Nyabondo Centre for Persons with Disabilities">
+
+  <!-- BREADCRUMB -->
+  <nav class="media-bc" aria-label="Breadcrumb">
+    <div class="media-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="media-hero">
+    <div class="media-container">
+      <div class="media-hero-content">
+        <span class="media-eyebrow">Stories &amp; Updates</span>
+        <h1>Media Centre</h1>
+        <p>
+          Explore the stories, events, and moments that define our journey.
+          From life-changing surgeries to community celebrations — here's where
+          we share our impact with the world.
+        </p>
+      </div>
+    </div>
+    <div class="media-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"
+        ></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- MEDIA SECTIONS GRID -->
+  <section class="media-sections">
+    <div class="media-container">
+      <div class="media-sections-grid">
+        {mediaSections.map((section, i) => (
+          <a href={section.href} class="media-section-card" style={`--delay: ${i * 100}ms`}>
+            <div class="media-section-icon" style={`color: ${section.color}; background: ${section.bgColor};`}>
+              <i class={section.icon}></i>
+            </div>
+            <div class="media-section-content">
+              <h2>{section.title}</h2>
+              <p>{section.description}</p>
+              <span class="media-section-arrow">
+                Explore <i class="fas fa-arrow-right"></i>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK STATS -->
+  <section class="media-stats">
+    <div class="media-container">
+      <div class="media-stats-grid">
+        <div class="media-stat-card">
+          <div class="media-stat-num">50+</div>
+          <div class="media-stat-label">Community Outreaches</div>
+        </div>
+        <div class="media-stat-card">
+          <div class="media-stat-num">12,000+</div>
+          <div class="media-stat-label">Corrective Surgeries</div>
+        </div>
+        <div class="media-stat-card">
+          <div class="media-stat-num">100+</div>
+          <div class="media-stat-label">Events &amp; Workshops</div>
+        </div>
+        <div class="media-stat-card">
+          <div class="media-stat-num">5,000+</div>
+          <div class="media-stat-label">Stories of Transformation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="media-cta">
+    <div class="media-container">
+      <div class="media-cta-card">
+        <h2>Share Your Story</h2>
+        <p>
+          Have you been touched by Nyabondo Centre's work? We'd love to hear from
+          you. Share your testimonial or experience with us.
+        </p>
+        <div class="media-cta-buttons">
+          <a href="/contact" class="media-btn media-btn-primary">
+            <i class="fas fa-pen"></i> Share Your Story
+          </a>
+          <a href="/get-involved/donate" class="media-btn media-btn-outline">
+            <i class="fas fa-heart"></i> Support Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* =============================================
+     MEDIA PAGE STYLES
+  ============================================= */
+  :root {
+    --media-primary: #0096c7;
+    --media-primary-dark: #006d94;
+    --media-primary-light: #48b8d8;
+    --media-green: #2e8b57;
+    --media-text: #0d2b38;
+    --media-text-light: #2e5a6b;
+    --media-bg: #f4fcff;
+    --media-surface: #ffffff;
+    --media-border: #c7e9f4;
+    --media-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --media-radius: 14px;
+    --media-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .media-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .media-bc {
+    background: var(--media-surface);
+    border-bottom: 1px solid var(--media-border);
+    padding: 12px 0;
+  }
+  .media-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .media-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .media-bc a {
+    color: var(--media-primary);
+    text-decoration: none;
+  }
+  .media-bc a:hover {
+    text-decoration: underline;
+  }
+  .media-bc span {
+    color: var(--media-text-light);
+  }
+  .media-bc i {
+    font-size: 0.65rem;
+    color: var(--media-text-light);
+  }
+
+  /* Hero */
+  .media-hero {
+    background: linear-gradient(
+      135deg,
+      var(--media-primary-dark) 0%,
+      var(--media-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .media-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .media-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--media-primary-light);
+    margin-bottom: 12px;
+  }
+  .media-eyebrow::before,
+  .media-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .media-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .media-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .media-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .media-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  /* Media Sections Grid */
+  .media-sections {
+    padding: 80px 0 64px;
+    background: var(--media-bg);
+  }
+  .media-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .media-section-card {
+    display: flex;
+    gap: 24px;
+    padding: 32px;
+    background: var(--media-surface);
+    border-radius: var(--media-radius);
+    border: 1px solid var(--media-border);
+    text-decoration: none;
+    transition: all 0.3s var(--media-ease);
+    box-shadow: var(--media-shadow);
+    opacity: 0;
+    transform: translateY(24px);
+    animation: mediaFadeIn 0.6s var(--media-ease) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+  .media-section-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 150, 199, 0.15);
+    border-color: var(--media-primary);
+  }
+  @keyframes mediaFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .media-section-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: transform 0.3s var(--media-ease);
+  }
+  .media-section-card:hover .media-section-icon {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  .media-section-content {
+    flex: 1;
+  }
+  .media-section-content h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--media-text);
+    margin-bottom: 10px;
+  }
+  .media-section-content p {
+    font-size: 0.95rem;
+    color: var(--media-text-light);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .media-section-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--media-primary);
+    font-size: 0.9rem;
+    transition: gap 0.3s var(--media-ease);
+  }
+  .media-section-card:hover .media-section-arrow {
+    gap: 14px;
+  }
+  .media-section-arrow i {
+    font-size: 0.8rem;
+  }
+
+  /* Stats Section */
+  .media-stats {
+    padding: 64px 0;
+    background: var(--media-surface);
+  }
+  .media-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .media-stat-card {
+    text-align: center;
+    padding: 24px;
+    background: var(--media-bg);
+    border-radius: var(--media-radius);
+    border: 1px solid var(--media-border);
+    transition: transform 0.3s var(--media-ease);
+  }
+  .media-stat-card:hover {
+    transform: translateY(-4px);
+  }
+  .media-stat-num {
+    font-family: "Playfair Display", serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--media-primary);
+    line-height: 1.1;
+  }
+  .media-stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--media-text-light);
+    margin-top: 8px;
+  }
+
+  /* CTA Banner */
+  .media-cta {
+    padding: 60px 0 80px;
+    background: var(--media-bg);
+  }
+  .media-cta-card {
+    background: linear-gradient(
+      135deg,
+      var(--media-primary-dark) 0%,
+      var(--media-primary) 100%
+    );
+    border-radius: var(--media-radius);
+    padding: 48px 40px;
+    text-align: center;
+    color: white;
+  }
+  .media-cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  .media-cta-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .media-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .media-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    border: 2px solid transparent;
+  }
+  .media-btn:hover {
+    transform: translateY(-2px);
+  }
+  .media-btn-primary {
+    background: white;
+    color: var(--media-primary);
+  }
+  .media-btn-primary:hover {
+    background: #e0f5fc;
+  }
+  .media-btn-outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.6);
+    color: white;
+  }
+  .media-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .media-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .media-sections-grid {
+      grid-template-columns: 1fr;
+    }
+    .media-section-card {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      padding: 28px 20px;
+    }
+    .media-section-content p {
+      text-align: center;
+    }
+    .media-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .media-stat-num {
+      font-size: 2rem;
+    }
+    .media-cta-card {
+      padding: 32px 24px;
+    }
+    .media-cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .media-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .media-stats-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .media-stat-card {
+      padding: 16px;
+    }
+    .media-stat-num {
+      font-size: 1.6rem;
+    }
+    .media-stat-label {
+      font-size: 0.7rem;
+    }
+    .media-section-card {
+      padding: 20px 16px;
+    }
+    .media-section-icon {
+      width: 52px;
+      height: 52px;
+      font-size: 1.3rem;
+    }
+    .media-section-content h2 {
+      font-size: 1.2rem;
+    }
+    .media-section-content p {
+      font-size: 0.85rem;
+    }
+  }
+</style>

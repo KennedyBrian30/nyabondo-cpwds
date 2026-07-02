@@ -1,0 +1,1157 @@
+---
+// src/pages/programs/ben-mapp-ii.astro
+import Layout from "../../layouts/Layout.astro";
+
+// Breadcrumb data
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Programmes", href: "/programs" },
+  { label: "BEN MAPP II", href: "/programs/ben-mapp-ii" },
+];
+
+// Gallery images
+const galleryImages = [
+  {
+    src: "/images/programs/ben-mapp-1.webp",
+    alt: "BEN MAPP II community outreach and engagement activities",
+  },
+  {
+    src: "/images/programs/ben-mapp-2.webp",
+    alt: "BEN MAPP II training session with community health workers",
+  },
+  {
+    src: "/images/programs/ben-mapp-3.webp",
+    alt: "BEN MAPP II disability inclusion workshop participants",
+  },
+  {
+    src: "/images/programs/ben-mapp-4.webp",
+    alt: "BEN MAPP II assistive device distribution and fitting",
+  },
+  {
+    src: "/images/programs/ben-mapp-5.webp",
+    alt: "BEN MAPP II community health promoter training session",
+  },
+];
+
+// Related programmes for interlinking
+const relatedProgrammes = [
+  {
+    title: "SHINE Project",
+    href: "/programs/shine",
+    description:
+      "Another multi‑annual programme strengthening rehabilitation systems alongside BEN MAPP II.",
+    icon: "fas fa-seedling",
+  },
+  {
+    title: "Physical Rehabilitation & Corrective Surgeries",
+    href: "/programs/physical-rehabilitation",
+    description:
+      "BEN MAPP II supports access to corrective surgeries, assistive devices, and therapy services.",
+    icon: "fas fa-scalpel",
+  },
+  {
+    title: "Livelihood & Economic Empowerment",
+    href: "/programs/livelihood",
+    description:
+      "The Inclusive Livelihood domain of BEN MAPP II includes VSLAs, IGAs, and start‑up kits.",
+    icon: "fas fa-seedling",
+  },
+  {
+    title: "Social Inclusion & Protection",
+    href: "/programs/social-inclusion",
+    description:
+      "Social inclusion and empowerment are core domains of the BEN MAPP II framework.",
+    icon: "fas fa-people-group",
+  },
+];
+
+// Five domains with detailed activities from the document
+const domains = [
+  {
+    title: "Health & Rehabilitation",
+    icon: "fas fa-hospital-user",
+    activities: [
+      "Facilitate establishment of county disability coordination forums with clear TORs, engaging Health Departments, hospitals, POs, and OPDs.",
+      "Training of senior and management health facility officers on disability mainstreaming with follow‑up support visits.",
+      "Support forums to develop, validate, and operationalize standardized referral pathways, protocols, and communication tools.",
+      "Identify and train Community Health Assistants (CHAs), Health Promotion Officers, Rehabilitation Officers, and Child Protection Volunteers on disability mainstreaming and referral pathways.",
+      "Map sub‑counties and identify public health facilities for referral purposes in targeted counties.",
+      "Train CHAs as ToTs to support Community Health Promoters (CHPs).",
+      "CHAs identify and train sub‑county CHPs and Child Protection Volunteers on disability mainstreaming and referral pathways.",
+      "Partner organizations identify focal CHPs and Child Protection Volunteers to work with the MAPP Programme Officer.",
+      "CHPs engaged in routine coaching, mentorship, and supervision sessions with sub‑county facility‑based officers/CHAs.",
+      "CHPs participate in and facilitate multidisciplinary outreach activities within the community.",
+      "Support and facilitate access to assistive devices, treatment, medication, supplements, special diets, corrective surgeries, and post‑operative or therapy services (Occupational, Physio, Speech, Counseling).",
+      "Initiate, track, and follow up on referrals using referral tools and regular communication with families.",
+    ],
+  },
+  {
+    title: "Inclusive Education",
+    icon: "fas fa-graduation-cap",
+    activities: [
+      "Facilitate and strengthen disability‑inclusive clubs in targeted schools – building capacity to promote awareness, peer support, and inclusive learning practices.",
+      "Conduct Disability Inclusion and Equity Training (DIET) and Disability Inclusion Scorecard (DISC) sessions for learning institutions to enhance awareness, accountability, and inclusive practices.",
+      "Facilitate assessment/accessibility audit and adaptation of learning facilities, teaching and learning resources in supported schools, TVETs, and institutions of higher learning (using the NCPWD assessment tool).",
+    ],
+  },
+  {
+    title: "Inclusive Livelihood",
+    icon: "fas fa-briefcase",
+    activities: [
+      "Map, identify, mobilize, and organize households with children or youth with disabilities in selected areas for economic strengthening (including formation of PSGs for VSLAs, IGAs, SLAs).",
+      "Conduct household‑level livelihood skills training (e.g., tailoring, carpentry, agribusiness, soap making, etc.).",
+      "Offer relevant livelihood/resilience‑focused capacity development support to caregivers (e.g., basic financial management skills, climate‑smart food security, agribusiness).",
+      "Facilitate Business Development Services (BDS) and market access to supported caregivers (e.g., start‑up kits, seed fund, one‑off grants, and other market opportunities).",
+    ],
+  },
+  {
+    title: "Social Inclusion",
+    icon: "fas fa-people-group",
+    activities: [
+      "Community awareness and sensitization on disability inclusion.",
+      "Formation of disability support groups.",
+      "Promotion of participation in community activities.",
+      "Disability rights advocacy.",
+      "Community dialogues and inclusion campaigns.",
+    ],
+  },
+  {
+    title: "Empowerment",
+    icon: "fas fa-star-of-life",
+    activities: [
+      "Leadership training for Organisations of Persons with Disabilities (OPDs).",
+      "Advocacy skills development.",
+      "Inclusion in decision‑making processes at county and community levels.",
+      "Capacity building for OPDs to represent their members effectively.",
+    ],
+  },
+];
+
+// Images
+const heroImg = "/images/programs/ben-mapp-2.webp";
+const logoImg = "/images/partners/cheshire-disability-services-kenya.webp";
+---
+
+<Layout title="BEN MAPP II | Nyabondo Centre for Persons with Disabilities">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {
+          breadcrumbs.map((crumb, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={crumb.href}>{crumb.label}</a>
+              ) : (
+                <span aria-current="page">{crumb.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="programme-hero">
+    <div class="container">
+      <div class="programme-hero-grid">
+        <div class="programme-hero-content">
+          <span class="section-eyebrow">Flagship Programme</span>
+          <h1 class="programme-title">
+            BEN MAPP <span class="accent">II</span>
+          </h1>
+          <p class="programme-subtitle">
+            Building Effective Network Multiannual Programmes Plan – Phase II
+          </p>
+          <p class="programme-lead">
+            A 5‑year project supported by Cheshire Disability Services Kenya,
+            implemented across all five domains of Community Based
+            Rehabilitation (CBR) – Health, Education, Livelihood, Social
+            Inclusion, and Empowerment.
+          </p>
+          <div class="programme-hero-stats">
+            <div class="stat">
+              <span class="stat-num">5</span>
+              <span class="stat-label">CBR Domains</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">5 Years</span>
+              <span class="stat-label">Duration</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">Cheshire Disability</span>
+              <span class="stat-label">Support Partner</span>
+            </div>
+          </div>
+        </div>
+        <div class="programme-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="Community members participating in BEN MAPP II livelihood training"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">
+            BEN MAPP II implementation
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Gallery -->
+  <section class="gallery" aria-labelledby="gallery-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">In Action</span>
+        <h2 id="gallery-heading" class="section-title">BEN MAPP II Gallery</h2>
+        <p class="section-subtitle">
+          See the programme in action across communities in Kisumu and Homa Bay
+          Counties.
+        </p>
+      </div>
+      <div class="gallery-grid">
+        {
+          galleryImages.map((img, i) => (
+            <div class="gallery-item reveal-up" style={`--delay: ${i * 80}ms`}>
+              <picture>
+                <source srcset={img.src} type="image/webp" />
+                <img src={img.src} alt={img.alt} loading="lazy" />
+              </picture>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner & Overview -->
+  <section class="partner-info" aria-labelledby="partner-heading">
+    <div class="container">
+      <div class="partner-card reveal-up">
+        <div class="partner-logo">
+          <picture>
+            <source srcset={logoImg} type="image/webp" />
+            <img
+              src={logoImg}
+              alt="Cheshire Disability Services Kenya logo"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+        <div class="partner-text">
+          <h2 id="partner-heading">
+            Supported by Cheshire Disability Services Kenya (CDSK)
+          </h2>
+          <p>
+            BEN MAPP II is a multi‑annual programme implemented by Nyabondo
+            Centre with the support of Cheshire Disability Services Kenya. The
+            project adopts the Community Based Rehabilitation (CBR) framework,
+            addressing the full spectrum of needs for persons with disabilities
+            – from health and education to livelihoods, social inclusion, and
+            empowerment.
+          </p>
+          <div class="location-badge">
+            <i class="fas fa-map-marker-alt"></i> Targeted Counties: Kisumu & Homa
+            Bay (primary focus)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Five Domains -->
+  <section class="domains" aria-labelledby="domains-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">CBR Framework</span>
+        <h2 id="domains-heading" class="section-title">
+          The Five Domains of BEN MAPP II
+        </h2>
+        <p class="section-subtitle">
+          Based on the internationally recognised Community Based Rehabilitation
+          matrix, our project addresses every aspect of life for persons with
+          disabilities.
+        </p>
+      </div>
+
+      <div class="domains-accordion">
+        {
+          domains.map((domain, idx) => (
+            <div class="domain-card reveal-up" style={`--delay: ${idx * 80}ms`}>
+              <div class="domain-header">
+                <div class="domain-icon">
+                  <i class={domain.icon} />
+                </div>
+                <h3>{domain.title}</h3>
+                <button
+                  class="domain-toggle"
+                  aria-label="Toggle activities"
+                  data-domain={idx}
+                >
+                  <i class="fas fa-chevron-down" />
+                </button>
+              </div>
+              <div class="domain-activities" id={`domain-${idx}`}>
+                <ul>
+                  {domain.activities.map((activity, i) => (
+                    <li>
+                      <i class="fas fa-check-circle" /> {activity}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Interventions Highlight -->
+  <section class="highlights" aria-labelledby="highlights-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">What Makes BEN MAPP II Unique</span>
+        <h2 id="highlights-heading" class="section-title">
+          Holistic, Coordinated, Sustainable
+        </h2>
+      </div>
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <i class="fas fa-handshake"></i>
+          <h3>County Coordination Forums</h3>
+          <p>
+            Establishing forums with clear TORs involving Health Departments,
+            hospitals, POs, and OPDs to coordinate disability services.
+          </p>
+        </div>
+        <div class="highlight-card">
+          <i class="fas fa-route"></i>
+          <h3>Standardised Referral Pathways</h3>
+          <p>
+            Developing, validating, and operationalizing referral protocols and
+            communication tools between community and facility levels.
+          </p>
+        </div>
+        <div class="highlight-card">
+          <i class="fas fa-chalkboard-user"></i>
+          <h3>Cascade Training Model</h3>
+          <p>
+            CHAs trained as ToTs who then train sub‑county CHPs and Child
+            Protection Volunteers – ensuring sustainability.
+          </p>
+        </div>
+        <div class="highlight-card">
+          <i class="fas fa-clipboard-list"></i>
+          <h3>Routine Coaching & Mentorship</h3>
+          <p>
+            CHPs receive ongoing supervision from sub‑county facility‑based
+            officers and CHAs.
+          </p>
+        </div>
+        <div class="highlight-card">
+          <i class="fas fa-school"></i>
+          <h3>Inclusive Education Tools</h3>
+          <p>
+            Disability Inclusion Scorecard (DISC) and accessibility audits using
+            NCPWD tools in schools and TVETs.
+          </p>
+        </div>
+        <div class="highlight-card">
+          <i class="fas fa-chart-simple"></i>
+          <h3>Multidisciplinary Outreach</h3>
+          <p>
+            CHPs participate in and facilitate outreach activities bringing
+            services directly to communities.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Referral Tracking -->
+  <section class="referral" aria-labelledby="referral-heading">
+    <div class="container">
+      <div class="referral-grid reveal-up">
+        <div class="referral-text">
+          <span class="section-eyebrow">Closing the Loop</span>
+          <h2 id="referral-heading">Robust Referral Tracking & Follow‑up</h2>
+          <p>
+            One of the core strengths of BEN MAPP II is the systematic tracking
+            of every referral. Using standardised referral tools, the programme
+            initiates, tracks, and follows up on all cases – from community
+            identification to facility‑based care – with regular communication
+            with families to ensure no one falls through the cracks.
+          </p>
+          <ul>
+            <li>
+              <i class="fas fa-check-circle"></i> Referral tools standardised across
+              all facilities
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Regular communication between CHPs
+              and families
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Follow‑up on assistive devices,
+              surgeries, and therapy
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Feedback loops to community volunteers
+            </li>
+          </ul>
+        </div>
+        <div class="referral-image">
+          <picture>
+            <source
+              srcset="/images/programs/ben-mapp-6.webp"
+              type="image/webp"
+            />
+            <img
+              src="/images/programs-ben-mapp-6.webp"
+              alt="Community health worker conducting a referral follow-up"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Programmes -->
+  <section class="related-programmes" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">
+          Complementary Programmes
+        </h2>
+        <p class="section-subtitle">
+          BEN MAPP II works alongside other Nyabondo initiatives to create
+          comprehensive support.
+        </p>
+      </div>
+      <div class="related-grid">
+        {
+          relatedProgrammes.map((prog, i) => (
+            <a
+              href={prog.href}
+              class="related-card reveal-up"
+              style={`--delay: ${i * 60}ms`}
+            >
+              <div class="related-icon">
+                <i class={prog.icon} />
+              </div>
+              <h3>{prog.title}</h3>
+              <p>{prog.description}</p>
+              <span class="related-arrow">
+                <i class="fas fa-arrow-right" />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-involve">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Support Holistic Community Based Rehabilitation</h2>
+          <p>
+            Your donation helps us train CHPs, establish referral pathways,
+            support inclusive education, and empower OPDs through BEN MAPP II.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/get-involved/donate" class="btn btn-green">
+            <i class="fas fa-heart"></i> Donate Now
+          </a>
+          <a href="/get-involved/partner" class="btn btn-primary-outline">
+            Partner with Us <i class="fas fa-handshake"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero */
+  .programme-hero {
+    padding: 64px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+  }
+  .programme-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .programme-hero-content {
+    padding-right: 20px;
+  }
+  .programme-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 8px;
+  }
+  .programme-title .accent {
+    color: var(--primary-light);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .programme-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .programme-lead {
+    font-size: 1.12rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .programme-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .programme-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .programme-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Gallery */
+  .gallery {
+    padding: 60px 0 80px;
+    background: var(--surface);
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .gallery-item {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s var(--ease-out-expo);
+    aspect-ratio: 1 / 1;
+  }
+  .gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-lg);
+    z-index: 2;
+  }
+  .gallery-item picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Partner Card */
+  .partner-info {
+    padding: 40px 0 60px;
+    background: var(--surface);
+  }
+  .partner-card {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    background: var(--background);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    border: 1px solid var(--border);
+  }
+  .partner-logo {
+    flex-shrink: 0;
+    width: 140px;
+  }
+  .partner-logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  .partner-text h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 150, 199, 0.1);
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    margin-top: 16px;
+  }
+
+  /* Domains Accordion */
+  .domains {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .domains-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .domain-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+  .domain-card:hover {
+    box-shadow: var(--shadow-sm);
+  }
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--surface);
+    cursor: pointer;
+  }
+  .domain-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 150, 199, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--primary);
+  }
+  .domain-header h3 {
+    flex: 1;
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .domain-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary);
+    font-size: 1rem;
+    transition: transform 0.2s;
+  }
+  .domain-toggle.open {
+    transform: rotate(180deg);
+  }
+  .domain-activities {
+    display: none;
+    padding: 0 24px 24px 88px;
+    border-top: 1px solid var(--border-light);
+    background: var(--background);
+  }
+  .domain-activities.open {
+    display: block;
+  }
+  .domain-activities ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+  }
+  .domain-activities li {
+    margin-bottom: 12px;
+    display: flex;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .domain-activities li i {
+    color: var(--secondary);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Highlights Grid */
+  .highlights {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .highlight-card {
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .highlight-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .highlight-card i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .highlight-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  .highlight-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Referral Tracking */
+  .referral {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .referral-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .referral-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+  }
+  .referral-text li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .referral-text li i {
+    color: var(--secondary);
+  }
+  .referral-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Related Programmes */
+  .related-programmes {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-involve {
+    padding: 60px 0 80px;
+  }
+  .cta-card {
+    background: linear-gradient(
+      115deg,
+      var(--primary-dark) 0%,
+      var(--primary) 100%
+    );
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border: 2px solid var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.7s var(--ease-out-expo),
+        transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .highlights-grid,
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .domain-activities {
+      padding-left: 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .programme-hero-grid,
+    .referral-grid,
+    .partner-card {
+      grid-template-columns: 1fr;
+      flex-direction: column;
+      text-align: center;
+    }
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .highlights-grid,
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .partner-card {
+      text-align: center;
+    }
+    .partner-logo {
+      margin: 0 auto;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .programme-hero-stats {
+      justify-content: center;
+    }
+    .programme-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+    .domain-header {
+      flex-wrap: wrap;
+    }
+    .domain-header h3 {
+      width: calc(100% - 80px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .gallery-item {
+      aspect-ratio: 1 / 1;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+
+    // Accordion functionality for domains
+    const toggles = document.querySelectorAll(".domain-toggle");
+    toggles.forEach((toggle, idx) => {
+      const activities = document.getElementById(`domain-${idx}`);
+      if (activities) {
+        // Start with first domain open
+        if (idx === 0) {
+          activities.classList.add("open");
+          toggle.classList.add("open");
+        }
+        toggle.addEventListener("click", () => {
+          activities.classList.toggle("open");
+          toggle.classList.toggle("open");
+        });
+        // Also make header clickable
+        const header = toggle.closest(".domain-header");
+        if (header) {
+          header.style.cursor = "pointer";
+          header.addEventListener("click", (e) => {
+            if (e.target !== toggle && !toggle.contains(e.target)) {
+              activities.classList.toggle("open");
+              toggle.classList.toggle("open");
+            }
+          });
+        }
+      }
+    });
+  })();
+</script>

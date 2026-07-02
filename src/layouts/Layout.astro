@@ -1,5 +1,6 @@
 ---
 // src/layouts/Layout.astro
+import "../styles/global.css";
 export interface Props {
   title: string;
   description?: string;
@@ -18,7 +19,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#1B3A6B" />
+    <meta name="theme-color" content="#0096C7" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -44,24 +45,24 @@ const {
 
     <style>
       :root {
-        --primary: #1b3a6b;
-        --primary-dark: #122952;
-        --primary-light: #2a5298;
-        --secondary: #c8922a;
-        --secondary-dark: #a57419;
-        --secondary-light: #e8a93a;
-        --text: #1a1a2e;
-        --text-light: #4a5568;
-        --text-muted: #718096;
-        --background: #fafaf8;
+        --primary: #0096C7;
+        --primary-dark: #006D94;
+        --primary-light: #48B8D8;
+        --secondary: #2E8B57;
+        --secondary-dark: #1F6B40;
+        --secondary-light: #3DAD6E;
+        --text: #0D2B38;
+        --text-light: #2E5A6B;
+        --text-muted: #5A8A99;
+        --background: #F4FCFF;
         --surface: #ffffff;
-        --border: #e8e8e0;
-        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06),
-          0 1px 2px rgba(0, 0, 0, 0.04);
-        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08),
-          0 2px 6px rgba(0, 0, 0, 0.04);
-        --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12),
-          0 4px 12px rgba(0, 0, 0, 0.06);
+        --border: #C7E9F4;
+        --shadow-sm: 0 1px 3px rgba(0, 150, 199, 0.08),
+          0 1px 2px rgba(0, 150, 199, 0.04);
+        --shadow-md: 0 4px 16px rgba(0, 150, 199, 0.1),
+          0 2px 6px rgba(0, 150, 199, 0.05);
+        --shadow-lg: 0 10px 40px rgba(0, 150, 199, 0.14),
+          0 4px 12px rgba(0, 150, 199, 0.07);
         --radius-sm: 6px;
         --radius-md: 12px;
         --radius-lg: 20px;
@@ -86,50 +87,6 @@ const {
         -webkit-font-smoothing: antialiased;
       }
 
-      body.high-contrast {
-        filter: contrast(1.5) grayscale(0.2);
-      }
-
-      /* ── Accessibility toolbar ── */
-      #accessibility-toolbar {
-        background: #f0f0ea;
-        border-bottom: 1px solid var(--border);
-        font-size: 0.75rem;
-        color: var(--text-light);
-      }
-
-      #accessibility-toolbar .toolbar-inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 6px 24px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 20px;
-      }
-
-      #accessibility-toolbar button {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--text-light);
-        font-family: inherit;
-        font-size: 0.75rem;
-        padding: 3px 6px;
-        border-radius: 4px;
-        transition:
-          color 0.2s,
-          background 0.2s;
-      }
-
-      #accessibility-toolbar button:hover {
-        color: var(--primary);
-        background: rgba(27, 58, 107, 0.08);
-      }
-
       /* ── Header ── */
       header {
         background: var(--surface);
@@ -137,7 +94,7 @@ const {
         position: sticky;
         top: 0;
         z-index: 100;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 2px solid var(--primary-light);
       }
 
       .nav-inner {
@@ -194,7 +151,7 @@ const {
         display: flex;
         align-items: center;
         gap: 4px;
-        padding: 8px 12px;
+        padding: 8px 11px;
         font-size: 0.875rem;
         font-weight: 500;
         color: var(--text);
@@ -209,7 +166,7 @@ const {
       .nav-links > li > a:hover,
       .nav-links > li:hover > a {
         color: var(--primary);
-        background: rgba(27, 58, 107, 0.06);
+        background: rgba(0, 150, 199, 0.07);
       }
 
       .nav-links > li > a i.chevron {
@@ -231,7 +188,7 @@ const {
         border: 1px solid var(--border);
         border-radius: var(--radius-md);
         box-shadow: var(--shadow-lg);
-        min-width: 220px;
+        min-width: 230px;
         padding: 8px;
         opacity: 0;
         visibility: hidden;
@@ -264,7 +221,7 @@ const {
       }
 
       .dropdown a:hover {
-        background: rgba(27, 58, 107, 0.06);
+        background: rgba(0, 150, 199, 0.07);
         color: var(--primary);
       }
 
@@ -349,7 +306,7 @@ const {
       }
 
       #mobile-menu-btn:hover {
-        background: rgba(27, 58, 107, 0.06);
+        background: rgba(0, 150, 199, 0.07);
       }
 
       /* Mobile nav */
@@ -382,7 +339,7 @@ const {
       }
 
       .mobile-nav-item:hover {
-        background: rgba(27, 58, 107, 0.06);
+        background: rgba(0, 150, 199, 0.07);
         color: var(--primary);
       }
 
@@ -408,7 +365,7 @@ const {
       }
 
       .mobile-nav-sub:hover {
-        background: rgba(27, 58, 107, 0.06);
+        background: rgba(0, 150, 199, 0.07);
         color: var(--primary);
       }
 
@@ -468,7 +425,7 @@ const {
         font-weight: 600;
         letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: var(--secondary-light);
+        color: var(--primary-light);
       }
 
       .footer-col h3 {
@@ -478,7 +435,7 @@ const {
         color: #fff;
         margin-bottom: 18px;
         padding-bottom: 10px;
-        border-bottom: 2px solid var(--secondary);
+        border-bottom: 2px solid var(--secondary-light);
         display: inline-block;
       }
 
@@ -500,13 +457,13 @@ const {
       }
 
       .footer-col ul a:hover {
-        color: var(--secondary-light);
+        color: var(--primary-light);
       }
 
       .footer-col ul a i {
         font-size: 0.75rem;
         width: 14px;
-        color: var(--secondary);
+        color: var(--secondary-light);
       }
 
       .contact-item {
@@ -519,7 +476,7 @@ const {
       }
 
       .contact-item i {
-        color: var(--secondary);
+        color: var(--primary-light);
         margin-top: 3px;
         flex-shrink: 0;
         width: 16px;
@@ -584,7 +541,7 @@ const {
       }
 
       .footer-bottom-links a:hover {
-        color: var(--secondary-light);
+        color: var(--primary-light);
       }
 
       /* ── Responsive ── */
@@ -593,8 +550,8 @@ const {
           gap: 0;
         }
         .nav-links > li > a {
-          padding: 8px 9px;
-          font-size: 0.82rem;
+          padding: 8px 8px;
+          font-size: 0.8rem;
         }
         .footer-inner {
           grid-template-columns: 1fr 1fr;
@@ -614,6 +571,24 @@ const {
           grid-template-columns: 1fr;
           gap: 32px;
           padding: 40px 24px 0;
+          text-align: center;
+        }
+        .footer-brand p {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 100%;
+        }
+        .footer-col h3 {
+          display: inline-block;
+        }
+        .footer-col ul a {
+          justify-content: center;
+        }
+        .contact-item {
+          justify-content: center;
+        }
+        .social-links {
+          justify-content: center;
         }
         .footer-bottom {
           flex-direction: column;
@@ -645,25 +620,6 @@ const {
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Accessibility Toolbar -->
-    <div
-      id="accessibility-toolbar"
-      role="toolbar"
-      aria-label="Accessibility options"
-    >
-      <div class="toolbar-inner">
-        <button id="increase-font" aria-label="Increase text size">
-          <i class="fas fa-plus" aria-hidden="true"></i> Larger Text
-        </button>
-        <button id="decrease-font" aria-label="Decrease text size">
-          <i class="fas fa-minus" aria-hidden="true"></i> Smaller Text
-        </button>
-        <button id="high-contrast" aria-label="Toggle high contrast mode">
-          <i class="fas fa-circle-half-stroke" aria-hidden="true"></i> High Contrast
-        </button>
-      </div>
-    </div>
-
     <!-- Header -->
     <header role="banner">
       <nav class="nav-inner" aria-label="Main navigation">
@@ -686,19 +642,14 @@ const {
           <!-- About Us -->
           <li>
             <a href="/about" aria-haspopup="true" aria-expanded="false">
-              About Us <i class="fas fa-chevron-down chevron" aria-hidden="true"
-              ></i>
+              About Us <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
             </a>
             <div class="dropdown" role="menu">
               <a href="/about/our-story" role="menuitem">
                 <i class="fas fa-book-open" aria-hidden="true"></i> Our Story
               </a>
-              <a href="/about/board" role="menuitem">
-                <i class="fas fa-user-tie" aria-hidden="true"></i> Board Members
-              </a>
               <a href="/about/administration" role="menuitem">
-                <i class="fas fa-users-gear" aria-hidden="true"></i> Administration
-                Team
+                <i class="fas fa-users-gear" aria-hidden="true"></i> Administration Team
               </a>
               <a href="/about/values" role="menuitem">
                 <i class="fas fa-heart" aria-hidden="true"></i> Core Values
@@ -713,44 +664,77 @@ const {
           <!-- Services -->
           <li>
             <a href="/services" aria-haspopup="true" aria-expanded="false">
-              Services <i class="fas fa-chevron-down chevron" aria-hidden="true"
-              ></i>
+              Services <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
             </a>
             <div class="dropdown" role="menu">
-              <a href="/services/outreaches" role="menuitem">
-                <i class="fas fa-map-location-dot" aria-hidden="true"></i> Community
-                Outreaches
+              <a href="/services/outpatient-inpatient" role="menuitem">
+                <i class="fas fa-hospital" aria-hidden="true"></i> Out/Inpatient Services
               </a>
               <a href="/services/surgeries" role="menuitem">
-                <i class="fas fa-stethoscope" aria-hidden="true"></i> Corrective
-                Surgeries
+                <i class="fas fa-stethoscope" aria-hidden="true"></i> Corrective Surgeries
               </a>
               <a href="/services/therapy" role="menuitem">
-                <i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Therapy
-                Services
+                <i class="fas fa-hand-holding-heart" aria-hidden="true"></i> Therapy Services
               </a>
               <a href="/services/assistive-devices" role="menuitem">
-                <i class="fas fa-wheelchair" aria-hidden="true"></i> Assistive Devices
-              </a>
-              <a href="/services/vocational-training" role="menuitem">
-                <i class="fas fa-graduation-cap" aria-hidden="true"></i> Vocational
-                Training
-              </a>
-              <a href="/services/longterm-rehab" role="menuitem">
-                <i class="fas fa-clock-rotate-left" aria-hidden="true"></i> Long-term
-                Rehabilitation
+                <i class="fas fa-wheelchair" aria-hidden="true"></i> Assistive Tech Devices
               </a>
             </div>
           </li>
 
-          <li><a href="/media-stories">Media &amp; Stories</a></li>
+          <!-- Programs -->
+          <li>
+            <a href="/programs" aria-haspopup="true" aria-expanded="false">
+              Programs <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown" role="menu">
+              <a href="/programs/livelihood" role="menuitem">
+                <i class="fas fa-seedling" aria-hidden="true"></i> Livelihood &amp; Economic Empowerment
+              </a>
+              <a href="/programs/cbid" role="menuitem">
+                <i class="fas fa-people-group" aria-hidden="true"></i> Community Based Inclusive Development
+              </a>
+              <a href="/programs/longterm-rehab" role="menuitem">
+                <i class="fas fa-clock-rotate-left" aria-hidden="true"></i> Long-term Rehabilitation
+              </a>
+              <a href="/programs/social-inclusion" role="menuitem">
+                <i class="fas fa-hands-holding-circle" aria-hidden="true"></i> Social Inclusion and Participation
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="/programs/shine" role="menuitem">
+                <i class="fas fa-star" aria-hidden="true"></i> SHINE Project (2026–2029)
+              </a>
+              <a href="/programs/ben-mapp-ii" role="menuitem">
+                <i class="fas fa-network-wired" aria-hidden="true"></i> BEN MAPP II
+              </a>
+            </div>
+          </li>
+
+          <!-- Media & Stories -->
+          <li>
+            <a href="/media" aria-haspopup="true" aria-expanded="false">
+              Media <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown" role="menu">
+              <a href="/media/events" role="menuitem">
+                <i class="fas fa-calendar-days" aria-hidden="true"></i> Events
+              </a>
+              <a href="/media/gallery" role="menuitem">
+                <i class="fas fa-images" aria-hidden="true"></i> Gallery
+              </a>
+              <a href="/media/case-studies" role="menuitem">
+                <i class="fas fa-file-lines" aria-hidden="true"></i> Case Studies
+              </a>
+              <a href="/media/testimonials" role="menuitem">
+                <i class="fas fa-quote-left" aria-hidden="true"></i> Testimonials
+              </a>
+            </div>
+          </li>
 
           <!-- Get Involved -->
           <li>
             <a href="/get-involved" aria-haspopup="true" aria-expanded="false">
-              Get Involved <i
-                class="fas fa-chevron-down chevron"
-                aria-hidden="true"></i>
+              Get Involved <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
             </a>
             <div class="dropdown" role="menu">
               <a href="/get-involved/donate" role="menuitem">
@@ -760,8 +744,7 @@ const {
                 <i class="fas fa-people-carry-box" aria-hidden="true"></i> Volunteer
               </a>
               <a href="/get-involved/partner" role="menuitem">
-                <i class="fas fa-handshake" aria-hidden="true"></i> Partner With
-                Us
+                <i class="fas fa-handshake" aria-hidden="true"></i> Partner With Us
               </a>
             </div>
           </li>
@@ -796,53 +779,42 @@ const {
 
         <span class="mobile-nav-group">About Us</span>
         <a href="/about/our-story" class="mobile-nav-sub">Our Story</a>
-        <a href="/about/board" class="mobile-nav-sub">Board Members</a>
-        <a href="/about/administration" class="mobile-nav-sub"
-          >Administration Team</a
-        >
+        <a href="/about/administration" class="mobile-nav-sub">Administration Team</a>
         <a href="/about/values" class="mobile-nav-sub">Core Values</a>
         <a href="/partners" class="mobile-nav-sub">Our Partners</a>
 
         <span class="mobile-nav-group">Services</span>
-        <a href="/services/outreaches" class="mobile-nav-sub"
-          >Community Outreaches</a
-        >
-        <a href="/services/surgeries" class="mobile-nav-sub"
-          >Corrective Surgeries</a
-        >
+        <a href="/services/outpatient-inpatient" class="mobile-nav-sub">Out/Inpatient Services</a>
+        <a href="/services/surgeries" class="mobile-nav-sub">Corrective Surgeries</a>
         <a href="/services/therapy" class="mobile-nav-sub">Therapy Services</a>
-        <a href="/services/assistive-devices" class="mobile-nav-sub"
-          >Assistive Devices</a
-        >
-        <a href="/services/vocational-training" class="mobile-nav-sub"
-          >Vocational Training</a
-        >
-        <a href="/services/longterm-rehab" class="mobile-nav-sub"
-          >Long-term Rehabilitation</a
-        >
+        <a href="/services/assistive-devices" class="mobile-nav-sub">Assistive Tech Devices</a>
 
-        <a href="/media-stories" class="mobile-nav-item">Media &amp; Stories</a>
+        <span class="mobile-nav-group">Programs</span>
+        <a href="/programs/livelihood" class="mobile-nav-sub">Livelihood &amp; Economic Empowerment</a>
+        <a href="/programs/cbid" class="mobile-nav-sub">Community Based Inclusive Development</a>
+        <a href="/programs/longterm-rehab" class="mobile-nav-sub">Long-term Rehabilitation</a>
+        <a href="/programs/social-inclusion" class="mobile-nav-sub">Social Inclusion and Participation</a>
+        <a href="/programs/shine" class="mobile-nav-sub">SHINE Project (2026–2029)</a>
+        <a href="/programs/ben-mapp-ii" class="mobile-nav-sub">BEN MAPP II</a>
+
+        <span class="mobile-nav-group">Media</span>
+        <a href="/media/events" class="mobile-nav-sub">Events</a>
+        <a href="/media/gallery" class="mobile-nav-sub">Gallery</a>
+        <a href="/media/case-studies" class="mobile-nav-sub">Case Studies</a>
+        <a href="/media/testimonials" class="mobile-nav-sub">Testimonials</a>
 
         <span class="mobile-nav-group">Get Involved</span>
         <a href="/get-involved/donate" class="mobile-nav-sub">Donate</a>
         <a href="/get-involved/volunteer" class="mobile-nav-sub">Volunteer</a>
-        <a href="/get-involved/partner" class="mobile-nav-sub"
-          >Partner With Us</a
-        >
+        <a href="/get-involved/partner" class="mobile-nav-sub">Partner With Us</a>
 
         <a href="/contact" class="mobile-nav-item">Contact</a>
 
         <div class="mobile-cta-row">
-          <a
-            href="/get-involved/donate"
-            style="background:var(--secondary);color:#fff;"
-          >
+          <a href="/get-involved/donate" style="background:var(--secondary);color:#fff;">
             <i class="fas fa-heart"></i> Donate
           </a>
-          <a
-            href="/get-involved/volunteer"
-            style="background:var(--primary);color:#fff;"
-          >
+          <a href="/get-involved/volunteer" style="background:var(--primary);color:#fff;">
             Get Help
           </a>
         </div>
@@ -859,7 +831,7 @@ const {
         <!-- Brand -->
         <div class="footer-brand">
           <img
-            src="/logo-white.png"
+            src="/logo.png"
             alt="Nyabondo Centre for Persons with Disabilities"
             style="height:56px;width:auto;"
           />
@@ -870,8 +842,7 @@ const {
             unwavering commitment to inclusion.
           </p>
           <span class="footer-tagline">
-            <i class="fas fa-star" aria-hidden="true"></i> Rising above Disability
-            since 1963
+            <i class="fas fa-star" aria-hidden="true"></i> Rising above Disability since 1963
           </span>
         </div>
 
@@ -880,24 +851,22 @@ const {
           <h3>Quick Links</h3>
           <ul>
             <li>
-              <a href="/about/our-story"
-                ><i class="fas fa-chevron-right"></i> Our Story</a>
+              <a href="/about/our-story"><i class="fas fa-chevron-right"></i> Our Story</a>
             </li>
             <li>
-              <a href="/services"
-                ><i class="fas fa-chevron-right"></i> Our Services</a>
+              <a href="/services"><i class="fas fa-chevron-right"></i> Our Services</a>
             </li>
             <li>
-              <a href="/media-stories"
-                ><i class="fas fa-chevron-right"></i> Media &amp; Stories</a>
+              <a href="/programs"><i class="fas fa-chevron-right"></i> Our Programs</a>
             </li>
             <li>
-              <a href="/get-involved/donate"
-                ><i class="fas fa-chevron-right"></i> Support Our Work</a>
+              <a href="/media/gallery"><i class="fas fa-chevron-right"></i> Media &amp; Stories</a>
             </li>
             <li>
-              <a href="/contact"
-                ><i class="fas fa-chevron-right"></i> Contact Us</a>
+              <a href="/get-involved/donate"><i class="fas fa-chevron-right"></i> Support Our Work</a>
+            </li>
+            <li>
+              <a href="/contact"><i class="fas fa-chevron-right"></i> Contact Us</a>
             </li>
           </ul>
         </div>
@@ -927,33 +896,21 @@ const {
         <!-- Social -->
         <div class="footer-col">
           <h3>Stay Connected</h3>
-          <p
-            style="font-size:0.85rem;color:rgba(255,255,255,0.55);margin-bottom:16px;line-height:1.6;"
-          >
-            Follow our journey and stay updated on the lives we are transforming
-            every day.
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.55);margin-bottom:16px;line-height:1.6;">
+            Follow our journey and stay updated on the lives we are transforming every day.
           </p>
           <div class="social-links">
-            <a href="#" aria-label="Facebook"
-              ><i class="fab fa-facebook-f" aria-hidden="true"></i></a
-            >
-            <a href="#" aria-label="Twitter / X"
-              ><i class="fab fa-x-twitter" aria-hidden="true"></i></a
-            >
-            <a href="#" aria-label="Instagram"
-              ><i class="fab fa-instagram" aria-hidden="true"></i></a
-            >
-            <a href="#" aria-label="YouTube"
-              ><i class="fab fa-youtube" aria-hidden="true"></i></a
-            >
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Twitter / X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
         <p>
-          &copy; 2024 Nyabondo Centre for Persons with Disabilities. All rights
-          reserved.
+          &copy; 2024 Nyabondo Centre for Persons with Disabilities. All rights reserved.
         </p>
         <div class="footer-bottom-links">
           <a href="/privacy">Privacy Policy</a>
@@ -975,34 +932,6 @@ const {
             : "fas fa-bars";
         });
       }
-
-      // Text size
-      let fontSize = 16;
-      document
-        .getElementById("increase-font")
-        ?.addEventListener("click", () => {
-          if (fontSize < 20) {
-            fontSize += 2;
-            document.body.style.fontSize = fontSize + "px";
-          }
-        });
-      document
-        .getElementById("decrease-font")
-        ?.addEventListener("click", () => {
-          if (fontSize > 14) {
-            fontSize -= 2;
-            document.body.style.fontSize = fontSize + "px";
-          }
-        });
-
-      // High contrast
-      let hc = false;
-      document
-        .getElementById("high-contrast")
-        ?.addEventListener("click", () => {
-          hc = !hc;
-          document.body.classList.toggle("high-contrast", hc);
-        });
     </script>
   </body>
 </html>

@@ -1,0 +1,960 @@
+---
+// src/pages/media/case-studies.astro
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
+
+// Fetch all case studies from the 'case-studies' collection
+const allCaseStudies = await getCollection('case-studies');
+
+// Sort case studies by date (newest first)
+const caseStudies = allCaseStudies.sort((a, b) => {
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+
+// Get featured case studies
+const featuredStudies = caseStudies.filter(study => study.data.featured === true).slice(0, 2);
+
+// Get all case studies for the main grid
+const allStudies = caseStudies;
+
+// Get unique categories for filter buttons
+const categories = ["All", ...new Set(caseStudies.map(study => study.data.category).filter(Boolean))];
+
+// Helper function to format date
+const formatDate = (date) => {
+  if (!date) return '';
+  const d = new Date(date);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Media", href: "/media" },
+  { label: "Case Studies", href: "/media/case-studies" },
+];
+---
+
+<Layout
+  title="Case Studies | Nyabondo Centre for Persons with Disabilities"
+  description="Real stories of transformation from our rehabilitation programs. Read case studies of individuals whose lives were changed through corrective surgeries, therapy, and assistive technology."
+>
+
+  <!-- BREADCRUMB -->
+  <nav class="case-bc" aria-label="Breadcrumb">
+    <div class="case-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════ HERO SECTION ══════════════════════════════════════════ -->
+  <section class="case-hero">
+    <div class="case-hero-overlay"></div>
+    <div class="case-hero-content">
+      <span class="hero-eyebrow">
+        <i class="fas fa-file-lines"></i> Real Stories, Real Impact
+      </span>
+      <h1>Case <span class="hero-accent">Studies</span></h1>
+      <p>In-depth stories of individuals whose lives have been transformed through Nyabondo Centre's rehabilitation services, surgeries, and assistive technology programs.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════ FEATURED CASE STUDIES ══════════════════════════════════════════ -->
+  {featuredStudies.length > 0 && (
+    <section class="featured-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-eyebrow"><i class="fas fa-star"></i> Featured Case Studies</div>
+          <h2>Stories of <span class="accent-primary">Transformation</span></h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle">Real lives changed through rehabilitation, surgery, and support</p>
+        </div>
+
+        <div class="featured-grid">
+          {featuredStudies.map((study) => (
+            <a href={`/media/case-studies/${study.id}`} class="featured-card" key={study.id}>
+              <div class="featured-image">
+                <img src={study.data.image || '/images/case-studies/placeholder.webp'} alt={study.data.title} loading="lazy" />
+                <div class="featured-category">
+                  <i class="fas fa-tag"></i> {study.data.category || 'Case Study'}
+                </div>
+              </div>
+              <div class="featured-content">
+                <div class="post-meta">
+                  <span><i class="fas fa-calendar-alt"></i> {formatDate(study.data.pubDate)}</span>
+                  <span><i class="fas fa-clock"></i> {study.data.readTime || '5 min read'}</span>
+                </div>
+                <h3 class="featured-title">{study.data.title}</h3>
+                <p class="featured-excerpt">{study.data.description || study.data.excerpt}</p>
+                <div class="featured-author">
+                  {study.data.authorImage && (
+                    <img src={study.data.authorImage} alt={study.data.author} class="author-avatar" />
+                  )}
+                  <span class="author-name">{study.data.author || 'Nyabondo Editorial'}</span>
+                </div>
+                <span class="read-more">Read Full Story <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ══════════════════════════════════════════ ALL CASE STUDIES ══════════════════════════════════════════ -->
+  <section class="all-studies-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow"><i class="fas fa-folder-open"></i> All Case Studies</div>
+        <h2>Every Story <span class="accent-primary">Matters</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Explore the full collection of transformation stories from our beneficiaries</p>
+      </div>
+
+      <!-- Category Filters -->
+      {categories.length > 1 && (
+        <div class="filter-buttons" id="filterButtons">
+          {categories.map(category => (
+            <button class="filter-btn" data-category={category} key={category}>
+              {category}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <!-- Case Studies Grid -->
+      <div class="studies-grid" id="studiesGrid">
+        {allStudies.map((study, idx) => (
+          <div class="study-card" data-category={study.data.category || 'Uncategorized'} key={study.id}>
+            <div class="study-image">
+              <img src={study.data.image || '/images/case-studies/placeholder.webp'} alt={study.data.title} loading="lazy" />
+              <div class="study-category-badge">
+                <i class="fas fa-tag"></i> {study.data.category || 'Case Study'}
+              </div>
+            </div>
+            <div class="study-content">
+              <div class="post-meta">
+                <span><i class="fas fa-calendar-alt"></i> {formatDate(study.data.pubDate)}</span>
+                <span><i class="fas fa-clock"></i> {study.data.readTime || '5 min read'}</span>
+              </div>
+              <h3 class="study-title">{study.data.title}</h3>
+              <p class="study-excerpt">{study.data.description || study.data.excerpt}</p>
+              <div class="study-footer">
+                <div class="study-author">
+                  {study.data.authorImage && (
+                    <img src={study.data.authorImage} alt={study.data.author} class="author-avatar-small" />
+                  )}
+                  <span>{study.data.author || 'Nyabondo Editorial'}</span>
+                </div>
+                <a href={`/media/case-studies/${study.id}`} class="read-link">Read <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {allStudies.length === 0 && (
+        <div class="no-studies">
+          <i class="fas fa-file-lines"></i>
+          <h3>No case studies yet</h3>
+          <p>Check back soon for stories of transformation from our programs.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════ CTA SECTION ══════════════════════════════════════════ -->
+  <section class="case-cta-section">
+    <div class="cta-container">
+      <div class="cta-content">
+        <div class="cta-eyebrow">Want to Share Your Story?</div>
+        <h2>Have a <span class="cta-highlight">Transformation Story</span> to Tell?</h2>
+        <p>If you've been impacted by our programs and want to share your journey, we'd love to hear from you.</p>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn-cta-primary">
+            <i class="fas fa-envelope"></i> Share Your Story
+          </a>
+          <a href="/get-involved/donate" class="btn-cta-secondary">
+            <i class="fas fa-heart"></i> Support Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* =============================================
+     CASE STUDIES PAGE STYLES
+  ============================================= */
+  :root {
+    --case-primary: #0096c7;
+    --case-primary-dark: #006d94;
+    --case-primary-light: #48b8d8;
+    --case-secondary: #2e8b57;
+    --case-text: #0d2b38;
+    --case-text-light: #2e5a6b;
+    --case-bg: #f4fcff;
+    --case-surface: #ffffff;
+    --case-border: #c7e9f4;
+    --case-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --case-radius: 14px;
+    --case-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --charcoal: #1e293b;
+    --gray-dk: #334155;
+    --gray-md: #5a6e8a;
+    --gray-sf: #f5f7fa;
+    --white: #ffffff;
+  }
+
+  .case-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .case-bc {
+    background: var(--case-surface);
+    border-bottom: 1px solid var(--case-border);
+    padding: 12px 0;
+  }
+  .case-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .case-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .case-bc a {
+    color: var(--case-primary);
+    text-decoration: none;
+  }
+  .case-bc a:hover {
+    text-decoration: underline;
+  }
+  .case-bc span {
+    color: var(--case-text-light);
+  }
+  .case-bc i {
+    font-size: 0.65rem;
+    color: var(--case-text-light);
+  }
+
+  /* ══════════════════════════════════════════ HERO SECTION ══════════════════════════════════════════ */
+  .case-hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--case-primary-dark) 0%, var(--case-primary) 100%);
+    overflow: hidden;
+  }
+  
+  .case-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hero/hero-nyabondo-staff.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12;
+    filter: blur(2px);
+  }
+  
+  .case-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(0, 109, 148, 0.6) 0%, var(--case-primary-dark) 100%);
+  }
+  
+  .case-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 4rem 5%;
+    margin-left: 5%;
+  }
+  
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(72, 184, 216, 0.2);
+    backdrop-filter: blur(8px);
+    color: var(--case-primary-light);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(72, 184, 216, 0.3);
+  }
+  
+  .case-hero-content h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 1.25rem;
+  }
+  
+  .hero-accent {
+    color: var(--case-primary-light);
+    font-style: italic;
+  }
+  
+  .case-hero-content p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  /* ══════════════════════════════════════════ FEATURED SECTION ══════════════════════════════════════════ */
+  .featured-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #fff 0%, var(--case-bg) 100%);
+  }
+  
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 150, 199, 0.08);
+    color: var(--case-primary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 40px;
+    margin-bottom: 0.85rem;
+  }
+  
+  .section-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--case-text);
+  }
+  
+  .accent-primary {
+    color: var(--case-primary);
+  }
+  
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--case-primary), var(--case-secondary));
+    margin: 0.75rem auto 1.25rem;
+    border-radius: 3px;
+  }
+  
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--case-text-light);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .featured-card {
+    background: var(--case-surface);
+    border-radius: 28px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s var(--case-ease);
+    border: 1px solid var(--case-border);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .featured-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 150, 199, 0.15);
+    border-color: var(--case-primary);
+  }
+  
+  .featured-image {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+  }
+  
+  .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--case-ease);
+  }
+  
+  .featured-card:hover .featured-image img {
+    transform: scale(1.08);
+  }
+  
+  .featured-category {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--case-primary);
+    color: white;
+    padding: 0.3rem 0.9rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 1;
+  }
+  
+  .featured-content {
+    padding: 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.7rem;
+    color: var(--case-text-light);
+    margin-bottom: 0.75rem;
+  }
+  
+  .post-meta i {
+    margin-right: 4px;
+  }
+  
+  .featured-title {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    color: var(--case-text);
+  }
+  
+  .featured-excerpt {
+    font-size: 0.85rem;
+    color: var(--case-text-light);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+  
+  .featured-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .author-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--case-text);
+  }
+  
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--case-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: gap 0.2s ease;
+  }
+  
+  .featured-card:hover .read-more {
+    gap: 12px;
+  }
+
+  /* ══════════════════════════════════════════ ALL CASE STUDIES ══════════════════════════════════════════ */
+  .all-studies-section {
+    padding: 5rem 0;
+    background: var(--case-surface);
+  }
+  
+  /* Filter Buttons */
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .filter-btn {
+    padding: 0.5rem 1.25rem;
+    border: 2px solid var(--case-border);
+    background: var(--case-surface);
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--case-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .filter-btn:hover {
+    border-color: var(--case-primary);
+    color: var(--case-primary);
+    transform: translateY(-2px);
+  }
+  
+  .filter-btn.active {
+    background: var(--case-primary);
+    border-color: var(--case-primary);
+    color: white;
+  }
+  
+  /* Studies Grid */
+  .studies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .study-card {
+    background: var(--case-surface);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--case-border);
+    transition: all 0.4s var(--case-ease);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .study-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 150, 199, 0.12);
+    border-color: var(--case-primary);
+  }
+  
+  .study-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .study-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--case-ease);
+  }
+  
+  .study-card:hover .study-image img {
+    transform: scale(1.08);
+  }
+  
+  .study-category-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--case-secondary);
+    color: white;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .study-content {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .study-title {
+    font-family: "Playfair Display", serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: var(--case-text);
+  }
+  
+  .study-excerpt {
+    font-size: 0.8rem;
+    color: var(--case-text-light);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+  
+  .study-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--case-border);
+  }
+  
+  .study-author {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: var(--case-text-light);
+  }
+  
+  .author-avatar-small {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .read-link {
+    color: var(--case-primary);
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.2s;
+    text-decoration: none;
+  }
+  
+  .read-link:hover {
+    gap: 8px;
+  }
+  
+  .no-studies {
+    text-align: center;
+    padding: 4rem;
+    background: var(--case-bg);
+    border-radius: 24px;
+  }
+  
+  .no-studies i {
+    font-size: 3rem;
+    color: var(--case-text-light);
+    margin-bottom: 1rem;
+  }
+  
+  .no-studies h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--case-text);
+  }
+  
+  .no-studies p {
+    color: var(--case-text-light);
+  }
+
+  /* ══════════════════════════════════════════ CTA SECTION ══════════════════════════════════════════ */
+  .case-cta-section {
+    background: linear-gradient(135deg, var(--case-primary) 0%, var(--case-primary-dark) 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .case-cta-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1), transparent);
+    pointer-events: none;
+  }
+  
+  .cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .cta-eyebrow {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.35rem 1.2rem;
+    border-radius: 40px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta-container h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-highlight {
+    color: var(--case-primary-light);
+  }
+  
+  .cta-container p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn-cta-primary {
+    background: white;
+    color: var(--case-primary);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-cta-primary:hover {
+    background: var(--case-primary-light);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  
+  .btn-cta-secondary {
+    border: 2px solid white;
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+  
+  .btn-cta-secondary:hover {
+    background: white;
+    color: var(--case-primary);
+    transform: translateY(-3px);
+  }
+
+  /* ══════════════════════════════════════════ RESPONSIVE ══════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .studies-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .section-inner {
+      padding: 0 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .case-hero-content h1 {
+      font-size: 2rem;
+    }
+    
+    .case-hero-content {
+      padding: 3rem 1.5rem;
+      margin-left: 0;
+      text-align: center;
+    }
+    
+    .case-hero-content p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-eyebrow {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .studies-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .filter-buttons {
+      gap: 0.5rem;
+    }
+    
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn-cta-primary,
+    .btn-cta-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .section-header h2 {
+      font-size: 1.6rem;
+    }
+    
+    .featured-title {
+      font-size: 1.1rem;
+    }
+    
+    .section-inner {
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .featured-image {
+      height: 200px;
+    }
+    
+    .featured-content {
+      padding: 1.25rem;
+    }
+    
+    .study-image {
+      height: 180px;
+    }
+  }
+</style>
+
+<script>
+  // Case Study Filtering
+  (function() {
+    const filterButtons = document.querySelectorAll('#filterButtons .filter-btn');
+    const studyCards = document.querySelectorAll('#studiesGrid .study-card');
+    
+    if (filterButtons.length && studyCards.length) {
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active button
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const category = btn.getAttribute('data-category');
+          
+          // Filter items
+          studyCards.forEach(card => {
+            if (category === 'All' || card.getAttribute('data-category') === category) {
+              card.style.display = 'flex';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 10);
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+  })();
+  
+  // Intersection Observer for scroll animations
+  (function() {
+    const animatedElements = document.querySelectorAll('.study-card');
+    if (animatedElements.length) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      
+      animatedElements.forEach(el => { 
+        el.style.animationPlayState = 'paused'; 
+        observer.observe(el); 
+      });
+    }
+  })();
+</script>

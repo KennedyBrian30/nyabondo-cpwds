@@ -1,0 +1,600 @@
+---
+// src/pages/about/values.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Core Values", href: "/about/core-values" },
+];
+
+// Core values from the document
+const coreValues = [
+  {
+    icon: "fas fa-shield-heart",
+    title: "Integrity",
+    description:
+      "We uphold the highest ethical standards, demonstrating honesty, fairness, and transparency in all our operations.",
+  },
+  {
+    icon: "fas fa-briefcase",
+    title: "Professionalism",
+    description:
+      "We are passionate in our work without compromising standards, values, and doctrines of the Church.",
+  },
+  {
+    icon: "fas fa-praying-hands",
+    title: "Spirituality",
+    description:
+      "We consecrate the work we do to persons with disabilities to God the Almighty, for whose providence we serve the less fortunate.",
+  },
+  {
+    icon: "fas fa-star",
+    title: "Quality",
+    description:
+      "We ensure adoption and adherence to systems and processes that guarantee provision of rehabilitative services that meet and exceed our clients' expectations.",
+  },
+  {
+    icon: "fas fa-lightbulb",
+    title: "Innovation and Creativity",
+    description:
+      "We are a learning organization that encourages and facilitates creativity and innovative performance, while embracing change.",
+  },
+  {
+    icon: "fas fa-users",
+    title: "Inclusivity",
+    description:
+      "We include and cater for people with disabilities in everyday activities. Social inclusion of persons with disabilities is a key component of our operations.",
+  },
+  {
+    icon: "fas fa-hand-holding-heart",
+    title: "Responsiveness",
+    description:
+      "We exhibit a sense of social responsibility to persons with disabilities by responding to their interests and needs in provision of comprehensive rehabilitative services.",
+  },
+  {
+    icon: "fas fa-chart-line",
+    title: "Accountability",
+    description:
+      "We are accountable and transparent to our beneficiaries, members, our partners, and the public.",
+  },
+  {
+    icon: "fas fa-lock",
+    title: "Confidentiality",
+    description:
+      "We treat any information about persons with disabilities and their families with utmost confidentiality.",
+  },
+  {
+    icon: "fas fa-hands-helping",
+    title: "Respect",
+    description:
+      "We respect the human person and their unique value, being the image and likeness of God (Gen 1:26). This forms the foundation for the sanctity of life from conception to death and our commitment to ensuring a dignified life for all.",
+  },
+];
+
+// Objectives from the document
+const objectives = [
+  "To conduct early identifications and early interventions, sensitization to the community on disability inclusion and access to rehabilitation services.",
+  "To create awareness on causes, prevention and management of various disabilities with the aim of reducing disability prevalence and overcoming prejudices and traditional beliefs towards Persons with Disabilities.",
+  "To promote quality rehabilitation services through medical/social rehabilitation and economic empowerment.",
+  "To develop and provide low cost but quality and appropriate assistive devices through appropriate technology to meet the needs of Persons with Disabilities in the rural community.",
+  "To partner with County Governments, National Governments, development partners and community structures to effectively co-ordinate activities targeting Persons with Disabilities.",
+  "To promote and support formation of Organizations of Persons with Disabilities to increase their self-confidence to achieve full participation in their communities and attain equal rights.",
+];
+---
+
+<Layout title="Core Values | Nyabondo Centre for Persons with Disabilities">
+  <!-- BREADCRUMB -->
+  <nav class="cv-bc" aria-label="Breadcrumb">
+    <div class="cv-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cv-hero">
+    <div class="cv-container">
+      <div class="cv-hero-content">
+        <span class="cv-eyebrow">Who We Are</span>
+        <h1>Our Core Values</h1>
+        <p>
+          The principles that guide everything we do — from the boardroom to the
+          bedside. Nyabondo Centre is built on a foundation of faith, integrity,
+          and unwavering commitment to persons with disabilities.
+        </p>
+      </div>
+    </div>
+    <div class="cv-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CORE VALUES GRID -->
+  <section class="cv-values">
+    <div class="cv-container">
+      <div class="cv-values-header">
+        <h2>Ten Values, One Mission</h2>
+        <p>
+          These core values are not just words on a wall. They are lived every
+          day by every staff member, sister, and volunteer at Nyabondo.
+        </p>
+      </div>
+      <div class="cv-values-grid">
+        {
+          coreValues.map((value, i) => (
+            <div class="cv-value-card" style={`--delay: ${i * 50}ms`}>
+              <div class="cv-value-icon" aria-hidden="true">
+                <i class={value.icon} />
+              </div>
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIVES SECTION -->
+  <section class="cv-objectives">
+    <div class="cv-container">
+      <div class="cv-objectives-grid">
+        <div class="cv-objectives-text">
+          <span class="cv-eyebrow">Our Strategic Focus</span>
+          <h2>What We Aim to Achieve</h2>
+          <p>
+            Nyabondo Centre works towards clear, measurable objectives that
+            ensure every person with a disability receives holistic care,
+            empowerment, and a path to independence.
+          </p>
+          <ul class="cv-objectives-list">
+            {
+              objectives.map((obj) => (
+                <li>
+                  <i class="fas fa-check-circle" aria-hidden="true" />
+                  <span>{obj}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <a href="/about/our-story" class="cv-btn cv-btn-outline">
+            Read Our Full Story <i class="fas fa-arrow-right" aria-hidden="true"
+            ></i>
+          </a>
+        </div>
+        <div class="cv-objectives-image" aria-hidden="true">
+          <picture>
+            <source
+              srcset="/images/about/about-nyabondo-centre.webp"
+              type="image/webp"
+            />
+            <img
+              src="/images/about/about-nyabondo-centre.webp"
+              alt="Nyabondo Centre team in action"
+              loading="lazy"
+              width="600"
+              height="500"
+            />
+          </picture>
+          <div class="cv-image-caption">
+            <i class="fas fa-quote-left"></i> Disability is not inability.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cv-cta">
+    <div class="cv-container">
+      <div class="cv-cta-card">
+        <h2>Live Our Values With Us</h2>
+        <p>
+          Whether you are a partner, a donor, or a volunteer, your support helps
+          us put these values into action every single day.
+        </p>
+        <div class="cv-cta-buttons">
+          <a href="/get-involved/donate" class="cv-btn cv-btn-green">
+            <i class="fas fa-heart" aria-hidden="true"></i> Support Our Work
+          </a>
+          <a href="/contact" class="cv-btn cv-btn-white">
+            Get in Touch <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* =============================================
+     CORE VALUES PAGE STYLES
+  ============================================= */
+  :root {
+    --cv-primary: #0096c7;
+    --cv-primary-dark: #006d94;
+    --cv-primary-light: #48b8d8;
+    --cv-green: #2e8b57;
+    --cv-green-dark: #1f6b40;
+    --cv-text: #0d2b38;
+    --cv-text-light: #2e5a6b;
+    --cv-bg: #f4fcff;
+    --cv-surface: #ffffff;
+    --cv-border: #c7e9f4;
+    --cv-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --cv-radius: 14px;
+    --cv-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cv-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .cv-bc {
+    background: var(--cv-surface);
+    border-bottom: 1px solid var(--cv-border);
+    padding: 12px 0;
+  }
+  .cv-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .cv-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .cv-bc a {
+    color: var(--cv-primary);
+    text-decoration: none;
+  }
+  .cv-bc a:hover {
+    text-decoration: underline;
+  }
+  .cv-bc span {
+    color: var(--cv-text-light);
+  }
+  .cv-bc i {
+    font-size: 0.65rem;
+    color: var(--cv-text-light);
+  }
+
+  /* Hero */
+  .cv-hero {
+    background: linear-gradient(
+      135deg,
+      var(--cv-primary-dark) 0%,
+      var(--cv-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .cv-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .cv-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cv-primary-light);
+    margin-bottom: 12px;
+  }
+  .cv-eyebrow::before,
+  .cv-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .cv-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .cv-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .cv-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .cv-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  /* Core Values Grid */
+  .cv-values {
+    padding: 96px 0;
+    background: var(--cv-bg);
+  }
+  .cv-values-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+  .cv-values-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--cv-text);
+    margin-bottom: 12px;
+  }
+  .cv-values-header p {
+    font-size: 1rem;
+    color: var(--cv-text-light);
+  }
+  .cv-values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .cv-value-card {
+    background: var(--cv-surface);
+    border-radius: var(--cv-radius);
+    padding: 32px 28px;
+    box-shadow: var(--cv-shadow);
+    transition:
+      transform 0.3s var(--cv-ease),
+      box-shadow 0.3s;
+    border: 1px solid var(--cv-border);
+  }
+  .cv-value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 150, 199, 0.15);
+    border-color: var(--cv-primary-light);
+  }
+  .cv-value-icon {
+    font-size: 2.5rem;
+    color: var(--cv-primary);
+    margin-bottom: 18px;
+  }
+  .cv-value-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cv-text);
+    margin-bottom: 12px;
+  }
+  .cv-value-card p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--cv-text-light);
+  }
+
+  /* Objectives Section */
+  .cv-objectives {
+    padding: 96px 0;
+    background: var(--cv-surface);
+  }
+  .cv-objectives-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .cv-objectives-text .cv-eyebrow {
+    margin-bottom: 12px;
+  }
+  .cv-objectives-text h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--cv-text);
+    margin-bottom: 16px;
+  }
+  .cv-objectives-text > p {
+    font-size: 1rem;
+    color: var(--cv-text-light);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+  .cv-objectives-list {
+    list-style: none;
+    margin: 0 0 36px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cv-objectives-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.94rem;
+    color: var(--cv-text-light);
+    line-height: 1.5;
+  }
+  .cv-objectives-list li i {
+    color: var(--cv-green);
+    font-size: 1.1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .cv-objectives-image {
+    position: relative;
+    border-radius: var(--cv-radius);
+    overflow: hidden;
+    box-shadow: var(--cv-shadow);
+  }
+  .cv-objectives-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .cv-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 35, 60, 0.85), transparent);
+    padding: 20px;
+    color: white;
+    font-style: italic;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+  .cv-image-caption i {
+    color: var(--cv-primary-light);
+  }
+
+  /* Buttons */
+  .cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      transform 0.2s,
+      background 0.2s;
+    border: 2px solid transparent;
+  }
+  .cv-btn-outline {
+    background: transparent;
+    color: var(--cv-primary);
+    border-color: var(--cv-primary);
+  }
+  .cv-btn-outline:hover {
+    background: var(--cv-primary);
+    color: white;
+    transform: translateY(-2px);
+  }
+  .cv-btn-green {
+    background: var(--cv-green);
+    color: white;
+  }
+  .cv-btn-green:hover {
+    background: var(--cv-green-dark);
+    transform: translateY(-2px);
+  }
+  .cv-btn-white {
+    background: white;
+    color: var(--cv-primary);
+    border-color: white;
+  }
+  .cv-btn-white:hover {
+    background: #e0f5fc;
+    transform: translateY(-2px);
+  }
+
+  /* CTA Section */
+  .cv-cta {
+    padding: 80px 0;
+    background: var(--cv-bg);
+  }
+  .cv-cta-card {
+    background: linear-gradient(
+      135deg,
+      var(--cv-primary-dark) 0%,
+      var(--cv-primary) 100%
+    );
+    border-radius: var(--cv-radius);
+    padding: 56px 48px;
+    text-align: center;
+    color: white;
+  }
+  .cv-cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 16px;
+  }
+  .cv-cta-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .cv-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .cv-values-grid {
+      gap: 24px;
+    }
+    .cv-objectives-grid {
+      gap: 48px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cv-values-grid {
+      grid-template-columns: 1fr;
+    }
+    .cv-objectives-grid {
+      grid-template-columns: 1fr;
+    }
+    .cv-objectives-image {
+      order: -1;
+    }
+    .cv-cta-card {
+      padding: 40px 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cv-value-card {
+      padding: 24px 20px;
+    }
+    .cv-value-card h3 {
+      font-size: 1.2rem;
+    }
+    .cv-objectives-list li {
+      font-size: 0.85rem;
+    }
+  }
+</style>

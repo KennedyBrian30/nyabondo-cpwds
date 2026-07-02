@@ -1,0 +1,660 @@
+---
+// src/pages/media/events.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Media", href: "/media" },
+  { label: "Events", href: "/media/events" },
+];
+
+const events = [
+  {
+    year: 2025,
+    date: "December 3, 2025",
+    title: "International Day for Persons with Disabilities 2025",
+    theme: "Amplifying the leadership of persons with disabilities for an inclusive and sustainable future",
+    description: "Nyabondo Centre hosted a community-wide celebration marking the International Day for Persons with Disabilities. The event brought together persons with disabilities, their families, community leaders, healthcare workers, and partners to celebrate the achievements of persons with disabilities and renew our collective commitment to inclusion, accessibility, and empowerment.",
+    highlights: [
+      "Keynote address by the Administrator, Sr. Ludovena Anyango Onyino on disability leadership and inclusion",
+      "Panel discussion featuring persons with disabilities sharing their success stories",
+      "Assistive device exhibition showcasing locally fabricated prosthetics, orthotics, and mobility aids",
+      "Cultural performances by persons with disabilities from the community",
+      "Launch of the SHINE Project (2026–2029) in partnership with CBM Kenya",
+      "Distribution of assistive devices to 50 beneficiaries",
+      "Community awareness sessions on disability rights and inclusion"
+    ],
+    images: [
+      "/images/events/idpd-2025-1.webp",
+      "/images/events/idpd-2025-2.webp",
+      "/images/events/idpd-2025-3.webp"
+    ],
+    impact: "Over 300 community members participated. 50 assistive devices distributed. 20 new referrals for corrective surgeries and rehabilitation services initiated."
+  },
+  {
+    year: 2024,
+    date: "December 3, 2024",
+    title: "International Day for Persons with Disabilities 2024",
+    theme: "Amplifying the leadership of persons with disabilities for an inclusive and sustainable future",
+    description: "Nyabondo Centre celebrated the International Day for Persons with Disabilities with a focus on leadership and inclusion. The event highlighted the contributions of persons with disabilities to community development and featured discussions on creating accessible environments for all.",
+    highlights: [
+      "Opening ceremony with the Administrator, Sr. Ludovena Anyango Onyino",
+      "Launch of BEN MAPP II programme supported by Cheshire Disability Services Kenya",
+      "Vocational training exhibition showcasing products made by persons with disabilities",
+      "Panel discussion on disability inclusion in the workplace",
+      "Distribution of mobility aids to 35 beneficiaries",
+      "Community sensitization on disability rights",
+      "Sports activities and games promoting inclusion"
+    ],
+    images: [
+      "/images/events/idpd-2024-1.webp",
+      "/images/events/idpd-2024-2.webp",
+      "/images/events/idpd-2024-3.webp"
+    ],
+    impact: "Over 250 community members participated. 35 mobility aids distributed. BEN MAPP II officially launched. 15 new partnerships established with local organizations."
+  },
+  {
+    year: 2023,
+    date: "December 3, 2023",
+    title: "International Day for Persons with Disabilities 2023",
+    theme: "United in action to rescue and achieve the Sustainable Development Goals for, with, and by persons with disabilities",
+    description: "The 2023 celebration focused on collective action to achieve the SDGs for persons with disabilities. Nyabondo Centre brought together stakeholders from government, civil society, and the private sector to discuss inclusive development and the role of persons with disabilities in achieving the global goals.",
+    highlights: [
+      "Keynote address by the Administrator on achieving SDGs for persons with disabilities",
+      "Panel discussion with county government officials on inclusive policies",
+      "Assistive technology demonstration and exhibition",
+      "Launch of community awareness campaign on disability inclusion",
+      "Distribution of 40 assistive devices to beneficiaries",
+      "Workshop on disability-inclusive programming for partner organizations",
+      "Cultural performances and testimonies from beneficiaries"
+    ],
+    images: [
+      "/images/events/idpd-2023-1.webp",
+      "/images/events/idpd-2023-2.webp",
+      "/images/events/idpd-2023-3.webp"
+    ],
+    impact: "Over 280 community members attended. 40 assistive devices distributed. 5 county government representatives participated. 8 new partner organizations engaged."
+  },
+  {
+    year: 2022,
+    date: "December 3, 2022",
+    title: "International Day for Persons with Disabilities 2022",
+    theme: "Not all disabilities are visible — Promoting inclusive and accessible communities for all",
+    description: "The 2022 celebration marked Nyabondo Centre's ongoing commitment to inclusion and accessibility. The event raised awareness about invisible disabilities and the importance of creating truly accessible communities where every person, regardless of their disability, can participate fully and thrive.",
+    highlights: [
+      "Opening remarks by the Administrator, Sr. Ludovena Anyango Onyino",
+      "Awareness session on invisible disabilities and mental health",
+      "Medical screening and health check-ups for community members",
+      "Assistive device fitting and distribution to 30 beneficiaries",
+      "Community dialogue on breaking stigma and discrimination",
+      "Art and craft exhibition by persons with disabilities",
+      "Referral services for 25 children with disabilities"
+    ],
+    images: [
+      "/images/events/idpd-2022-1.webp",
+      "/images/events/idpd-2022-2.webp",
+      "/images/events/idpd-2022-3.webp"
+    ],
+    impact: "Over 200 community members reached. 30 assistive devices distributed. 25 children referred for further services. Significant increase in community awareness about invisible disabilities."
+  }
+];
+
+// Helper to get the most recent events first (already sorted desc by year)
+const sortedEvents = [...events].sort((a, b) => b.year - a.year);
+---
+
+<Layout title="Events | Nyabondo Centre for Persons with Disabilities">
+
+  <!-- BREADCRUMB -->
+  <nav class="events-bc" aria-label="Breadcrumb">
+    <div class="events-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="events-hero">
+    <div class="events-container">
+      <div class="events-hero-content">
+        <span class="events-eyebrow">Stories &amp; Updates</span>
+        <h1>Events</h1>
+        <p>
+          Explore our events calendar and see how we're engaging with communities,
+          raising awareness, and celebrating the achievements of persons with
+          disabilities across Kenya.
+        </p>
+      </div>
+    </div>
+    <div class="events-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"
+        ></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- EVENTS LIST -->
+  <section class="events-list">
+    <div class="events-container">
+      <div class="events-grid">
+        {sortedEvents.map((event, i) => (
+          <div class="event-card" style={`--delay: ${i * 150}ms`}>
+            <div class="event-header">
+              <div class="event-year-badge">
+                <span class="event-year">{event.year}</span>
+                <span class="event-date">{event.date}</span>
+              </div>
+            </div>
+
+            <div class="event-body">
+              <h2>{event.title}</h2>
+              <p class="event-theme">
+                <strong>Theme:</strong> {event.theme}
+              </p>
+              <p class="event-description">{event.description}</p>
+
+              <div class="event-highlights">
+                <h3>Highlights</h3>
+                <ul>
+                  {event.highlights.map((highlight) => (
+                    <li>
+                      <i class="fas fa-check-circle" aria-hidden="true"></i>
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {event.images && event.images.length > 0 && (
+                <div class="event-gallery">
+                  <h3>Gallery</h3>
+                  <div class="event-gallery-grid">
+                    {event.images.map((img) => (
+                      <div class="event-gallery-item">
+                        <picture>
+                          <source srcset={img} type="image/webp" />
+                          <img
+                            src={img}
+                            alt={`${event.title} - event photo`}
+                            loading="lazy"
+                          />
+                        </picture>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div class="event-impact">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                <div>
+                  <strong>Impact:</strong> {event.impact}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="events-cta">
+    <div class="events-container">
+      <div class="events-cta-card">
+        <h2>Stay Updated</h2>
+        <p>
+          Don't miss our upcoming events. Follow us on social media or subscribe
+          to our newsletter to stay informed about our activities and how you can
+          get involved.
+        </p>
+        <div class="events-cta-buttons">
+          <a href="/contact" class="events-btn events-btn-primary">
+            <i class="fas fa-envelope"></i> Contact Us
+          </a>
+          <a href="/get-involved/donate" class="events-btn events-btn-outline">
+            <i class="fas fa-heart"></i> Support Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* =============================================
+     EVENTS PAGE STYLES
+  ============================================= */
+  :root {
+    --events-primary: #0096c7;
+    --events-primary-dark: #006d94;
+    --events-primary-light: #48b8d8;
+    --events-green: #2e8b57;
+    --events-text: #0d2b38;
+    --events-text-light: #2e5a6b;
+    --events-bg: #f4fcff;
+    --events-surface: #ffffff;
+    --events-border: #c7e9f4;
+    --events-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --events-radius: 14px;
+    --events-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .events-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .events-bc {
+    background: var(--events-surface);
+    border-bottom: 1px solid var(--events-border);
+    padding: 12px 0;
+  }
+  .events-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .events-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .events-bc a {
+    color: var(--events-primary);
+    text-decoration: none;
+  }
+  .events-bc a:hover {
+    text-decoration: underline;
+  }
+  .events-bc span {
+    color: var(--events-text-light);
+  }
+  .events-bc i {
+    font-size: 0.65rem;
+    color: var(--events-text-light);
+  }
+
+  /* Hero */
+  .events-hero {
+    background: linear-gradient(
+      135deg,
+      var(--events-primary-dark) 0%,
+      var(--events-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .events-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .events-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--events-primary-light);
+    margin-bottom: 12px;
+  }
+  .events-eyebrow::before,
+  .events-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .events-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .events-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .events-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .events-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  /* Events List */
+  .events-list {
+    padding: 80px 0;
+    background: var(--events-bg);
+  }
+  .events-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .event-card {
+    background: var(--events-surface);
+    border-radius: var(--events-radius);
+    overflow: hidden;
+    box-shadow: var(--events-shadow);
+    border: 1px solid var(--events-border);
+    transition: all 0.3s var(--events-ease);
+    opacity: 0;
+    transform: translateY(24px);
+    animation: eventFadeIn 0.7s var(--events-ease) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+  .event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 150, 199, 0.15);
+  }
+  @keyframes eventFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .event-header {
+    background: linear-gradient(135deg, var(--events-primary), var(--events-primary-dark));
+    padding: 24px 32px;
+    color: white;
+  }
+  .event-year-badge {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .event-year {
+    font-family: "Playfair Display", serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .event-date {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    padding-left: 16px;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+  }
+  .event-body {
+    padding: 32px;
+  }
+  .event-body h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--events-text);
+    margin-bottom: 12px;
+  }
+  .event-theme {
+    font-size: 0.95rem;
+    color: var(--events-primary);
+    margin-bottom: 16px;
+    padding: 8px 16px;
+    background: rgba(0, 150, 199, 0.06);
+    border-radius: 8px;
+    border-left: 3px solid var(--events-primary);
+  }
+  .event-description {
+    font-size: 0.95rem;
+    color: var(--events-text-light);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+  .event-highlights {
+    margin-bottom: 24px;
+  }
+  .event-highlights h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--events-text);
+    margin-bottom: 12px;
+  }
+  .event-highlights ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .event-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--events-text-light);
+    line-height: 1.55;
+  }
+  .event-highlights li i {
+    color: var(--events-green);
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .event-gallery {
+    margin-bottom: 24px;
+  }
+  .event-gallery h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--events-text);
+    margin-bottom: 12px;
+  }
+  .event-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .event-gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s var(--events-ease);
+  }
+  .event-gallery-item:hover {
+    transform: scale(1.03);
+  }
+  .event-gallery-item picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .event-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .event-impact {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    background: rgba(0, 150, 199, 0.04);
+    border-radius: 8px;
+    border-left: 4px solid var(--events-primary);
+  }
+  .event-impact i {
+    color: var(--events-primary);
+    font-size: 1.2rem;
+    margin-top: 2px;
+  }
+  .event-impact div {
+    font-size: 0.9rem;
+    color: var(--events-text-light);
+    line-height: 1.6;
+  }
+  .event-impact strong {
+    color: var(--events-text);
+  }
+
+  /* CTA Banner */
+  .events-cta {
+    padding: 60px 0 80px;
+    background: var(--events-surface);
+  }
+  .events-cta-card {
+    background: linear-gradient(
+      135deg,
+      var(--events-primary-dark) 0%,
+      var(--events-primary) 100%
+    );
+    border-radius: var(--events-radius);
+    padding: 48px 40px;
+    text-align: center;
+    color: white;
+  }
+  .events-cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  .events-cta-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .events-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .events-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    border: 2px solid transparent;
+  }
+  .events-btn:hover {
+    transform: translateY(-2px);
+  }
+  .events-btn-primary {
+    background: white;
+    color: var(--events-primary);
+  }
+  .events-btn-primary:hover {
+    background: #e0f5fc;
+  }
+  .events-btn-outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.6);
+    color: white;
+  }
+  .events-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .event-highlights ul {
+      grid-template-columns: 1fr;
+    }
+    .event-gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .event-header {
+      padding: 20px 24px;
+    }
+    .event-year {
+      font-size: 2rem;
+    }
+    .event-body {
+      padding: 24px;
+    }
+    .event-body h2 {
+      font-size: 1.4rem;
+    }
+    .event-gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .events-cta-card {
+      padding: 32px 24px;
+    }
+    .events-cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .events-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .event-year-badge {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .event-date {
+      padding-left: 0;
+      border-left: none;
+      font-size: 0.85rem;
+    }
+    .event-body h2 {
+      font-size: 1.2rem;
+    }
+    .event-gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .event-gallery-item {
+      aspect-ratio: 4/3;
+    }
+    .event-theme {
+      font-size: 0.85rem;
+    }
+  }
+</style>

@@ -1,0 +1,620 @@
+---
+// src/pages/media/testimonials.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Media", href: "/media" },
+  { label: "Testimonials", href: "/media/testimonials" },
+];
+
+const testimonials = [
+  {
+    name: "Joyline",
+    age: "8",
+    title: "Joyline's Journey",
+    image: "/images/stories/story-joyline-recovery.webp",
+    alt: "A young girl smiling after corrective surgery at Nyabondo",
+    quote: "After her corrective surgery at Nyabondo, Joyline can now walk better and attend school like every other child. The stigma is also gone. She tells us she wants to become a doctor someday.",
+    author: "Mother of Joyline",
+    stars: 5,
+  },
+  {
+    name: "Anjenjo",
+    age: "22",
+    title: "Anjenjo's Success",
+    image: "/images/stories/anjenjo.webp",
+    alt: "A young man standing confidently with his prosthetic limbs",
+    quote: "As a bilateral above knee amputee, going to school would not have been possible without the intervention of Nyabondo Rehabilitation. Through their partners, they ensured I successfully went through both primary and secondary studies. Besides, they have consistently helped with replacing my prosthetics or repairing them, services which are both expensive to undertake. Thank you Nyabondo Rehab.",
+    author: "Anjenjo",
+    stars: 5,
+  },
+  {
+    name: "Robert Oguna",
+    title: "From Beneficiary to Technician",
+    image: "/images/stories/robert-oguna.webp",
+    alt: "Robert Oguna working as a technician at Nyabondo Centre",
+    quote: "For over 10 years Nyabondo Rehabilitation Centre has been like home after the outreach team identified me from the community. I came here as a young kid and after a series of longterm therapy and formal schooling, my life has completely changed. I currently work here as a technician.",
+    author: "Robert, Beneficiary",
+    stars: 5,
+  },
+];
+
+// Additional testimonials (could be added later)
+const additionalTestimonials = [
+  // Add more testimonials here as they become available
+];
+---
+
+<Layout title="Testimonials | Nyabondo Centre for Persons with Disabilities">
+
+  <!-- BREADCRUMB -->
+  <nav class="testimonials-bc" aria-label="Breadcrumb">
+    <div class="testimonials-container">
+      <ol>
+        {
+          breadcrumbs.map((c, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={c.href}>{c.label}</a>
+              ) : (
+                <span aria-current="page">{c.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="testimonials-hero">
+    <div class="testimonials-container">
+      <div class="testimonials-hero-content">
+        <span class="testimonials-eyebrow">Real Stories, Real Impact</span>
+        <h1>Testimonials</h1>
+        <p>
+          Hear directly from our beneficiaries, their families, and partners
+          about the impact Nyabondo Centre has had on their lives and communities.
+        </p>
+      </div>
+    </div>
+    <div class="testimonials-hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
+        <path
+          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
+          fill="#f4fcff"
+        ></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS GRID -->
+  <section class="testimonials-grid-section">
+    <div class="testimonials-container">
+      <div class="testimonials-grid">
+        {testimonials.map((testimonial, i) => (
+          <article class="testimonial-card" style={`--delay: ${i * 120}ms`}>
+            <div class="testimonial-image">
+              <picture>
+                <source srcset={testimonial.image} type="image/webp" />
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.alt}
+                  loading="lazy"
+                  decoding="async"
+                  width="640"
+                  height="440"
+                />
+              </picture>
+              <div class="testimonial-image-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="testimonial-body">
+              <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+              <h3>{testimonial.title}</h3>
+              <blockquote>
+                {testimonial.quote}
+              </blockquote>
+              <div class="testimonial-footer">
+                <div class="testimonial-stars" aria-label="Five star experience">
+                  {[...Array(testimonial.stars)].map((_, i) => (
+                    <i class="fas fa-star" aria-hidden="true"></i>
+                  ))}
+                </div>
+                <cite>{testimonial.author}</cite>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="testimonials-stats">
+    <div class="testimonials-container">
+      <div class="testimonials-stats-grid">
+        <div class="testimonials-stat-card">
+          <div class="testimonials-stat-num">50,000+</div>
+          <div class="testimonials-stat-label">Lives Transformed</div>
+        </div>
+        <div class="testimonials-stat-card">
+          <div class="testimonials-stat-num">12,000+</div>
+          <div class="testimonials-stat-label">Surgeries Performed</div>
+        </div>
+        <div class="testimonials-stat-card">
+          <div class="testimonials-stat-num">8,500+</div>
+          <div class="testimonials-stat-label">Assistive Devices Given</div>
+        </div>
+        <div class="testimonials-stat-card">
+          <div class="testimonials-stat-num">60+</div>
+          <div class="testimonials-stat-label">Years of Service</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHARE YOUR STORY CTA -->
+  <section class="testimonials-cta">
+    <div class="testimonials-container">
+      <div class="testimonials-cta-card">
+        <i class="fas fa-quote-right" aria-hidden="true"></i>
+        <h2>Share Your Story</h2>
+        <p>
+          Have you or a loved one been touched by Nyabondo Centre's work?
+          We'd love to hear from you. Share your testimonial and inspire others.
+        </p>
+        <div class="testimonials-cta-buttons">
+          <a href="/contact" class="testimonials-btn testimonials-btn-primary">
+            <i class="fas fa-pen"></i> Share Your Story
+          </a>
+          <a href="/get-involved/donate" class="testimonials-btn testimonials-btn-outline">
+            <i class="fas fa-heart"></i> Support Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* =============================================
+     TESTIMONIALS PAGE STYLES
+  ============================================= */
+  :root {
+    --testimonials-primary: #0096c7;
+    --testimonials-primary-dark: #006d94;
+    --testimonials-primary-light: #48b8d8;
+    --testimonials-green: #2e8b57;
+    --testimonials-text: #0d2b38;
+    --testimonials-text-light: #2e5a6b;
+    --testimonials-bg: #f4fcff;
+    --testimonials-surface: #ffffff;
+    --testimonials-border: #c7e9f4;
+    --testimonials-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --testimonials-radius: 14px;
+    --testimonials-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumb */
+  .testimonials-bc {
+    background: var(--testimonials-surface);
+    border-bottom: 1px solid var(--testimonials-border);
+    padding: 12px 0;
+  }
+  .testimonials-bc ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .testimonials-bc li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+  }
+  .testimonials-bc a {
+    color: var(--testimonials-primary);
+    text-decoration: none;
+  }
+  .testimonials-bc a:hover {
+    text-decoration: underline;
+  }
+  .testimonials-bc span {
+    color: var(--testimonials-text-light);
+  }
+  .testimonials-bc i {
+    font-size: 0.65rem;
+    color: var(--testimonials-text-light);
+  }
+
+  /* Hero */
+  .testimonials-hero {
+    background: linear-gradient(
+      135deg,
+      var(--testimonials-primary-dark) 0%,
+      var(--testimonials-primary) 100%
+    );
+    padding: 80px 0 96px;
+    position: relative;
+    color: white;
+  }
+  .testimonials-hero-content {
+    max-width: 720px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  .testimonials-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--testimonials-primary-light);
+    margin-bottom: 12px;
+  }
+  .testimonials-eyebrow::before,
+  .testimonials-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+  .testimonials-hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .testimonials-hero p {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  .testimonials-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+  .testimonials-hero-wave svg {
+    width: 100%;
+    height: 40px;
+    display: block;
+  }
+
+  /* Testimonials Grid */
+  .testimonials-grid-section {
+    padding: 80px 0;
+    background: var(--testimonials-bg);
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .testimonial-card {
+    background: var(--testimonials-surface);
+    border-radius: var(--testimonials-radius);
+    overflow: hidden;
+    border: 1px solid var(--testimonials-border);
+    box-shadow: var(--testimonials-shadow);
+    transition: all 0.3s var(--testimonials-ease);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: testimonialFadeIn 0.7s var(--testimonials-ease) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+  .testimonial-card:hover {
+    box-shadow: 0 16px 48px rgba(0, 150, 199, 0.15);
+    transform: translateY(-6px);
+    border-color: var(--testimonials-primary);
+  }
+  @keyframes testimonialFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .testimonial-image {
+    height: 230px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .testimonial-image picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .testimonial-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--testimonials-ease);
+  }
+  .testimonial-card:hover .testimonial-image img {
+    transform: scale(1.06);
+  }
+  .testimonial-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 50, 80, 0.45) 0%, transparent 50%);
+  }
+  .testimonial-body {
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    flex-grow: 1;
+  }
+  .testimonial-quote-mark {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    font-family: "Playfair Display", serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: var(--testimonials-primary);
+    opacity: 0.08;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.3s var(--testimonials-ease);
+  }
+  .testimonial-card:hover .testimonial-quote-mark {
+    opacity: 0.15;
+  }
+  .testimonial-body h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--testimonials-text);
+    margin-bottom: 4px;
+  }
+  .testimonial-body blockquote {
+    font-size: 0.92rem;
+    color: var(--testimonials-text-light);
+    line-height: 1.7;
+    font-style: italic;
+    margin: 0;
+    flex-grow: 1;
+  }
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--testimonials-border);
+    margin-top: auto;
+  }
+  .testimonial-stars {
+    color: #f59e0b;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 2px;
+  }
+  .testimonial-body cite {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--testimonials-primary);
+    font-style: normal;
+  }
+
+  /* Stats Section */
+  .testimonials-stats {
+    padding: 64px 0;
+    background: var(--testimonials-surface);
+  }
+  .testimonials-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .testimonials-stat-card {
+    text-align: center;
+    padding: 24px;
+    background: var(--testimonials-bg);
+    border-radius: var(--testimonials-radius);
+    border: 1px solid var(--testimonials-border);
+    transition: transform 0.3s var(--testimonials-ease);
+  }
+  .testimonials-stat-card:hover {
+    transform: translateY(-4px);
+  }
+  .testimonials-stat-num {
+    font-family: "Playfair Display", serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--testimonials-primary);
+    line-height: 1.1;
+  }
+  .testimonials-stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--testimonials-text-light);
+    margin-top: 8px;
+  }
+
+  /* CTA Banner */
+  .testimonials-cta {
+    padding: 60px 0 80px;
+    background: var(--testimonials-bg);
+  }
+  .testimonials-cta-card {
+    background: linear-gradient(
+      135deg,
+      var(--testimonials-primary-dark) 0%,
+      var(--testimonials-primary) 100%
+    );
+    border-radius: var(--testimonials-radius);
+    padding: 48px 40px;
+    text-align: center;
+    color: white;
+    position: relative;
+  }
+  .testimonials-cta-card i.fa-quote-right {
+    font-size: 3rem;
+    opacity: 0.15;
+    position: absolute;
+    bottom: 20px;
+    right: 32px;
+  }
+  .testimonials-cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  .testimonials-cta-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .testimonials-cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .testimonials-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    border: 2px solid transparent;
+  }
+  .testimonials-btn:hover {
+    transform: translateY(-2px);
+  }
+  .testimonials-btn-primary {
+    background: white;
+    color: var(--testimonials-primary);
+  }
+  .testimonials-btn-primary:hover {
+    background: #e0f5fc;
+  }
+  .testimonials-btn-outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.6);
+    color: white;
+  }
+  .testimonials-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .testimonials-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .testimonial-image {
+      height: 200px;
+    }
+    .testimonial-body {
+      padding: 22px 20px;
+    }
+    .testimonial-body h3 {
+      font-size: 1.1rem;
+    }
+    .testimonial-body blockquote {
+      font-size: 0.88rem;
+    }
+    .testimonials-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .testimonials-stat-num {
+      font-size: 2rem;
+    }
+    .testimonials-cta-card {
+      padding: 32px 24px;
+    }
+    .testimonials-cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .testimonials-btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .testimonials-cta-card i.fa-quote-right {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .testimonials-stats-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .testimonials-stat-card {
+      padding: 16px;
+    }
+    .testimonials-stat-num {
+      font-size: 1.6rem;
+    }
+    .testimonials-stat-label {
+      font-size: 0.7rem;
+    }
+    .testimonial-image {
+      height: 180px;
+    }
+    .testimonial-body {
+      padding: 18px 16px;
+    }
+    .testimonial-quote-mark {
+      font-size: 3rem;
+    }
+    .testimonial-body h3 {
+      font-size: 1rem;
+    }
+    .testimonial-body blockquote {
+      font-size: 0.85rem;
+    }
+    .testimonial-footer {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+  }
+</style>

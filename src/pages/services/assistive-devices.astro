@@ -1,0 +1,1037 @@
+---
+// src/pages/services/assistive-devices.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Assistive Devices", href: "/services/assistive-devices" },
+];
+
+const relatedServices = [
+  {
+    title: "Corrective Surgeries",
+    href: "/services/surgeries",
+    description: "Post‑surgical orthotics and prosthetics are custom‑fitted by our technologists.",
+    icon: "fas fa-stethoscope",
+  },
+  {
+    title: "Therapy Services",
+    href: "/services/therapy",
+    description: "Therapists assess and prescribe the right assistive device for your needs.",
+    icon: "fas fa-hand-holding-heart",
+  },
+  {
+    title: "In‑patient & Out‑patient Services",
+    href: "/services/outpatient-inpatient",
+    description: "Device fitting and adjustments available for inpatients and outpatients.",
+    icon: "fas fa-hospital",
+  },
+  {
+    title: "Long‑term Rehabilitation",
+    href: "/programs/longterm-rehab",
+    description: "Assistive devices are a core component of our rehabilitation programmes.",
+    icon: "fas fa-clock-rotate-left",
+  },
+];
+
+const categories = [
+  {
+    title: "Prosthetics",
+    icon: "fas fa-person-walking",
+    description: "Custom‑made artificial limbs for individuals with limb loss or congenital absence.",
+    items: [
+      "Lower limb prosthetics (above‑knee, below‑knee)",
+      "Upper limb prosthetics (above‑elbow, below‑elbow)",
+      "Paediatric prosthetics for children",
+      "Cosmetic and functional prosthetics",
+    ],
+  },
+  {
+    title: "Orthotics",
+    icon: "fas fa-bone",
+    description: "External braces and supports to correct deformities, stabilise joints, and improve function.",
+    items: [
+      "Ankle‑Foot Orthoses (AFO) – for foot drop and ankle instability",
+      "Knee‑Ankle‑Foot Orthoses (KAFO) – for knee and ankle support",
+      "Hip abduction braces – for hip dysplasia",
+      "Hand and wrist splints – for contracture management",
+      "Spinal braces (TLSO) – for scoliosis and spinal support",
+      "Paediatric orthotics – custom‑moulded for growing children",
+    ],
+  },
+  {
+    title: "Mobility Aids",
+    icon: "fas fa-wheelchair",
+    description: "Devices to help you move safely and independently.",
+    items: [
+      "Wheelchairs (manual and lightweight)",
+      "Walking frames (standard, wheeled, paediatric)",
+      "Axillary and elbow crutches",
+      "Walking sticks and canes",
+      "Paediatric walking aids",
+    ],
+  },
+  {
+    title: "Paediatric Seating & Positioning",
+    icon: "fas fa-child",
+    description: "Specialised seating to provide postural support for children with cerebral palsy and other conditions.",
+    items: [
+      "Custom‑moulded seating systems",
+      "Standing frames – to promote weight‑bearing and bone health",
+      "Special needs pushchairs and strollers",
+      "Corner chairs and floor sitters",
+      "Adaptive car seats",
+    ],
+  },
+  {
+    title: "Daily Living Aids",
+    icon: "fas fa-hand-peace",
+    description: "Tools to help with self‑care and independent living.",
+    items: [
+      "Adapted eating utensils (curved handles, weighted spoons)",
+      "Dressing aids (button hooks, zipper pulls, sock aids)",
+      "Bathing and toileting aids (shower chairs, raised toilet seats)",
+      "Writing and communication aids",
+      "Reachers and grabbers",
+    ],
+  },
+];
+
+const heroImg = "/images/services/service-assistive-devices.webp";
+const workshopImg = "/images/hero/hero-assistive-device.webp";
+const orthoticsImg = "/images/services/service-assistive-devices-1.webp";
+const paediatricImg = "/images/hero/hero-rehabilitation-therapy.webp";
+---
+
+<Layout title="Assistive Devices | Nyabondo Centre for Persons with Disabilities">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {breadcrumbs.map((crumb, i) => (
+          <li>
+            {i < breadcrumbs.length - 1 ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+            {i < breadcrumbs.length - 1 && (
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section (improved) -->
+  <section class="service-hero">
+    <div class="hero-bg-pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="service-hero-grid">
+        <div class="service-hero-content">
+          <span class="section-eyebrow">Custom‑Made for You</span>
+          <h1 class="service-title">
+            Assistive <span class="accent">Devices</span>
+          </h1>
+          <p class="service-lead">
+            High‑quality, custom‑fabricated prosthetics, orthotics, mobility aids,
+            and daily living equipment – designed and built on‑site to fit your
+            unique body and goals.
+          </p>
+          <div class="service-hero-stats">
+            <div class="stat">
+              <span class="stat-num">8,500+</span>
+              <span class="stat-label">Devices Provided</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">Custom‑Made</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">On‑Site</span>
+              <span class="stat-label">Workshop</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn-primary">Book Assessment</a>
+            <a href="#categories" class="btn btn-outline">Explore Devices</a>
+          </div>
+        </div>
+        <div class="service-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="A senior orthopaedic technologist fitting a custom prosthetic limb at Nyabondo Centre"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">Custom prosthetic fitting in our workshop</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Approach Statement (mobile: image after heading) -->
+  <section class="custom-approach" aria-labelledby="custom-heading">
+    <div class="container">
+      <div class="custom-card reveal-up">
+        <div class="custom-icon"><i class="fas fa-ruler-combined"></i></div>
+        <div class="custom-content">
+          <h2 id="custom-heading">Every Device is Custom‑Made for You</h2>
+          <div class="custom-image-mobile">
+            <picture>
+              <source srcset={workshopImg} type="image/webp" />
+              <img src={workshopImg} alt="Orthopaedic technologist at work" loading="lazy" />
+            </picture>
+          </div>
+          <p>
+            No two bodies are the same – so no two devices should be either. 
+            Our orthopaedic technologists take precise measurements, create plaster 
+            casts or digital scans, and hand‑craft each device in our on‑site workshop.
+            We assess your functional needs, activity level, and personal goals to 
+            ensure your device enables you to live as independently as possible.
+          </p>
+          <div class="custom-highlights">
+            <span><i class="fas fa-check-circle"></i> Individual assessment</span>
+            <span><i class="fas fa-check-circle"></i> Precision casting/moulding</span>
+            <span><i class="fas fa-check-circle"></i> On‑site fabrication</span>
+            <span><i class="fas fa-check-circle"></i> Fitting and adjustments</span>
+            <span><i class="fas fa-check-circle"></i> Follow‑up and repairs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Grid -->
+  <section id="categories" class="categories" aria-labelledby="categories-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">What We Provide</span>
+        <h2 id="categories-heading" class="section-title">Comprehensive Range of Assistive Devices</h2>
+        <p class="section-subtitle">
+          Our orthopaedic workshop produces a full spectrum of devices – all custom‑fabricated
+          to meet your individual clinical and functional needs.
+        </p>
+      </div>
+
+      <div class="categories-grid">
+        {categories.map((category, i) => (
+          <div class="category-card reveal-up" style={`--delay: ${i * 80}ms`}>
+            <div class="category-icon"><i class={category.icon}></i></div>
+            <h3>{category.title}</h3>
+            <p class="category-desc">{category.description}</p>
+            <ul>
+              {category.items.map((item) => (
+                <li><i class="fas fa-microphone"></i> {item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The Process (mobile: no image needed) -->
+  <section class="process" aria-labelledby="process-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">How It Works</span>
+        <h2 id="process-heading" class="section-title">From Assessment to Delivery</h2>
+      </div>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Clinical Assessment</h3>
+          <p>Physiotherapist or orthopaedic technologist evaluates your functional needs and goals.</p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Measurements & Casting</h3>
+          <p>Precise measurements, plaster casting, or digital scan of the limb/body part.</p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Custom Fabrication</h3>
+          <p>Hand‑crafted in our on‑site workshop using high‑quality materials.</p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Fitting & Training</h3>
+          <p>Device fitted to you. Training on how to use, wear, and care for it.</p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h3>Follow‑up & Adjustments</h3>
+          <p>Scheduled reviews to adjust fit, especially for growing children or changing conditions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- On‑Site Workshop Highlight (mobile: image after heading) -->
+  <section class="workshop" aria-labelledby="workshop-heading">
+    <div class="container">
+      <div class="workshop-grid reveal-up">
+        <div class="workshop-text">
+          <span class="section-eyebrow">On‑Site Production</span>
+          <h2 id="workshop-heading">Fully Equipped Orthopaedic Workshop</h2>
+          <div class="workshop-image-mobile">
+            <picture>
+              <source srcset={workshopImg} type="image/webp" />
+              <img src={workshopImg} alt="Orthopaedic technologist at work in Nyabondo's on‑site workshop" loading="lazy" />
+            </picture>
+          </div>
+          <p>
+            Our workshop is staffed by experienced orthopaedic technologists who
+            fabricate devices using modern materials – lightweight thermoplastics,
+            carbon fibre composites, aluminium, and soft goods. Having the workshop
+            on‑site means:
+          </p>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Faster turnaround times (typically 1–2 weeks)</li>
+            <li><i class="fas fa-check-circle"></i> Direct communication between technologist and patient</li>
+            <li><i class="fas fa-check-circle"></i> Immediate adjustments during fitting</li>
+            <li><i class="fas fa-check-circle"></i> Affordable, durable products</li>
+            <li><i class="fas fa-check-circle"></i> Repair and maintenance services</li>
+          </ul>
+        </div>
+        <div class="workshop-image desktop-only">
+          <picture>
+            <source srcset={workshopImg} type="image/webp" />
+            <img src={workshopImg} alt="Orthopaedic technologist at work" loading="lazy" />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paediatric Focus (mobile: image after heading) -->
+  <section class="paediatric" aria-labelledby="paeds-heading">
+    <div class="container">
+      <div class="paediatric-grid reveal-up">
+        <div class="paediatric-text">
+          <span class="section-eyebrow">Growing Children Need Growing Solutions</span>
+          <h2 id="paeds-heading">Paediatric Assistive Devices</h2>
+          <div class="paediatric-image-mobile">
+            <picture>
+              <source srcset={paediatricImg} type="image/webp" />
+              <img src={paediatricImg} alt="Child using a custom paediatric walking frame" loading="lazy" />
+            </picture>
+          </div>
+          <p>
+            Children's needs change as they grow. Our paediatric devices are designed
+            to accommodate growth through adjustable features or scheduled replacements.
+            We work closely with families and therapists to ensure devices support
+            development, not restrict it.
+          </p>
+          <div class="paediatric-note">
+            <i class="fas fa-child"></i> We offer a growth allowance in all paediatric
+            orthotics, and follow‑up appointments every 6–12 months to reassess fit.
+          </div>
+        </div>
+        <div class="paediatric-image desktop-only">
+          <picture>
+            <source srcset={paediatricImg} type="image/webp" />
+            <img src={paediatricImg} alt="Child using a custom paediatric walking frame" loading="lazy" />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Services -->
+  <section class="related-services" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">Services That Work With Assistive Devices</h2>
+        <p class="section-subtitle">
+          A device is most effective when combined with therapy and medical care.
+        </p>
+      </div>
+      <div class="related-grid">
+        {relatedServices.map((service, i) => (
+          <a href={service.href} class="related-card reveal-up" style={`--delay: ${i * 60}ms`}>
+            <div class="related-icon"><i class={service.icon}></i></div>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <span class="related-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-devices">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Need a Custom Assistive Device?</h2>
+          <p>
+            Contact us for an assessment. Our team will work with you to design
+            and fabricate a device that fits your body, your life, and your goals.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn btn-green">
+            <i class="fas fa-calendar-check"></i> Book an Assessment
+          </a>
+          <a href="/get-involved/donate" class="btn btn-primary-outline">
+            Support Device Production <i class="fas fa-heart"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero (improved) */
+  .service-hero {
+    position: relative;
+    padding: 60px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+    overflow: hidden;
+  }
+  .hero-bg-pattern {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(0,150,199,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    transform: rotate(15deg);
+  }
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .service-hero-content {
+    padding-right: 20px;
+  }
+  .service-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .service-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .service-lead {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .service-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+    border: 2px solid transparent;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+  }
+  .btn-outline {
+    background: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .btn-outline:hover {
+    background: var(--primary);
+    color: white;
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border-color: var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+  .service-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .service-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Custom Approach Card */
+  .custom-approach {
+    padding: 40px 0;
+    background: var(--surface);
+  }
+  .custom-card {
+    display: flex;
+    gap: 28px;
+    background: linear-gradient(120deg, #e8f7ff, #ffffff);
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--secondary);
+    border-radius: var(--radius-md);
+    padding: 32px;
+  }
+  .custom-icon {
+    font-size: 2.5rem;
+    color: var(--secondary);
+  }
+  .custom-content h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+  .custom-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .custom-highlights span {
+    background: rgba(46, 139, 87, 0.1);
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Categories Grid */
+  .categories {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .category-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .category-icon {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .category-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  .category-desc {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .category-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .category-card li {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .category-card li i {
+    color: var(--secondary);
+    font-size: 0.7rem;
+    margin-top: 3px;
+  }
+
+  /* Process Steps */
+  .process {
+    padding: 60px 0;
+    background: var(--surface);
+  }
+  .process-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+  .step {
+    flex: 1;
+    min-width: 170px;
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin: 0 auto 12px;
+  }
+  .step h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .step p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+  .step-arrow {
+    color: var(--primary-light);
+    font-size: 1.2rem;
+  }
+
+  /* Workshop Highlight */
+  .workshop {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .workshop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .workshop-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  .workshop-text li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .workshop-text li i {
+    color: var(--secondary);
+  }
+  .workshop-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .workshop-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Paediatric Focus */
+  .paediatric {
+    padding: 60px 0;
+    background: var(--surface);
+  }
+  .paediatric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .paediatric-text p {
+    margin-bottom: 20px;
+  }
+  .paediatric-note {
+    background: rgba(0, 150, 199, 0.08);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    margin-top: 20px;
+  }
+  .paediatric-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .paediatric-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Related Services */
+  .related-services {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-devices {
+    padding: 60px 0;
+  }
+  .cta-card {
+    background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255,255,255,0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Mobile image positioning */
+  .custom-image-mobile, .workshop-image-mobile, .paediatric-image-mobile {
+    display: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .categories-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .process-steps {
+      flex-direction: column;
+    }
+    .step-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .service-hero-grid, .workshop-grid, .paediatric-grid {
+      grid-template-columns: 1fr;
+    }
+    .categories-grid, .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .custom-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .service-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+    .service-hero-stats {
+      justify-content: center;
+    }
+    .hero-actions {
+      justify-content: center;
+    }
+    .custom-highlights {
+      justify-content: center;
+    }
+
+    /* Mobile: show images after headings, hide desktop images */
+    .desktop-only {
+      display: none;
+    }
+    .custom-image-mobile, .workshop-image-mobile, .paediatric-image-mobile {
+      display: block;
+      margin: 20px 0;
+    }
+    .custom-image-mobile img, .workshop-image-mobile img, .paediatric-image-mobile img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+    /* Ensure text flows after image */
+    .custom-content p, .workshop-text p, .paediatric-text p {
+      margin-top: 20px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" }
+    );
+    els.forEach(el => io.observe(el));
+  })();
+</script>

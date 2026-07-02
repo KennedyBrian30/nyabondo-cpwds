@@ -1,0 +1,1013 @@
+---
+// src/pages/programs/cbid.astro
+import Layout from "../../layouts/Layout.astro";
+
+// Breadcrumb data
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Programmes", href: "/programs" },
+  { label: "Community Based Inclusive Development (CBID)", href: "/programs/cbid" },
+];
+
+// Related programmes for interlinking
+const relatedProgrammes = [
+  {
+    title: "Livelihood & Economic Empowerment",
+    href: "/programs/livelihood",
+    description: "Skills training and income generation for persons with disabilities and caregivers – a natural next step after early identification.",
+    icon: "fas fa-seedling",
+  },
+  {
+    title: "Social Inclusion & Protection",
+    href: "/programs/social-inclusion",
+    description: "Support groups, rights advocacy, and linkages to cash transfer programmes that build on community-based inclusive development.",
+    icon: "fas fa-people-group",
+  },
+  {
+    title: "Long‑term Rehabilitation for Children",
+    href: "/programs/longterm-rehab",
+    description: "Structured therapy for children with complex needs – often accessed through CBID referrals and early intervention.",
+    icon: "fas fa-clock-rotate-left",
+  },
+  {
+    title: "SHINE Project",
+    href: "/programs/shine",
+    description: "Twin‑track approach strengthening community and county systems for lasting inclusive change.",
+    icon: "fas fa-seedling",
+  },
+];
+
+// Images – reusing existing assets from the site
+const heroImg = "/images/hero/hero-community-outreach.webp";
+const earlyIdentificationImg = "/images/hero/hero-post-op.webp";
+const referralImg = "/images/services/service-corrective-surgery.webp";
+const registrationImg = "/images/about/about-nyabondo-centre.webp";
+---
+
+<Layout title="Community Based Inclusive Development (CBID) | Nyabondo Centre for Persons with Disabilities">
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {breadcrumbs.map((crumb, i) => (
+          <li>
+            {i < breadcrumbs.length - 1 ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+            {i < breadcrumbs.length - 1 && (
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="programme-hero">
+    <div class="container">
+      <div class="programme-hero-grid">
+        <div class="programme-hero-content">
+          <span class="section-eyebrow">Community Led, Inclusive Development</span>
+          <h1 class="programme-title">
+            Community Based <span class="accent">Inclusive Development</span>
+          </h1>
+          <p class="programme-lead">
+            Bringing services closer to home – early identification, referral
+            pathways, disability registration, and community empowerment for
+            sustainable inclusion.
+          </p>
+          <div class="programme-hero-stats">
+            <div class="stat">
+              <span class="stat-num">300+</span>
+              <span class="stat-label">Outreaches Conducted</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">15,000+</span>
+              <span class="stat-label">Children Screened</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">12</span>
+              <span class="stat-label">Counties Reached</span>
+            </div>
+          </div>
+        </div>
+        <div class="programme-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="Nyabondo staff engaging community members during a CBID outreach in a rural village"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">Community outreach in Homa Bay County</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is CBID -->
+  <section class="cbid-intro" aria-labelledby="cbid-heading">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-text reveal-left">
+          <span class="section-eyebrow">Our Approach</span>
+          <h2 id="cbid-heading" class="section-title">What is CBID?</h2>
+          <p>
+            Community Based Inclusive Development (CBID) is a strategy that
+            empowers local communities to identify, support, and include persons
+            with disabilities. Rather than waiting for families to travel to
+            distant facilities, Nyabondo takes services directly to villages,
+            working hand‑in‑hand with Community Health Promoters (CHPs), local
+            leaders, and disability support groups.
+          </p>
+          <p>
+            Through CBID, we ensure that children and adults with disabilities
+            are identified early, connected to medical and rehabilitation
+            services, registered with the National Council for Persons with
+            Disabilities (NCPWD), and supported to participate fully in
+            community life.
+          </p>
+          <div class="cbid-principles">
+            <span><i class="fas fa-check-circle"></i> Early identification</span>
+            <span><i class="fas fa-check-circle"></i> Community ownership</span>
+            <span><i class="fas fa-check-circle"></i> Referral coordination</span>
+            <span><i class="fas fa-check-circle"></i> Rights‑based approach</span>
+          </div>
+        </div>
+        <div class="intro-image reveal-right">
+          <picture>
+            <source srcset="/images/hero/hero-nyabondo-staff.webp" type="image/webp" />
+            <img
+              src="/images/hero/hero-nyabondo-staff.webp"
+              alt="Nyabondo staff and community health volunteers planning a CBID activity"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Activities -->
+  <section class="activities" aria-labelledby="activities-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Core Components</span>
+        <h2 id="activities-heading" class="section-title">
+          How CBID Works in Practice
+        </h2>
+        <p class="section-subtitle">
+          From the moment a disability is suspected to full community inclusion,
+          our CBID activities create a seamless pathway of care and support.
+        </p>
+      </div>
+
+      <div class="activities-grid">
+        <article class="activity-card reveal-up">
+          <div class="activity-icon"><i class="fas fa-baby-carriage"></i></div>
+          <h3>Early Identification & Intervention</h3>
+          <p>
+            Trained Community Health Promoters and outreach teams screen children
+            for developmental delays, hearing/vision impairments, and physical
+            disabilities. Early action prevents secondary complications and
+            improves outcomes.
+          </p>
+        </article>
+
+        <article class="activity-card reveal-up">
+          <div class="activity-icon"><i class="fas fa-stethoscope"></i></div>
+          <h3>Referral for Specialised Services</h3>
+          <p>
+            Linkages to corrective surgeries, physiotherapy, occupational
+            therapy, and specialist consultations at Nyabondo Centre or other
+            facilities. We track every referral to ensure no child is left
+            behind.
+          </p>
+        </article>
+
+        <article class="activity-card reveal-up">
+          <div class="activity-icon"><i class="fas fa-id-card"></i></div>
+          <h3>Disability Assessment & Registration</h3>
+          <p>
+            In collaboration with County governments and NCPWD, we conduct
+            disability assessments and support registration to access government
+            benefits, including the Cash Transfer Programme for Persons with
+            Severe Disabilities.
+          </p>
+        </article>
+
+        <article class="activity-card reveal-up">
+          <div class="activity-icon"><i class="fas fa-school"></i></div>
+          <h3>Educational Assessment & EARC Referrals</h3>
+          <p>
+            Identification of children with learning disabilities, referrals to
+            Educational Assessment and Resource Centres (EARC) for placement in
+            appropriate schools, and follow‑up on inclusive education rights.
+          </p>
+        </article>
+
+        <article class="activity-card reveal-up">
+          <div class="activity-icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <h3>Community Awareness & Sensitisation</h3>
+          <p>
+            Door‑to‑door campaigns, barazas, and radio shows to break stigma,
+            inform families about disability rights, and promote inclusion in
+            schools, workplaces, and places of worship.
+          </p>
+        </article>
+
+        <article class="activity-card reveal-up">
+          <div class="activity-icon"><i class="fas fa-chalkboard-user"></i></div>
+          <h3>Training of Community Health Promoters</h3>
+          <p>
+            Equipping CHPs with skills in disability screening, basic
+            rehabilitation, referral pathways, and data collection – turning
+            every health volunteer into an agent of inclusion.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Referral Pathway Spotlight -->
+  <section class="pathway" aria-labelledby="pathway-heading">
+    <div class="container">
+      <div class="pathway-header reveal-up">
+        <span class="section-eyebrow">Seamless Coordination</span>
+        <h2 id="pathway-heading" class="section-title">
+          Strong Referral Pathways: From Community to Care
+        </h2>
+        <p class="section-subtitle">
+          One of the biggest gaps CBID addresses is the weak link between
+          community detection and facility‑based care. Nyabondo has established
+          clear, standardised referral protocols.
+        </p>
+      </div>
+
+      <div class="pathway-steps reveal-up">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Community Detection</h3>
+            <p>CHPs identify children/adults with suspected disabilities during home visits or outreaches.</p>
+          </div>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Initial Assessment</h3>
+            <p>CBID officer or facility‑based CHA conducts basic screening and disability assessment.</p>
+          </div>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Referral & Tracking</h3>
+            <p>Case referred to Nyabondo or county hospital using standard referral tool. Follow‑up ensures appointment is kept.</p>
+          </div>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Service Delivery</h3>
+            <p>Surgery, therapy, assistive devices, or registration – delivered and feedback sent back to CHP.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pathway-note">
+        <i class="fas fa-map-location-dot"></i> This system is being strengthened through the <strong>SHINE Project (2026–2029)</strong> and <strong>BEN MAPP II</strong>, with support from CBM and Cheshire Disability Services Kenya.
+        <a href="/programs/shine">Learn more about SHINE →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Story / Impact -->
+  <section class="success-spotlight" aria-labelledby="spotlight-heading">
+    <div class="container">
+      <div class="spotlight-wrapper">
+        <div class="spotlight-image reveal-left">
+          <picture>
+            <source srcset="/images/stories/story-joyline-recovery.webp" type="image/webp" />
+            <img
+              src="/images/stories/story-joyline-recovery.webp"
+              alt="A young girl smiling after corrective surgery – identified early through CBID"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+        <div class="spotlight-text reveal-right">
+          <span class="section-eyebrow">Real Impact</span>
+          <h2>Joyline’s Journey: Early Identification Changed Everything</h2>
+          <blockquote>
+            “A CHP visited our village and noticed Joyline dragging her leg. She
+            explained that surgery could help. We had never taken her to hospital
+            because we didn't know. Now she walks to school and even plays with
+            other children. The stigma is gone.”
+          </blockquote>
+          <cite>— Mother of Joyline, aged 8</cite>
+          <div class="spotlight-stats">
+            <div>
+              <span class="stat-num">6 months</span>
+              <span class="stat-label">from identification to surgery</span>
+            </div>
+            <div>
+              <span class="stat-num">100%</span>
+              <span class="stat-label">school attendance now</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration with Other Programmes -->
+  <section class="integration" aria-labelledby="integration-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Holistic Support</span>
+        <h2 id="integration-heading" class="section-title">CBID Connects to Everything We Do</h2>
+        <p class="section-subtitle">
+          Early identification opens doors to a full continuum of services.
+        </p>
+      </div>
+      <div class="integration-grid">
+        <div class="integration-card">
+          <i class="fas fa-seedling"></i>
+          <h3>Livelihood & Economic Empowerment</h3>
+          <p>Once a child is stable post‑surgery, caregivers are linked to entrepreneurship and VSLA groups.</p>
+          <a href="/programs/livelihood" class="btn-link">Learn more →</a>
+        </div>
+        <div class="integration-card">
+          <i class="fas fa-people-group"></i>
+          <h3>Social Inclusion & Protection</h3>
+          <p>Registration with NCPWD opens access to cash transfers, health insurance, and support groups.</p>
+          <a href="/programs/social-inclusion" class="btn-link">Learn more →</a>
+        </div>
+        <div class="integration-card">
+          <i class="fas fa-clock-rotate-left"></i>
+          <h3>Long‑term Rehabilitation</h3>
+          <p>Children with complex conditions like cerebral palsy are enrolled in structured therapy programmes.</p>
+          <a href="/programs/longterm-rehab" class="btn-link">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Programmes (Interlinking) -->
+  <section class="related-programmes" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">Related Programmes</h2>
+        <p class="section-subtitle">
+          CBID works best alongside these other initiatives.
+        </p>
+      </div>
+      <div class="related-grid">
+        {relatedProgrammes.map((prog, i) => (
+          <a href={prog.href} class="related-card reveal-up" style={`--delay: ${i * 60}ms`}>
+            <div class="related-icon" aria-hidden="true"><i class={prog.icon}></i></div>
+            <h3>{prog.title}</h3>
+            <p>{prog.description}</p>
+            <span class="related-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA to Get Involved -->
+  <section class="cta-involve">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Support Community Based Inclusive Development</h2>
+          <p>
+            Your donation helps us reach more remote villages, train more CHPs,
+            and ensure no child is left behind.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/get-involved/donate" class="btn btn-green">
+            <i class="fas fa-heart"></i> Donate Now
+          </a>
+          <a href="/get-involved/partner" class="btn btn-primary-outline">
+            Partner with Us <i class="fas fa-handshake"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== reuse design tokens from homepage ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero */
+  .programme-hero {
+    padding: 64px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+  }
+  .programme-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .programme-hero-content {
+    padding-right: 20px;
+  }
+  .programme-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .programme-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .programme-lead {
+    font-size: 1.12rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .programme-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .programme-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .programme-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* CBID Intro */
+  .cbid-intro {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .intro-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 24px;
+  }
+  .cbid-principles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .cbid-principles span {
+    background: rgba(0, 150, 199, 0.08);
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cbid-principles i {
+    color: var(--secondary);
+  }
+  .intro-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Activities Grid */
+  .activities {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .activity-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .activity-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+  }
+  .activity-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(0, 150, 199, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 24px;
+  }
+  .activity-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .activity-card p {
+    color: var(--text-light);
+    line-height: 1.65;
+    font-size: 0.9rem;
+  }
+
+  /* Pathway */
+  .pathway {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .pathway-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .step {
+    flex: 1;
+    min-width: 180px;
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .step-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .step-content p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+  .step-arrow {
+    color: var(--primary-light);
+    font-size: 1.5rem;
+  }
+  .pathway-note {
+    background: rgba(0, 150, 199, 0.08);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    margin-top: 24px;
+  }
+  .pathway-note a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 8px;
+  }
+
+  /* Success Spotlight */
+  .success-spotlight {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .spotlight-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .spotlight-text blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text);
+    border-left: 4px solid var(--primary);
+    padding-left: 24px;
+    margin: 20px 0;
+    line-height: 1.6;
+  }
+  .spotlight-text cite {
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-style: normal;
+    display: block;
+    margin-bottom: 24px;
+  }
+  .spotlight-stats {
+    display: flex;
+    gap: 32px;
+  }
+  .spotlight-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Integration Cards */
+  .integration {
+    padding: 80px 0;
+    background: var(--surface);
+  }
+  .integration-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .integration-card {
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+  }
+  .integration-card i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .integration-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  .integration-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+  .btn-link {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Related Programmes */
+  .related-programmes {
+    padding: 80px 0;
+    background: var(--background);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-involve {
+    padding: 60px 0 80px;
+  }
+  .cta-card {
+    background: linear-gradient(115deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255,255,255,0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: white;
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+    transform: translateY(-2px);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .activities-grid, .integration-grid, .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .pathway-steps {
+      flex-direction: column;
+    }
+    .step-arrow {
+      transform: rotate(90deg);
+    }
+  }
+  @media (max-width: 768px) {
+    .programme-hero-grid, .intro-grid, .spotlight-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .activities-grid, .integration-grid, .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .programme-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+    .programme-hero-stats {
+      justify-content: center;
+    }
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal-left.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+    .reveal-right.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up, .reveal-left, .reveal-right");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" }
+    );
+    els.forEach(el => io.observe(el));
+  })();
+</script>

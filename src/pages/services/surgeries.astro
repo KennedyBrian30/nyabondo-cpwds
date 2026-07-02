@@ -1,0 +1,1091 @@
+---
+// src/pages/services/surgeries.astro
+import Layout from "../../layouts/Layout.astro";
+
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Corrective Surgeries", href: "/services/surgeries" },
+];
+
+const relatedServices = [
+  {
+    title: "In‑patient & Out‑patient Services",
+    href: "/services/outpatient-inpatient",
+    description:
+      "Pre‑surgical consultations, post‑operative care, and inpatient recovery in our SHA-accredited facility.",
+    icon: "fas fa-hospital",
+  },
+  {
+    title: "Therapy Services",
+    href: "/services/therapy",
+    description:
+      "Physiotherapy and occupational therapy are essential before and after surgery for optimal outcomes.",
+    icon: "fas fa-hand-holding-heart",
+  },
+  {
+    title: "Assistive Devices",
+    href: "/services/assistive-devices",
+    description:
+      "Post‑surgery orthotics, prosthetics, and mobility aids fabricated in our on‑site workshop.",
+    icon: "fas fa-wheelchair",
+  },
+  {
+    title: "Long‑term Rehabilitation",
+    href: "/programs/longterm-rehab",
+    description:
+      "Extended therapy for children with complex conditions, often following corrective surgery.",
+    icon: "fas fa-clock-rotate-left",
+  },
+];
+
+const heroImg = "/images/services/service-corrective-surgery.webp";
+const surgeryTeamImg = "/images/hero/hero-surgery-child.webp";
+const postopImg = "/images/hero/hero-post-op.webp";
+const conditionsImg = "/images/hero/hero-corrective-surgery.webp";
+---
+
+<Layout
+  title="Corrective Surgeries | Nyabondo Centre for Persons with Disabilities"
+>
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        {
+          breadcrumbs.map((crumb, i) => (
+            <li>
+              {i < breadcrumbs.length - 1 ? (
+                <a href={crumb.href}>{crumb.label}</a>
+              ) : (
+                <span aria-current="page">{crumb.label}</span>
+              )}
+              {i < breadcrumbs.length - 1 && (
+                <i class="fas fa-chevron-right" aria-hidden="true" />
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section (improved) -->
+  <section class="service-hero">
+    <div class="hero-bg-pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="service-hero-grid">
+        <div class="service-hero-content">
+          <span class="section-eyebrow"
+            >Restoring Mobility, Transforming Lives</span
+          >
+          <h1 class="service-title">
+            Corrective <span class="accent">Surgeries</span>
+          </h1>
+          <p class="service-lead">
+            High‑quality orthopaedic and reconstructive procedures for children
+            and adults – restoring function, relieving pain, and enabling
+            independence.
+          </p>
+          <div class="service-hero-stats">
+            <div class="stat">
+              <span class="stat-num">12,000+</span>
+              <span class="stat-label">Surgeries Performed</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">98%</span>
+              <span class="stat-label">Follow‑up Rate</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">SHA</span>
+              <span class="stat-label">Accredited</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a href="/contact" class="btn btn-primary">Request Consultation</a>
+            <a href="#overview" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        <div class="service-hero-image">
+          <picture>
+            <source srcset={heroImg} type="image/webp" />
+            <img
+              src={heroImg}
+              alt="Surgeons performing a corrective orthopaedic procedure at Nyabondo Centre"
+              loading="eager"
+              width="640"
+              height="480"
+            />
+          </picture>
+          <div class="image-credit" aria-hidden="true">
+            Orthopaedic surgery in progress
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview (mobile: image after heading) -->
+  <section id="overview" class="overview" aria-labelledby="overview-heading">
+    <div class="container">
+      <div class="overview-grid reveal-up">
+        <div class="overview-text">
+          <span class="section-eyebrow">Why Choose Nyabondo</span>
+          <h2 id="overview-heading">
+            Expert Surgical Care, Compassionate Healing
+          </h2>
+          <div class="overview-image-mobile">
+            <picture>
+              <source srcset={surgeryTeamImg} type="image/webp" />
+              <img
+                src={surgeryTeamImg}
+                alt="Surgical team at Nyabondo Centre"
+                loading="lazy"
+              />
+            </picture>
+          </div>
+          <p>
+            Nyabondo Centre has performed over 12,000 corrective surgeries since
+            its founding. Our surgical team brings decades of combined
+            experience in orthopaedic and reconstructive procedures, working in
+            a fully equipped operating theatre with modern anaesthesia and
+            monitoring equipment.
+          </p>
+          <p>
+            We follow a comprehensive care pathway: pre‑surgical assessment, the
+            operation itself, post‑operative inpatient care, and then intensive
+            physiotherapy and occupational therapy to ensure full functional
+            recovery. Our SHA accreditation means eligible patients access these
+            services with minimal out‑of‑pocket costs.
+          </p>
+        </div>
+        <div class="overview-image desktop-only">
+          <picture>
+            <source srcset={surgeryTeamImg} type="image/webp" />
+            <img
+              src={surgeryTeamImg}
+              alt="Surgical team at Nyabondo Centre"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conditions We Treat -->
+  <section class="conditions" aria-labelledby="conditions-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Common Conditions</span>
+        <h2 id="conditions-heading" class="section-title">What We Treat</h2>
+        <p class="section-subtitle">
+          Our surgical team specialises in a wide range of orthopaedic and
+          reconstructive conditions.
+        </p>
+      </div>
+
+      <div class="conditions-grid">
+        <div class="condition-card">
+          <i class="fas fa-baby"></i>
+          <h3>Clubfoot (CTEV)</h3>
+          <p>
+            Ponseti method casting followed by tenotomy – a minimally invasive
+            procedure to release the Achilles tendon.
+          </p>
+        </div>
+        <div class="condition-card">
+          <i class="fas fa-smile"></i>
+          <h3>Cleft Lip & Palate</h3>
+          <p>
+            Reconstructive surgery to close the gap, improving feeding, speech,
+            and appearance. Often performed in stages.
+          </p>
+        </div>
+        <div class="condition-card">
+          <i class="fas fa-hand-paper"></i>
+          <h3>Post‑Burn Contractures</h3>
+          <p>
+            Release of scar tissue and skin grafting to restore range of motion
+            in limbs and joints.
+          </p>
+        </div>
+        <div class="condition-card">
+          <i class="fas fa-bone"></i>
+          <h3>Congenital Limb Deformities</h3>
+          <p>
+            Corrective osteotomies, limb lengthening, and realignment procedures
+            for conditions like bowlegs, knock‑knees, and rotational
+            deformities.
+          </p>
+        </div>
+        <div class="condition-card">
+          <i class="fas fa-brain"></i>
+          <h3>Cerebral Palsy Related</h3>
+          <p>
+            Muscle release surgeries (adductor tenotomy, hamstring lengthening,
+            heel cord lengthening) to improve gait and reduce spasticity.
+          </p>
+        </div>
+        <div class="condition-card">
+          <i class="fas fa-ambulance"></i>
+          <h3>Fractures & Trauma</h3>
+          <p>
+            Internal and external fixation of complex fractures, including
+            post‑traumatic reconstructions.
+          </p>
+        </div>
+        <div class="condition-card">
+          <i class="fas fa-child"></i>
+          <h3>Hip Dysplasia</h3>
+          <p>
+            Developmental dysplasia of the hip (DDH) – closed or open reduction,
+            pelvic and femoral osteotomies.
+          </p>
+        </div>
+        <div class="condition-card">
+          <i class="fas fa-hand-peace"></i>
+          <h3>Hand & Upper Limb Deformities</h3>
+          <p>Polydactyly, syndactyly, and other congenital hand anomalies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Surgical Pathway -->
+  <section class="pathway" aria-labelledby="pathway-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Patient Journey</span>
+        <h2 id="pathway-heading" class="section-title">
+          From Consultation to Recovery
+        </h2>
+      </div>
+      <div class="pathway-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Referral & Assessment</h3>
+          <p>
+            Referred by CBID outreach, county hospital, or directly by family.
+            Surgical consultation and pre‑op investigations.
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Scheduling & Preparation</h3>
+          <p>
+            Date set. Pre‑surgical physiotherapy may begin to optimise outcomes.
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>The Operation</h3>
+          <p>
+            Performed in our fully equipped theatre under general or regional
+            anaesthesia. Length varies by procedure.
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Inpatient Recovery</h3>
+          <p>
+            Post‑operative care, pain management, wound care. Average stay: 5–14
+            days depending on surgery.
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h3>Therapy & Rehabilitation</h3>
+          <p>
+            Daily physiotherapy and occupational therapy to restore strength,
+            range of motion, and function.
+          </p>
+        </div>
+        <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <h3>Follow‑up Clinics</h3>
+          <p>
+            Regular reviews to monitor healing, adjust orthotics, and track
+            long‑term outcomes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Post‑Op & Therapy Integration (mobile: image after heading) -->
+  <section class="postop-therapy" aria-labelledby="postop-heading">
+    <div class="container">
+      <div class="postop-grid reveal-up">
+        <div class="postop-text">
+          <span class="section-eyebrow">Comprehensive Recovery</span>
+          <h2 id="postop-heading">Surgery is Just the Beginning</h2>
+          <div class="postop-image-mobile">
+            <picture>
+              <source srcset={postopImg} type="image/webp" />
+              <img
+                src={postopImg}
+                alt="A child receiving post‑surgical care and therapy at Nyabondo"
+                loading="lazy"
+              />
+            </picture>
+          </div>
+          <p>
+            We believe that the success of any corrective surgery depends as
+            much on what happens afterwards as the procedure itself. Our
+            rehabilitation team works with every surgical patient to:
+          </p>
+          <ul>
+            <li>
+              <i class="fas fa-check-circle"></i> Restore strength and range of motion
+              through tailored physiotherapy
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Develop daily living skills through
+              occupational therapy
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Fit custom orthotics or prosthetics
+              from our on‑site workshop
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Provide family training for continued
+              home‑based care
+            </li>
+          </ul>
+          <div class="postop-note">
+            <i class="fas fa-clock"></i> Most patients require 6–12 weeks of structured
+            therapy after major orthopaedic surgery.
+          </div>
+        </div>
+        <div class="postop-image desktop-only">
+          <picture>
+            <source srcset={postopImg} type="image/webp" />
+            <img
+              src={postopImg}
+              alt="A child receiving post‑surgical care and therapy at Nyabondo"
+              loading="lazy"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Story (no image, fine as is) -->
+  <section class="success-story" aria-labelledby="story-heading">
+    <div class="container">
+      <div class="story-card reveal-up">
+        <div class="story-quote">
+          <i class="fas fa-quote-left"></i>
+          <blockquote>
+            My daughter was born with clubfoot. She could not walk or wear
+            shoes. After the surgery and three months of physiotherapy at
+            Nyabondo, she runs and plays like any other child. We are forever
+            grateful.
+          </blockquote>
+          <cite>— Jane, mother of 5‑year‑old Maureen</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Services -->
+  <section class="related-services" aria-labelledby="related-heading">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-eyebrow">Explore More</span>
+        <h2 id="related-heading" class="section-title">
+          Services That Support Your Surgery Journey
+        </h2>
+        <p class="section-subtitle">
+          From pre‑surgical care to long‑term rehabilitation – we have you
+          covered.
+        </p>
+      </div>
+      <div class="related-grid">
+        {
+          relatedServices.map((service, i) => (
+            <a
+              href={service.href}
+              class="related-card reveal-up"
+              style={`--delay: ${i * 60}ms`}
+            >
+              <div class="related-icon">
+                <i class={service.icon} />
+              </div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <span class="related-arrow">
+                <i class="fas fa-arrow-right" />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-surgery">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Need a Surgical Consultation?</h2>
+          <p>
+            Contact us to schedule an assessment. Our team will guide you
+            through the process, from initial consultation to post‑operative
+            care.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn btn-green">
+            <i class="fas fa-phone"></i> Request Consultation
+          </a>
+          <a href="/get-involved/donate" class="btn btn-primary-outline">
+            Support Life‑Changing Surgeries <i class="fas fa-heart"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --primary: #0096c7;
+    --primary-dark: #006d94;
+    --primary-light: #48b8d8;
+    --secondary: #2e8b57;
+    --secondary-dark: #1f6b40;
+    --text: #0d2b38;
+    --text-light: #2e5a6b;
+    --text-muted: #5a8a99;
+    --background: #f4fcff;
+    --surface: #ffffff;
+    --border: #c7e9f4;
+    --border-light: #ddf1f9;
+    --shadow-sm: 0 2px 8px rgba(0, 150, 199, 0.08);
+    --shadow-md: 0 6px 24px rgba(0, 150, 199, 0.1);
+    --shadow-lg: 0 16px 48px rgba(0, 150, 199, 0.12);
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Breadcrumbs */
+  .breadcrumbs {
+    background: var(--background);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs i {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .breadcrumbs span[aria-current="page"] {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  /* Section utilities */
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .section-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.9rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+
+  /* Hero (improved) */
+  .service-hero {
+    position: relative;
+    padding: 60px 0 48px;
+    background: linear-gradient(120deg, #f0fcff 0%, #ffffff 100%);
+    overflow: hidden;
+  }
+  .hero-bg-pattern {
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 150, 199, 0.04) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    transform: rotate(15deg);
+  }
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .service-hero-content {
+    padding-right: 20px;
+  }
+  .service-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    margin: 16px 0 20px;
+  }
+  .service-title .accent {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary-light);
+    display: inline-block;
+  }
+  .service-lead {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .service-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .stat {
+    text-align: left;
+  }
+  .stat-num {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.22s var(--ease-out-expo);
+    border: 2px solid transparent;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--primary-dark);
+  }
+  .btn-outline {
+    background: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .btn-outline:hover {
+    background: var(--primary);
+    color: white;
+  }
+  .btn-green {
+    background: var(--secondary);
+    color: #fff;
+    border-color: var(--secondary);
+  }
+  .btn-green:hover {
+    background: var(--secondary-dark);
+  }
+  .btn-primary-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .btn-primary-outline:hover {
+    background: white;
+    color: var(--primary);
+  }
+  .service-hero-image {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .service-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .image-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #eee;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* Overview */
+  .overview {
+    padding: 60px 0;
+    background: var(--surface);
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .overview-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+  .overview-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .overview-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Conditions Grid */
+  .conditions {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .condition-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+  }
+  .condition-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .condition-card i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .condition-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .condition-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Pathway */
+  .pathway {
+    padding: 60px 0;
+    background: var(--surface);
+  }
+  .pathway-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+  .step {
+    flex: 1;
+    min-width: 160px;
+    background: var(--background);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    text-align: center;
+  }
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin: 0 auto 12px;
+  }
+  .step h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .step p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+  .step-arrow {
+    color: var(--primary-light);
+    font-size: 1.2rem;
+  }
+
+  /* Post-Op Therapy */
+  .postop-therapy {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .postop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .postop-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  .postop-text li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .postop-text li i {
+    color: var(--secondary);
+  }
+  .postop-note {
+    background: rgba(0, 150, 199, 0.08);
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    margin-top: 20px;
+  }
+  .postop-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .postop-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Success Story */
+  .success-story {
+    padding: 60px 0;
+    background: var(--surface);
+  }
+  .story-card {
+    background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    text-align: center;
+    color: white;
+  }
+  .story-quote i {
+    font-size: 2.5rem;
+    opacity: 0.5;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+  .story-quote blockquote {
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 20px;
+  }
+  .story-quote cite {
+    font-weight: 600;
+    font-style: normal;
+    opacity: 0.9;
+  }
+
+  /* Related Services */
+  .related-services {
+    padding: 60px 0;
+    background: var(--background);
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .related-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 24px 20px;
+    text-decoration: none;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s;
+    display: block;
+    position: relative;
+  }
+  .related-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+  .related-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+  .related-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .related-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+  .related-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: var(--primary-light);
+    transition: transform 0.2s;
+  }
+  .related-card:hover .related-arrow {
+    transform: translateX(4px);
+    color: var(--primary);
+  }
+
+  /* CTA */
+  .cta-surgery {
+    padding: 60px 0;
+  }
+  .cta-card {
+    background: linear-gradient(
+      115deg,
+      var(--primary-dark) 0%,
+      var(--primary) 100%
+    );
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cta-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .cta-card p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 500px;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.7s var(--ease-out-expo),
+        transform 0.7s var(--ease-out-expo);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Mobile image positioning */
+  .overview-image-mobile,
+  .postop-image-mobile {
+    display: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .conditions-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .pathway-steps {
+      flex-direction: column;
+    }
+    .step-arrow {
+      transform: rotate(90deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .service-hero-grid,
+    .overview-grid,
+    .postop-grid {
+      grid-template-columns: 1fr;
+    }
+    .conditions-grid,
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .service-hero-content {
+      text-align: center;
+      padding-right: 0;
+    }
+    .service-hero-stats {
+      justify-content: center;
+    }
+    .hero-actions {
+      justify-content: center;
+    }
+    .story-card {
+      padding: 32px 24px;
+    }
+
+    /* Show mobile images after headings, hide desktop ones */
+    .desktop-only {
+      display: none;
+    }
+    .overview-image-mobile,
+    .postop-image-mobile {
+      display: block;
+      margin: 20px 0;
+    }
+    .overview-image-mobile img,
+    .postop-image-mobile img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+    /* Ensure text flows after image */
+    .overview-text p:first-of-type,
+    .postop-text p {
+      margin-top: 20px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduced) return;
+    const els = document.querySelectorAll(".reveal-up");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -20px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+  })();
+</script>

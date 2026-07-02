@@ -1,0 +1,817 @@
+---
+// src/pages/about.astro
+import Layout from "../layouts/Layout.astro";
+
+// Core values (same as before)
+const coreValues = [
+  { icon: "fas fa-shield-heart", title: "Integrity", description: "Upholding the highest ethical standards, demonstrating honesty, fairness, and transparency in our operations." },
+  { icon: "fas fa-chart-line", title: "Professionalism", description: "We are passionate in our work without compromising standards, values, and doctrines of the Church." },
+  { icon: "fas fa-hands-praying", title: "Spirituality", description: "We consecrate the work we do to persons with disabilities to God the Almighty, for whose providence we serve the less fortunate." },
+  { icon: "fas fa-star", title: "Quality", description: "Adoption and adherence to systems and processes that guarantee rehabilitative services that meet and exceed client expectations." },
+  { icon: "fas fa-lightbulb", title: "Innovation & Creativity", description: "A learning organization that encourages creativity and innovative performance while embracing change." },
+  { icon: "fas fa-people-group", title: "Inclusivity", description: "We include and cater for people with disabilities in everyday activities; social inclusion is a key component of our operations." },
+  { icon: "fas fa-hand-holding-heart", title: "Responsiveness", description: "A sense of social responsibility to persons with disabilities by responding to their interests and needs." },
+  { icon: "fas fa-chart-simple", title: "Accountability", description: "We are accountable and transparent to our beneficiaries, members, partners, and the public." },
+  { icon: "fas fa-lock", title: "Confidentiality", description: "We treat any information about persons with disabilities and their families with utmost confidentiality." },
+  { icon: "fas fa-hand-peace", title: "Respect", description: "We respect the human person and their unique value, being the image and likeness of God." }
+];
+
+// Objectives
+const objectives = [
+  "Conduct early identifications and early interventions, sensitization to the community on disability inclusion and access to rehabilitation services.",
+  "Create awareness on causes, prevention and management of various disabilities to reduce disability prevalence and overcome prejudices and traditional beliefs.",
+  "Promote quality rehabilitation services through medical/social rehabilitation and economic empowerment.",
+  "Develop and provide low-cost, quality, and appropriate assistive devices through appropriate technology to meet the needs of Persons with Disabilities in rural communities.",
+  "Partner with County Governments, National Governments, development partners, and community structures to effectively coordinate activities targeting Persons with Disabilities.",
+  "Promote and support the formation of Organizations of Persons with Disabilities (OPDs) to increase self-confidence and achieve full participation and equal rights."
+];
+
+// Achievements
+const achievements = [
+  "Community sensitization and awareness has significantly reduced stigma and discrimination of persons with disabilities.",
+  "Early identification and intervention has reduced disability prevalence through corrective surgeries and therapy services.",
+  "Reduced mobility limitation by provision of assistive devices and mobility aids to support movement.",
+  "Increased social inclusion and participation of persons with disabilities through collaboration with OPDs.",
+  "Collaboration with partners and stakeholders has made services available, accessible, and affordable to vulnerable persons with disabilities.",
+  "Improved livelihoods for youths with disabilities through vocational training programmes."
+];
+
+// Challenges
+const challenges = [
+  { title: "Inadequate Financial Support", description: "Limited funding to help the institution grow in terms of infrastructure, human resources, and other key operational areas.", icon: "fas fa-coins" },
+  { title: "Overwhelming Service Delivery", description: "High demand from vulnerable persons with disabilities who are unable to fully cater for the cost of services provided.", icon: "fas fa-people-arrows" },
+  { title: "Donor Fatigue", description: "Many donors have either withdrawn or reduced support, making it difficult to sustain most programmes at the Centre.", icon: "fas fa-handshake-slash" }
+];
+
+// Partners (simplified)
+const partners = [
+  { name: "Christian Blind Mission", logo: "/images/partners/cbm-global.webp" },
+  { name: "Cheshire Disability Services Kenya", logo: "/images/partners/cheshire-disability-services-kenya.webp" },
+  { name: "Ministry of Health", logo: "/images/partners/ministry-of-health-kenya.webp" },
+  { name: "National Fund for the Disabled Kenya", logo: "/images/partners/national-fund-disabled-kenya.webp" },
+  { name: "National Council for Persons with Disabilities", logo: "/images/partners/national-council-persons-disabilities.webp" },
+  { name: "Kenya Conference of Catholic Bishops", logo: "/images/partners/kenya-conference-catholic-bishops.webp" },
+  { name: "Archdiocese of Kisumu", logo: "/images/partners/archdiocese-of-kisumu.webp" },
+  { name: "Association of Sisterhoods of Kenya", logo: "/images/partners/association-of-sisterhoods-kenya.webp" }
+];
+
+// CBR Domains
+const cbrDomains = [
+  { title: "Health & Rehabilitation", desc: "Establishing county disability coordination forums, training health workers, supporting access to assistive devices, corrective surgeries, and therapy services." },
+  { title: "Inclusive Education", desc: "Strengthening disability-inclusive clubs, conducting Disability Inclusion and Equity Training (DIET), and facilitating accessibility audits in schools and institutions." },
+  { title: "Livelihood & Economic Empowerment", desc: "Vocational skills training, entrepreneurship development, VSLA formation, and market access for caregivers and persons with disabilities." },
+  { title: "Social Inclusion", desc: "Community awareness and sensitization, formation of disability support groups, promotion of participation in community activities, and disability rights advocacy." },
+  { title: "Empowerment", desc: "Capacity building for OPDs, financial literacy training, and support for registration with the National Council for Persons with Disabilities." }
+];
+---
+
+<Layout title="About Us – Nyabondo Centre for Persons with Disabilities">
+  <!-- HERO SECTION -->
+  <section class="about-hero" aria-label="About Nyabondo Centre">
+    <div class="about-hero-overlay"></div>
+    <div class="container about-hero-inner">
+      <div class="about-hero-content">
+        <span class="about-hero-badge">Our Story</span>
+        <h1 class="about-hero-title">Six Decades of Healing,<br />Hope and Human Dignity</h1>
+        <p class="about-hero-subtitle">
+          From a humble home for 35 children to a nationally recognised referral centre, Nyabondo has remained steadfast in its mission to restore independence and transform lives.
+        </p>
+        <div class="about-hero-stats">
+          <div class="about-hero-stat">
+            <span class="about-hero-stat-num">1963</span>
+            <span class="about-hero-stat-label">Year Founded</span>
+          </div>
+          <div class="about-hero-stat">
+            <span class="about-hero-stat-num">60+</span>
+            <span class="about-hero-stat-label">Years of Service</span>
+          </div>
+          <div class="about-hero-stat">
+            <span class="about-hero-stat-num">50K+</span>
+            <span class="about-hero-stat-label">Lives Touched</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR LEGACY (History) -->
+  <section class="history" aria-labelledby="history-heading">
+    <div class="container">
+      <div class="history-grid">
+        <div class="history-content reveal-right">
+          <div class="section-header-left">
+            <span class="section-eyebrow">Our Legacy</span>
+            <h2 id="history-heading" class="section-title-large">The Story of Nyabondo Centre</h2>
+            <div class="title-underline"></div>
+          </div>
+          <p class="history-lead">
+            Nyabondo Centre for Persons with Disabilities was founded in <strong>1963</strong> by <strong>Rev. Father John Kutner</strong>, a Mill Hill Priest from the Netherlands who, during his pastoral work, encountered children with disabilities crawling and living without hope. Moved by compassion, he began a mission that would transform countless lives.
+          </p>
+          
+           <div class="history-quote">
+            <i class="fas fa-quote-left" aria-hidden="true"></i>
+            <blockquote>We consecrate the work we do to persons with disabilities to God the Almighty, for whose providence we serve the less fortunate.</blockquote>
+            <cite>— Franciscan Sisters of Saint Anna, Nyabondo Centre</cite>
+          </div>
+        </div>
+        <div class="history-image reveal-left">
+          <div class="history-image-wrap">
+            <picture>
+              <source srcset="/images/programs/programs-overview-1.webp" type="image/webp" />
+              <img src="/images/programs/programs-overview-1.webp" alt="Early days of Nyabondo Centre — historical view" loading="lazy" decoding="async" />
+            </picture>
+            <div class="history-image-badge">
+              <i class="fas fa-church" aria-hidden="true"></i>
+              <span>Founded by Mill Hill Missionaries</span>
+            </div>
+            
+          </div>
+          <div class="section-cta">
+        <a href="/about/our-story" class="btn btn-primary-outline">Full Story <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION, VISION, MOTTO -->
+  <section class="mission-vision" aria-labelledby="mv-heading">
+    <div class="container">
+      <div class="mv-grid">
+        <div class="mv-card mv-card-mission reveal-up" style="--delay:0ms">
+          <div class="mv-icon"><i class="fas fa-bullseye" aria-hidden="true"></i></div>
+          <h3>Our Mission</h3>
+          <p>Provision of Quality Rehabilitation and Medical Services through Corrective Surgery, Therapy and Assistive Devices to Persons with Disabilities in a Safe and Secure Environment.</p>
+        </div>
+        <div class="mv-card mv-card-vision reveal-up" style="--delay:100ms">
+          <div class="mv-icon"><i class="fas fa-eye" aria-hidden="true"></i></div>
+          <h3>Our Vision</h3>
+          <p>To be a referral Centre of excellence in provision of integral, comprehensive rehabilitation services that are affordable to persons with disabilities in Kenya.</p>
+        </div>
+        <div class="mv-card mv-card-motto reveal-up" style="--delay:200ms">
+          <div class="mv-icon"><i class="fas fa-feather" aria-hidden="true"></i></div>
+          <h3>Our Motto</h3>
+          <p class="motto-text">"Rising above Disability"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP & GOVERNANCE -->
+  <section class="leadership" aria-labelledby="leadership-heading">
+    <div class="container">
+      <div class="leadership-layout">
+        <div class="leadership-content reveal-right">
+          <div class="section-header-left">
+            <span class="section-eyebrow">Governance</span>
+            <h2 id="leadership-heading" class="section-title-large">Administration & Board</h2>
+            <div class="title-underline"></div>
+          </div>
+          <p>
+            Nyabondo Centre is administered under the congregation of the <strong>Franciscan Sisters of Saint Anna (FSSA)</strong>, who have faithfully carried forward the vision since 1989.
+          </p>
+          <div class="leadership-card">
+            <div class="leadership-icon"><i class="fas fa-user-nun" aria-hidden="true"></i></div>
+            <div>
+              <h3>Rev. Sr. Ludovena Anyango Onyino</h3>
+              <p class="leadership-title">Centre Administrator</p>
+              <p>Sr. Ludovena leads the daily operations and strategic direction of Nyabondo, ensuring that compassionate, quality rehabilitative services reach those who need them most.</p>
+            </div>
+          </div>
+          <div class="leadership-card">
+            <div class="leadership-icon"><i class="fas fa-users" aria-hidden="true"></i></div>
+            <div>
+              <h3>Board of Management</h3>
+              <p>The Centre is governed by a 9-member Board appointed by the Archdiocese of Kisumu (ADOK), providing oversight and strategic guidance.</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="leadership-image reveal-left">
+          <picture>
+            <source srcset="/images/about/administration.webp" type="image/webp" />
+            <img src="/images/about/administration.webp" alt="Nyabondo Centre administration and staff" loading="lazy" />
+          </picture>
+        </div>
+        <div class="section-cta">
+        <a href="/about/administration" class="btn btn-primary-outline">Meet Our Team <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- STRATEGIC FOCUS (Objectives) -->
+  <section class="objectives" aria-labelledby="objectives-heading">
+    <div class="container">
+      <div class="objectives-layout">
+        <div class="objectives-image reveal-left">
+          <picture>
+            <source srcset="/images/about/objectives-nyabondo.webp" type="image/webp" />
+            <img src="/images/about/objectives-nyabondo.webp" alt="Nyabondo team at work during a community outreach" loading="lazy" />
+          </picture>
+        </div>
+        <div class="objectives-content reveal-right">
+          <div class="section-header-left">
+            <span class="section-eyebrow">Strategic Focus</span>
+            <h2 id="objectives-heading" class="section-title-large">Our Objectives</h2>
+            <div class="title-underline"></div>
+          </div>
+          <ul class="objectives-list">
+            {
+              objectives.map((obj, i) => (
+                <li key={i}>
+                  <i class="fas fa-check-circle" aria-hidden="true"></i>
+                  <span>{obj}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY BASED INCLUSIVE DEVELOPMENT -->
+  <section class="cbr-approach" aria-labelledby="cbr-heading">
+    <div class="container">
+      <div class="section-header-centered reveal-up">
+        <span class="section-eyebrow">Our Holistic Approach</span>
+        <h2 id="cbr-heading" class="section-title">Community Based Inclusive Development</h2>
+        <div class="title-underline-centered"></div>
+        <p class="section-subtitle">Nyabondo implements a multi-sectoral approach across five core domains of Community Based Rehabilitation (CBR).</p>
+      </div>
+      <div class="cbr-grid">
+        {
+          cbrDomains.map((domain, i) => (
+            <div class="cbr-card reveal-up" style={`--delay: ${i * 80}ms`}>
+              <div class="cbr-card-icon"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>
+              <h3>{domain.title}</h3>
+              <p>{domain.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="cbr-note">
+        <i class="fas fa-handshake" aria-hidden="true"></i>
+        <p><strong>Flagship Programmes:</strong> Through the support of Christian Blind Mission (CBM), Nyabondo is implementing the <strong>SHINE Project (2026–2029)</strong> across Kisumu and Homa Bay Counties, focusing on both individual empowerment and societal change. Additionally, with Cheshire Disability Services Kenya, the <strong>BEN MAPP II project</strong> works across the five CBR domains.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY ACHIEVEMENTS -->
+  <section class="achievements" aria-labelledby="achievements-heading">
+    <div class="achievements-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header-centered section-header--light reveal-up">
+        <span class="section-eyebrow section-eyebrow--light">Impact Over Six Decades</span>
+        <h2 id="achievements-heading" class="section-title section-title--light">Key Achievements</h2>
+        <div class="title-underline-centered title-underline-light"></div>
+        <p class="section-subtitle section-subtitle--light">For over 60 years, Nyabondo has transformed communities and restored dignity to thousands.</p>
+      </div>
+      <div class="achievements-grid">
+        {
+          achievements.map((achievement, i) => (
+            <div class="achievement-card reveal-up" style={`--delay: ${i * 70}ms`}>
+              <i class="fas fa-trophy" aria-hidden="true"></i>
+              <p>{achievement}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGES & WAY FORWARD -->
+  <section class="challenges" aria-labelledby="challenges-heading">
+    <div class="container">
+      <div class="section-header-centered reveal-up">
+        <span class="section-eyebrow">Honest Reflection</span>
+        <h2 id="challenges-heading" class="section-title">Challenges We Face</h2>
+        <div class="title-underline-centered"></div>
+        <p class="section-subtitle">Even as we continue to serve, we acknowledge the obstacles that make our mission more urgent and our need for partnership greater.</p>
+      </div>
+      <div class="challenges-grid">
+        {
+          challenges.map((challenge, i) => (
+            <div class="challenge-card reveal-up" style={`--delay: ${i * 100}ms`}>
+              <div class="challenge-icon"><i class={challenge.icon} aria-hidden="true"></i></div>
+              <h3>{challenge.title}</h3>
+              <p>{challenge.description}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="challenges-cta">
+        <a href="/get-involved/donate" class="btn btn-green">Support Our Work <i class="fas fa-arrow-right"></i></a>
+        <a href="/get-involved/partner" class="btn btn-primary-outline">Become a Partner <i class="fas fa-handshake"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="about-partners" aria-labelledby="about-partners-heading">
+    <div class="container">
+      <div class="section-header-centered reveal-up">
+        <span class="section-eyebrow">Our Network</span>
+        <h2 id="about-partners-heading" class="section-title">Trusted Partners</h2>
+        <div class="title-underline-centered"></div>
+        <p class="section-subtitle">We are deeply grateful for the organisations that walk alongside us.</p>
+      </div>
+      <div class="about-partners-grid">
+        {
+          partners.map((partner, i) => (
+            <div class="about-partner-card reveal-up" style={`--delay: ${i * 40}ms`}>
+              <div class="about-partner-logo">
+                <picture>
+                  <source srcset={partner.logo} type="image/webp" />
+                  <img src={partner.logo} alt={`${partner.name} logo`} loading="lazy" />
+                </picture>
+              </div>
+              <span>{partner.name}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="section-cta">
+        <a href="/partners" class="btn btn-primary-outline">View All Partners <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="about-cta" aria-labelledby="about-cta-heading">
+    <div class="container">
+      <div class="about-cta-inner">
+        <h2 id="about-cta-heading">Join Us in Transforming Lives</h2>
+        <p>Your support — whether through donation, partnership, or volunteering — enables Nyabondo to reach more persons with disabilities and continue our legacy of hope.</p>
+        <div class="about-cta-buttons">
+          <a href="/get-involved/donate" class="btn btn-green"><i class="fas fa-hand-holding-dollar"></i> Donate Now</a>
+          <a href="/contact" class="btn btn-white-outline">Contact Us <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style is:global>
+    /* ===== GLOBAL STYLES FOR ABOUT PAGE ===== */
+    .section-header-left {
+      margin-bottom: 32px;
+    }
+    .section-header-centered {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.18;
+      margin-bottom: 12px;
+    }
+    .section-title-large {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .title-underline {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+    .title-underline-centered {
+      width: 70px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      margin: 12px auto 20px;
+      border-radius: 2px;
+    }
+    .title-underline-light {
+      background: linear-gradient(90deg, #fff, var(--primary-light));
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-eyebrow--light {
+      color: var(--primary-light);
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+    .section-subtitle--light {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    /* Hero */
+    .about-hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+      overflow: hidden;
+    }
+    .about-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" opacity="0.08"><path fill="none" stroke="white" stroke-width="1.5" d="M0,150 L300,30 L600,110 L900,50 L1200,130"/><circle cx="200" cy="80" r="60" fill="none" stroke="white" stroke-width="1"/><circle cx="900" cy="140" r="80" fill="none" stroke="white" stroke-width="1"/></svg>') repeat;
+      pointer-events: none;
+    }
+    .about-hero-inner { position: relative; z-index: 1; }
+    .about-hero-content { max-width: 720px; }
+    .about-hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 20px;
+    }
+    .about-hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .about-hero-subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 32px;
+      max-width: 560px;
+    }
+    .about-hero-stats {
+      display: flex;
+      gap: 32px;
+    }
+    .about-hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .about-hero-stat-num {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .about-hero-stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* History */
+    .history {
+      padding: 100px 0;
+      background: var(--surface);
+    }
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .history-content p {
+      margin-bottom: 20px;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+    .history-lead {
+      font-size: 1.08rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .history-quote {
+      margin-top: 28px;
+      padding: 20px 24px;
+      background: var(--background);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-md);
+    }
+    .history-quote i { font-size: 1.4rem; color: var(--primary); opacity: 0.5; margin-bottom: 8px; }
+    .history-quote blockquote { font-style: italic; font-size: 1rem; color: var(--text); margin: 8px 0; }
+    .history-quote cite { font-size: 0.8rem; color: var(--text-muted); }
+    .history-image-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .history-image-wrap img { width: 100%; height: auto; display: block; }
+    .history-image-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(12px);
+      padding: 8px 16px;
+      border-radius: 100px;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Mission Vision Cards */
+    .mission-vision {
+      padding: 60px 0 100px;
+      background: var(--background);
+    }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .mv-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 38px 28px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s var(--ease-out-expo);
+      border: 1px solid var(--border-light);
+    }
+    .mv-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .mv-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--primary-light);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 1.8rem;
+    }
+    .mv-card-mission .mv-icon { background: var(--primary); }
+    .mv-card-vision .mv-icon { background: var(--secondary); }
+    .mv-card-motto .mv-icon { background: var(--primary-dark); }
+    .mv-card h3 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: 16px; }
+    .mv-card p { color: var(--text-light); line-height: 1.65; }
+    .motto-text { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+
+    /* Core Values */
+    .core-values {
+      padding: 100px 0;
+      background: var(--surface);
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 40px;
+    }
+    .value-card {
+      background: var(--background);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: all 0.25s;
+      border: 1px solid transparent;
+    }
+    .value-card:hover { border-color: var(--primary-light); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .value-icon { font-size: 2rem; color: var(--primary); margin-bottom: 18px; }
+    .value-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+    .value-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.65; }
+
+    /* Objectives */
+    .objectives {
+      padding: 0 0 100px;
+      background: var(--background);
+    }
+    .objectives-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .objectives-image img { width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+    .objectives-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+    .objectives-list li {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+    .objectives-list li i { color: var(--secondary); font-size: 1.2rem; margin-top: 3px; flex-shrink: 0; }
+    .objectives-list li span { color: var(--text-light); line-height: 1.7; }
+
+    /* CBR */
+    .cbr-approach {
+      padding: 80px 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border-light);
+    }
+    .cbr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      margin: 48px 0 32px;
+    }
+    .cbr-card {
+      background: var(--background);
+      padding: 28px;
+      border-radius: var(--radius-md);
+      transition: 0.2s;
+      border-left: 3px solid var(--primary);
+    }
+    .cbr-card-icon { color: var(--primary); margin-bottom: 14px; font-size: 1.2rem; }
+    .cbr-card h3 { font-size: 1.1rem; margin-bottom: 12px; }
+    .cbr-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; }
+    .cbr-note {
+      background: #eef9fc;
+      padding: 20px 28px;
+      border-radius: var(--radius-md);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      font-size: 0.9rem;
+    }
+    .cbr-note i { font-size: 1.6rem; color: var(--primary); }
+
+    /* Achievements */
+    .achievements {
+      position: relative;
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+    }
+    .achievements-bg {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 40%, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .achievement-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.2s;
+    }
+    .achievement-card:hover { transform: translateY(-3px); background: rgba(255,255,255,0.15); }
+    .achievement-card i { font-size: 1.8rem; color: var(--primary-light); flex-shrink: 0; }
+    .achievement-card p { margin: 0; line-height: 1.6; }
+
+    /* Challenges */
+    .challenges {
+      padding: 100px 0;
+      background: var(--surface);
+    }
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .challenge-card {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--background);
+      border-radius: var(--radius-lg);
+      transition: 0.2s;
+    }
+    .challenge-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .challenge-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+    .challenge-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+    .challenge-card p { color: var(--text-light); line-height: 1.7; }
+    .challenges-cta {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 48px;
+    }
+
+    /* Leadership */
+    .leadership {
+      padding: 100px 0;
+      background: var(--background);
+    }
+    .leadership-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .leadership-card {
+      display: flex;
+      gap: 20px;
+      background: white;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .leadership-icon { font-size: 2rem; color: var(--primary); flex-shrink: 0; }
+    .leadership-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .leadership-title { font-weight: 600; color: var(--secondary); font-size: 0.8rem; margin-bottom: 8px; }
+    .leadership-footnote {
+      font-size: 0.85rem;
+      margin-top: 20px;
+      background: #e2f3f7;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+    }
+    .leadership-image img { width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+
+    /* Partners */
+    .about-partners {
+      padding: 80px 0;
+      background: var(--surface);
+    }
+    .about-partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 24px;
+      margin: 48px 0;
+    }
+    .about-partner-card {
+      background: var(--background);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      transition: 0.2s;
+      border: 1px solid var(--border-light);
+    }
+    .about-partner-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .about-partner-logo { height: 70px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .about-partner-logo img { max-height: 50px; width: auto; filter: grayscale(0.2); opacity: 0.8; transition: 0.2s; }
+    .about-partner-card:hover img { filter: none; opacity: 1; }
+    .about-partner-card span { font-size: 0.75rem; font-weight: 600; color: var(--text-light); }
+
+    /* Final CTA */
+    .about-cta {
+      padding: 80px 0;
+      background: linear-gradient(110deg, var(--primary-dark), var(--primary));
+      color: white;
+    }
+    .about-cta-inner {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .about-cta-inner h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+    .about-cta-inner p { margin-bottom: 32px; opacity: 0.85; }
+    .about-cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .history-grid, .objectives-layout, .leadership-layout { grid-template-columns: 1fr; gap: 40px; }
+      .mv-grid { grid-template-columns: 1fr; }
+      .challenges-grid { grid-template-columns: 1fr; }
+      .about-hero-stats { gap: 20px; flex-wrap: wrap; }
+    }
+    @media (max-width: 640px) {
+      .objectives-list li { flex-direction: column; gap: 6px; }
+      .achievements-grid { grid-template-columns: 1fr; }
+      .about-partners-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</Layout>
