@@ -7,12 +7,14 @@
 </head>
 <body>
   <script>
-    // Define the config directly in JavaScript
+    // This is the crucial part: define the config with the correct backend
     window.CMS_CONFIG = {
       backend: {
         name: 'github',
         repo: 'KennedyBrian30/nyabondo-cpwds',
-        branch: 'main'
+        branch: 'main',
+        // This tells Decap CMS to use your custom OAuth server endpoint
+        auth_endpoint: 'https://www.nyabondo-cpwds.org/api/auth'
       },
       publish_mode: 'simple',
       site_url: 'https://nyabondo-cpwds.org',
@@ -28,8 +30,13 @@
           fields: [
             { label: 'Title', name: 'title', widget: 'string' },
             { label: 'Description', name: 'description', widget: 'text' },
-            { label: 'Date', name: 'pubDate', widget: 'datetime' },
-            { label: 'Featured Image', name: 'image', widget: 'image' },
+            { label: 'Excerpt', name: 'excerpt', widget: 'text', required: false },
+            { label: 'Publication Date', name: 'pubDate', widget: 'datetime' },
+            { label: 'Author', name: 'author', widget: 'string', required: false },
+            { label: 'Category', name: 'category', widget: 'string', required: false },
+            { label: 'Featured Image', name: 'image', widget: 'image', required: false },
+            { label: 'Featured', name: 'featured', widget: 'boolean', default: false },
+            { label: 'Tags', name: 'tags', widget: 'list', required: false },
             { label: 'Body', name: 'body', widget: 'markdown' }
           ]
         }
