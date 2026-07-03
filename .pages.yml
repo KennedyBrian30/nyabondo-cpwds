@@ -3,7 +3,7 @@ media:
   output: /images/uploads
 
 content:
-  - name: case-studies
+  - name: case-studies 
     label: Case Studies
     type: collection
     path: src/content/case-studies
