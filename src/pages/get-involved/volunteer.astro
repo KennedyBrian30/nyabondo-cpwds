@@ -174,65 +174,142 @@ const volunteerRoles = [
   </section>
 
   <!-- VOLUNTEER APPLICATION FORM -->
-  <section class="volunteer-form-section">
+  <section class="volunteer-form-section" id="application-form">
     <div class="volunteer-container">
       <div class="volunteer-form-card">
         <h2>Apply to Volunteer</h2>
+        
+        <!-- Formspree Integration -->
         <form
-          action="/api/volunteer-apply"
+          action="https://formspree.io/f/mpqvlbkn"
           method="POST"
           class="volunteer-form"
+          id="volunteer-form"
         >
+          <!-- Honeypot field to prevent spam -->
+          <input type="text" name="_gotcha" style="display:none" />
+          
           <div class="volunteer-form-row">
+            <div class="form-group">
+              <label for="full_name">Full Name *</label>
+              <input
+                type="text"
+                id="full_name"
+                name="full_name"
+                placeholder="Enter your full name"
+                required
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+          </div>
+          
+          <div class="volunteer-form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+254 700 000 000"
+                required
+                autocomplete="tel"
+              />
+            </div>
+            <div class="form-group">
+              <label for="location">Location (City/Country)</label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                placeholder="Nairobi, Kenya"
+                autocomplete="address-level2"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="role_interest">Primary Role Interest *</label>
+            <select id="role_interest" name="role_interest" required>
+              <option value="">Select a role...</option>
+              <option value="Medical Volunteer">Medical Volunteer</option>
+              <option value="Therapy Assistant">Therapy Assistant</option>
+              <option value="Orthopaedic Technologist">Orthopaedic Technologist</option>
+              <option value="Vocational Trainer">Vocational Trainer</option>
+              <option value="Administrative Support">Administrative Support</option>
+              <option value="Maintenance & Logistics">Maintenance & Logistics</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="availability">Availability</label>
             <input
               type="text"
-              name="full_name"
-              placeholder="Full Name *"
-              required
+              id="availability"
+              name="availability"
+              placeholder="e.g., March 2026, 2 weeks"
             />
-            <input type="email" name="email" placeholder="Email *" required />
           </div>
-          <div class="volunteer-form-row">
-            <input type="tel" name="phone" placeholder="Phone *" required />
+
+          <div class="form-group">
+            <label for="qualifications">Qualifications & Experience</label>
+            <textarea
+              id="qualifications"
+              name="qualifications"
+              rows="3"
+              placeholder="Briefly describe your qualifications, skills, or relevant experience"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="motivation">Why do you want to volunteer at Nyabondo?</label>
+            <textarea
+              id="motivation"
+              name="motivation"
+              rows="3"
+              placeholder="Share your motivation and what you hope to contribute"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="emergency_contact">Emergency Contact (Name & Phone)</label>
             <input
               type="text"
-              name="location"
-              placeholder="Your Location (City/Country)"
+              id="emergency_contact"
+              name="emergency_contact"
+              placeholder="e.g., Jane Doe, +254 700 000 000"
             />
           </div>
-          <select name="role_interest" required>
-            <option value="">Select Primary Role Interest *</option>
-            <option>Medical Volunteer</option>
-            <option>Therapy Assistant</option>
-            <option>Orthopaedic Technologist</option>
-            <option>Vocational Trainer</option>
-            <option>Administrative Support</option>
-            <option>Maintenance & Logistics</option>
-            <option>Other</option>
-          </select>
-          <input
-            type="text"
-            name="availability"
-            placeholder="Availability (e.g., March 2025, 2 weeks)"
-          />
-          <textarea
-            name="qualifications"
-            rows="3"
-            placeholder="Briefly describe your qualifications or experience"
-          ></textarea>
-          <textarea
-            name="motivation"
-            rows="3"
-            placeholder="Why do you want to volunteer at Nyabondo?"></textarea>
-          <button type="submit" class="volunteer-btn volunteer-btn-primary"
-            >Submit Application</button
-          >
+
+          <!-- Hidden field to identify the form source -->
+          <input type="hidden" name="_subject" value="New Volunteer Application - Nyabondo Centre" />
+          
+          <button type="submit" class="volunteer-btn volunteer-btn-primary" id="submit-btn">
+            <span id="btn-text">Submit Application</span>
+            <span id="btn-spinner" style="display:none;">
+              <i class="fas fa-spinner fa-spin"></i> Submitting...
+            </span>
+          </button>
         </form>
+
+        <!-- Success/Error Message -->
+        <div id="form-message" style="display:none; margin-top: 20px; padding: 15px; border-radius: 6px;"></div>
+
         <p class="volunteer-note">
-          * After submitting, our volunteer coordinator will respond within 5–7
-          days. For urgent inquiries, call <a href="tel:+254733384352"
-            >0733 384 352</a
-          >.
+          <i class="fas fa-info-circle" style="color: var(--volunteer-primary);"></i>
+          After submitting, our volunteer coordinator will respond within 5–7 days. 
+          For urgent inquiries, call <a href="tel:+254733384352">0733 384 352</a>.
         </p>
       </div>
     </div>
@@ -254,6 +331,83 @@ const volunteerRoles = [
   </section>
 </Layout>
 
+<script>
+  // Handle form submission with AJAX for better UX
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('volunteer-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const messageDiv = document.getElementById('form-message');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Show loading state
+      btnText.style.display = 'none';
+      btnSpinner.style.display = 'inline';
+      submitBtn.disabled = true;
+      messageDiv.style.display = 'none';
+      messageDiv.className = '';
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Success
+          messageDiv.style.display = 'block';
+          messageDiv.style.backgroundColor = '#d4edda';
+          messageDiv.style.color = '#155724';
+          messageDiv.style.border = '1px solid #c3e6cb';
+          messageDiv.innerHTML = `
+            <strong><i class="fas fa-check-circle"></i> Thank you for your application!</strong>
+            <p style="margin-top: 8px; margin-bottom: 0;">
+              Your application has been submitted successfully. Our volunteer coordinator will 
+              respond within 5–7 days. We look forward to welcoming you to the Nyabondo family!
+            </p>
+          `;
+          form.reset(); // Clear the form
+        } else {
+          // Error
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Submission failed. Please try again.');
+        }
+      } catch (error) {
+        // Display error message
+        messageDiv.style.display = 'block';
+        messageDiv.style.backgroundColor = '#f8d7da';
+        messageDiv.style.color = '#721c24';
+        messageDiv.style.border = '1px solid #f5c6cb';
+        messageDiv.innerHTML = `
+          <strong><i class="fas fa-exclamation-circle"></i> Something went wrong</strong>
+          <p style="margin-top: 8px; margin-bottom: 0;">
+            ${error.message || 'There was a problem submitting your application. Please try again or contact us directly.'}
+          </p>
+        `;
+      } finally {
+        // Reset button state
+        btnText.style.display = 'inline';
+        btnSpinner.style.display = 'none';
+        submitBtn.disabled = false;
+        
+        // Auto-hide success message after 10 seconds
+        if (messageDiv.style.backgroundColor === '#d4edda') {
+          setTimeout(() => {
+            messageDiv.style.display = 'none';
+          }, 10000);
+        }
+      }
+    });
+  });
+</script>
+
 <style>
   /* ===== Volunteer Page Styles ===== */
   :root {
@@ -269,16 +423,19 @@ const volunteerRoles = [
     --volunteer-shadow: 0 6px 24px rgba(0, 150, 199, 0.1);
     --volunteer-radius: 14px;
   }
+  
   .volunteer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
   }
+  
   .volunteer-bc {
     background: var(--volunteer-surface);
     border-bottom: 1px solid var(--volunteer-border);
     padding: 12px 0;
   }
+  
   .volunteer-bc ol {
     display: flex;
     flex-wrap: wrap;
@@ -287,19 +444,29 @@ const volunteerRoles = [
     margin: 0;
     padding: 0;
   }
+  
   .volunteer-bc li {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     font-size: 0.82rem;
   }
+  
   .volunteer-bc a {
     color: var(--volunteer-primary);
     text-decoration: none;
+    transition: color 0.2s;
   }
+  
+  .volunteer-bc a:hover {
+    color: var(--volunteer-primary-dark);
+    text-decoration: underline;
+  }
+  
   .volunteer-bc span {
     color: var(--volunteer-text-light);
   }
+  
   .volunteer-hero {
     background: linear-gradient(
       135deg,
@@ -310,11 +477,13 @@ const volunteerRoles = [
     position: relative;
     color: white;
   }
+  
   .volunteer-hero-content {
     max-width: 720px;
     text-align: center;
     margin: 0 auto;
   }
+  
   .volunteer-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -326,6 +495,7 @@ const volunteerRoles = [
     color: var(--volunteer-primary-light);
     margin-bottom: 12px;
   }
+  
   .volunteer-eyebrow::before,
   .volunteer-eyebrow::after {
     content: "";
@@ -335,17 +505,20 @@ const volunteerRoles = [
     background: currentColor;
     opacity: 0.6;
   }
+  
   .volunteer-hero h1 {
     font-family: "Playfair Display", serif;
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
     margin-bottom: 16px;
   }
+  
   .volunteer-hero p {
     font-size: 1.05rem;
     opacity: 0.9;
     line-height: 1.6;
   }
+  
   .volunteer-hero-wave {
     position: absolute;
     bottom: -1px;
@@ -353,6 +526,7 @@ const volunteerRoles = [
     width: 100%;
     line-height: 0;
   }
+  
   .volunteer-hero-wave svg {
     width: 100%;
     height: 40px;
@@ -363,32 +537,40 @@ const volunteerRoles = [
     padding: 64px 0;
     background: var(--volunteer-surface);
   }
+  
   .volunteer-roles h2 {
     font-family: "Playfair Display", serif;
     font-size: 1.8rem;
     text-align: center;
     margin-bottom: 48px;
+    color: var(--volunteer-text);
   }
+  
   .volunteer-roles-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
   }
+  
   .volunteer-role-card {
     background: var(--volunteer-bg);
     border-radius: var(--volunteer-radius);
     padding: 24px;
     border: 1px solid var(--volunteer-border);
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
+  
   .volunteer-role-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--volunteer-shadow);
   }
+  
   .volunteer-role-card h3 {
     color: var(--volunteer-primary);
     margin-bottom: 12px;
+    font-size: 1.1rem;
   }
+  
   .volunteer-role-details {
     margin-top: 16px;
     display: flex;
@@ -397,6 +579,7 @@ const volunteerRoles = [
     font-size: 0.85rem;
     color: var(--volunteer-text-light);
   }
+  
   .volunteer-role-details i {
     width: 20px;
     color: var(--volunteer-green);
@@ -406,6 +589,7 @@ const volunteerRoles = [
     padding: 48px 0;
     background: var(--volunteer-bg);
   }
+  
   .volunteer-why-card {
     max-width: 700px;
     margin: 0 auto;
@@ -413,17 +597,22 @@ const volunteerRoles = [
     background: var(--volunteer-surface);
     border-radius: var(--volunteer-radius);
     padding: 40px;
+    box-shadow: var(--volunteer-shadow);
   }
+  
   .volunteer-why-card i {
     font-size: 3rem;
     color: var(--volunteer-primary-light);
     margin-bottom: 16px;
   }
+  
   .volunteer-why-card ul {
     text-align: left;
     max-width: 400px;
     margin: 20px auto;
+    padding-left: 20px;
   }
+  
   .volunteer-why-card li {
     margin-bottom: 8px;
   }
@@ -433,22 +622,27 @@ const volunteerRoles = [
     background: var(--volunteer-surface);
     text-align: center;
   }
+  
   .volunteer-process h2 {
     font-family: "Playfair Display", serif;
     font-size: 1.8rem;
     margin-bottom: 48px;
+    color: var(--volunteer-text);
   }
+  
   .volunteer-steps {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 32px;
   }
+  
   .step {
     flex: 1;
     min-width: 180px;
     text-align: center;
   }
+  
   .step-num {
     display: inline-flex;
     align-items: center;
@@ -467,6 +661,7 @@ const volunteerRoles = [
     padding: 64px 0;
     background: var(--volunteer-bg);
   }
+  
   .volunteer-form-card {
     max-width: 800px;
     margin: 0 auto;
@@ -475,20 +670,38 @@ const volunteerRoles = [
     padding: 48px;
     box-shadow: var(--volunteer-shadow);
   }
+  
   .volunteer-form-card h2 {
     text-align: center;
     margin-bottom: 32px;
+    color: var(--volunteer-text);
+    font-family: "Playfair Display", serif;
   }
+  
   .volunteer-form {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
+  
   .volunteer-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
   }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--volunteer-text);
+  }
+  
   .volunteer-form input,
   .volunteer-form select,
   .volunteer-form textarea {
@@ -496,32 +709,78 @@ const volunteerRoles = [
     border: 1px solid var(--volunteer-border);
     border-radius: 6px;
     font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    box-sizing: border-box;
   }
+  
+  .volunteer-form input:focus,
+  .volunteer-form select:focus,
+  .volunteer-form textarea:focus {
+    outline: none;
+    border-color: var(--volunteer-primary);
+    box-shadow: 0 0 0 3px rgba(0, 150, 199, 0.1);
+  }
+  
+  .volunteer-form textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
   .volunteer-btn-primary {
     background: var(--volunteer-primary);
     color: white;
     border: none;
-    padding: 12px 28px;
+    padding: 14px 32px;
     border-radius: 6px;
     font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
     align-self: flex-start;
+    min-width: 200px;
   }
-  .volunteer-btn-primary:hover {
+  
+  .volunteer-btn-primary:hover:not(:disabled) {
     background: var(--volunteer-primary-dark);
   }
+  
+  .volunteer-btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  .volunteer-btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
   .volunteer-note {
     font-size: 0.85rem;
     color: var(--volunteer-text-light);
     margin-top: 24px;
     text-align: center;
   }
+  
+  .volunteer-note a {
+    color: var(--volunteer-primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .volunteer-note a:hover {
+    text-decoration: underline;
+  }
+  
+  .volunteer-note i {
+    margin-right: 6px;
+  }
 
   .volunteer-testimonial {
     padding: 64px 0;
     background: var(--volunteer-surface);
   }
+  
   .volunteer-testimonial-card {
     max-width: 800px;
     margin: 0 auto;
@@ -531,36 +790,73 @@ const volunteerRoles = [
     border-radius: var(--volunteer-radius);
     border-left: 4px solid var(--volunteer-primary);
   }
+  
   .volunteer-testimonial-card i {
     font-size: 2rem;
     color: var(--volunteer-primary-light);
     opacity: 0.5;
     margin-bottom: 16px;
   }
+  
   .volunteer-testimonial-card blockquote {
     font-size: 1.2rem;
     font-style: italic;
     margin: 0 0 16px;
+    color: var(--volunteer-text);
+  }
+  
+  .volunteer-testimonial-card cite {
+    font-style: normal;
+    color: var(--volunteer-text-light);
+    font-weight: 500;
   }
 
+  /* Responsive Styles */
   @media (max-width: 1024px) {
     .volunteer-roles-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  
   @media (max-width: 768px) {
     .volunteer-roles-grid {
       grid-template-columns: 1fr;
     }
+    
     .volunteer-steps {
       flex-direction: column;
       align-items: center;
     }
+    
     .volunteer-form-row {
       grid-template-columns: 1fr;
     }
+    
     .volunteer-form-card {
       padding: 32px 24px;
+    }
+    
+    .volunteer-btn-primary {
+      width: 100%;
+      align-self: center;
+    }
+    
+    .volunteer-hero {
+      padding: 60px 0 76px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .volunteer-form-card {
+      padding: 24px 16px;
+    }
+    
+    .volunteer-role-card {
+      padding: 16px;
+    }
+    
+    .volunteer-testimonial-card {
+      padding: 24px;
     }
   }
 </style>

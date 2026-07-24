@@ -144,12 +144,16 @@ const quickLinks = [
               as possible.
             </p>
           </div>
-          <form
-            class="contact-form"
-            action="https://script.google.com/macros/s/AKfycbwG2CDSDdLYA5nlNDZAP4xWI1bi8a4VcrIPW4TFwxKRFk8vT6UIr8S6dAXImOdHIv2VMw/exec"
-            method="POST"
-            target="_blank"
+
+          <!-- Message container for success/error notifications -->
+          <div
+            id="formMessage"
+            class="contact-form-message"
+            style="display: none;"
           >
+          </div>
+
+          <form id="contactForm" class="contact-form" method="POST">
             <!-- Name -->
             <div class="contact-form-group">
               <label for="contact-name"
@@ -223,8 +227,16 @@ const quickLinks = [
 
             <!-- Submit -->
             <div class="contact-form-group contact-form-submit">
-              <button type="submit" class="contact-btn contact-btn-submit">
-                <i class="fas fa-paper-plane"></i> Send Message
+              <button
+                type="submit"
+                id="submitBtn"
+                class="contact-btn contact-btn-submit"
+              >
+                <i class="fas fa-paper-plane"></i>
+                <span id="btnText">Send Message</span>
+                <span id="btnSpinner" class="spinner" style="display: none;">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </span>
               </button>
               <p class="contact-form-note">
                 By submitting this form, you consent to Nyabondo Centre
@@ -535,6 +547,28 @@ const quickLinks = [
   .contact-form-header p {
     color: var(--contact-text-light);
   }
+
+  /* Form Message Styles */
+  .contact-form-message {
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    display: none;
+  }
+  .contact-form-message.success {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .contact-form-message.error {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
   .contact-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -596,10 +630,33 @@ const quickLinks = [
     transition:
       background 0.3s,
       transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+    justify-content: center;
   }
-  .contact-btn-submit:hover {
+  .contact-btn-submit:hover:not(:disabled) {
     background: var(--contact-green-dark);
     transform: translateY(-2px);
+  }
+  .contact-btn-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .spinner {
+    display: inline-block;
+  }
+  .fa-spin {
+    animation: fa-spin 1s infinite linear;
+  }
+  @keyframes fa-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   .contact-form-note {
     font-size: 0.8rem;
@@ -884,3 +941,124 @@ const quickLinks = [
     }
   }
 </style>
+
+<script>
+  // =============================================
+  // CONTACT FORM HANDLER - AJAX Submission
+  // =============================================
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm");
+    const messageDiv = document.getElementById("formMessage");
+    const submitBtn = document.getElementById("submitBtn");
+    const btnText = document.getElementById("btnText");
+    const btnSpinner = document.getElementById("btnSpinner");
+
+    // IMPORTANT: Replace this URL with your actual Apps Script deployment URL
+    const SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycby86PXWu8E2Ybg7fy4OHzUnEJSxFV7AXQ7De30bhUvXSxT7SahwwgdDtK9Ox7y9WTxTtw/exec";
+
+    if (!form) {
+      console.error("Contact form not found!");
+      return;
+    }
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault(); // Prevent default form submission
+
+      // Clear previous messages
+      messageDiv.style.display = "none";
+      messageDiv.className = "contact-form-message";
+
+      // Show loading state
+      submitBtn.disabled = true;
+      btnText.textContent = "Sending...";
+      btnSpinner.style.display = "inline-block";
+
+      try {
+        // Collect form data
+        const formData = new FormData(form);
+        const data = new URLSearchParams();
+
+        for (const [key, value] of formData.entries()) {
+          if (value && value.trim()) {
+            data.append(key, value.trim());
+          }
+        }
+
+        // Add user agent
+        data.append("userAgent", navigator.userAgent);
+
+        // Send to Apps Script
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: data.toString(),
+        });
+
+        // Parse the JSON response
+        let result;
+        try {
+          result = await response.json();
+        } catch (parseError) {
+          // If response is not JSON, try to get text
+          const text = await response.text();
+          console.error("Non-JSON response:", text);
+          throw new Error(
+            "Server returned an invalid response. Please try again.",
+          );
+        }
+
+        // Handle the response
+        if (result.success) {
+          // Success - show message and reset form
+          showMessage("success", "✅ " + result.message);
+          form.reset();
+
+          // Scroll to the message
+          messageDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+          // Error from server
+          showMessage(
+            "error",
+            "❌ " + (result.message || "An error occurred. Please try again."),
+          );
+        }
+      } catch (error) {
+        console.error("Form submission error:", error);
+        showMessage(
+          "error",
+          "❌ " +
+            (error.message ||
+              "An error occurred. Please try again or contact us directly."),
+        );
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        btnText.textContent = "Send Message";
+        btnSpinner.style.display = "none";
+      }
+    });
+
+    // Helper function to show messages
+    function showMessage(type, message) {
+      messageDiv.className = "contact-form-message " + type;
+      messageDiv.textContent = message;
+      messageDiv.style.display = "block";
+
+      // Auto-hide success messages after 10 seconds
+      if (type === "success") {
+        setTimeout(() => {
+          messageDiv.style.opacity = "0";
+          messageDiv.style.transition = "opacity 0.5s ease";
+          setTimeout(() => {
+            messageDiv.style.display = "none";
+            messageDiv.style.opacity = "1";
+          }, 500);
+        }, 10000);
+      }
+    }
+  });
+</script>
