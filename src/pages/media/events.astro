@@ -1,109 +1,61 @@
 ---
 // src/pages/media/events.astro
 import Layout from "../../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
 
+// Fetch all news/events from the 'events' collection
+const allEvents = await getCollection('events');
+
+// Sort events by date (newest first)
+const events = allEvents.sort((a, b) => {
+  return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
+
+// Get featured events (those marked as featured or the 2 most recent)
+const featuredEvents = events.filter(event => event.data.featured === true).slice(0, 2);
+// If no featured events, use the 2 most recent
+const featuredToShow = featuredEvents.length > 0 ? featuredEvents : events.slice(0, 2);
+
+// Get all events for the main grid
+const allEventsList = events;
+
+// Get unique categories for filter buttons
+const categories = ["All", ...new Set(events.map(event => event.data.category).filter(Boolean))];
+
+// Helper function to format date
+const formatDate = (date) => {
+  if (!date) return '';
+  const d = new Date(date);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
+// Helper function to get relative time
+const getRelativeTime = (date) => {
+  if (!date) return '';
+  const now = new Date();
+  const diff = now.getTime() - new Date(date).getTime();
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  
+  if (days === 0) return 'Today';
+  if (days === 1) return 'Yesterday';
+  if (days < 7) return `${days} days ago`;
+  if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
+  if (days < 365) return `${Math.floor(days / 30)} months ago`;
+  return `${Math.floor(days / 365)} years ago`;
+};
+
+// Breadcrumbs
 const breadcrumbs = [
   { label: "Home", href: "/" },
   { label: "Media", href: "/media" },
-  { label: "Events", href: "/media/events" },
+  { label: "Events & Updates", href: "/media/events" },
 ];
-
-const events = [
-  {
-    year: 2025,
-    date: "December 3, 2025",
-    title: "International Day for Persons with Disabilities 2025",
-    theme: "Amplifying the leadership of persons with disabilities for an inclusive and sustainable future",
-    description: "Nyabondo Centre hosted a community-wide celebration marking the International Day for Persons with Disabilities. The event brought together persons with disabilities, their families, community leaders, healthcare workers, and partners to celebrate the achievements of persons with disabilities and renew our collective commitment to inclusion, accessibility, and empowerment.",
-    highlights: [
-      "Keynote address by the Administrator, Sr. Ludovena Anyango Onyino on disability leadership and inclusion",
-      "Panel discussion featuring persons with disabilities sharing their success stories",
-      "Assistive device exhibition showcasing locally fabricated prosthetics, orthotics, and mobility aids",
-      "Cultural performances by persons with disabilities from the community",
-      "Launch of the SHINE Project (2026–2029) in partnership with CBM Kenya",
-      "Distribution of assistive devices to 50 beneficiaries",
-      "Community awareness sessions on disability rights and inclusion"
-    ],
-    images: [
-      "/images/events/idpd-2025-1.webp",
-      "/images/events/idpd-2025-2.webp",
-      "/images/events/idpd-2025-3.webp"
-    ],
-    impact: "Over 300 community members participated. 50 assistive devices distributed. 20 new referrals for corrective surgeries and rehabilitation services initiated."
-  },
-  {
-    year: 2024,
-    date: "December 3, 2024",
-    title: "International Day for Persons with Disabilities 2024",
-    theme: "Amplifying the leadership of persons with disabilities for an inclusive and sustainable future",
-    description: "Nyabondo Centre celebrated the International Day for Persons with Disabilities with a focus on leadership and inclusion. The event highlighted the contributions of persons with disabilities to community development and featured discussions on creating accessible environments for all.",
-    highlights: [
-      "Opening ceremony with the Administrator, Sr. Ludovena Anyango Onyino",
-      "Launch of BEN MAPP II programme supported by Cheshire Disability Services Kenya",
-      "Vocational training exhibition showcasing products made by persons with disabilities",
-      "Panel discussion on disability inclusion in the workplace",
-      "Distribution of mobility aids to 35 beneficiaries",
-      "Community sensitization on disability rights",
-      "Sports activities and games promoting inclusion"
-    ],
-    images: [
-      "/images/events/idpd-2024-1.webp",
-      "/images/events/idpd-2024-2.webp",
-      "/images/events/idpd-2024-3.webp"
-    ],
-    impact: "Over 250 community members participated. 35 mobility aids distributed. BEN MAPP II officially launched. 15 new partnerships established with local organizations."
-  },
-  {
-    year: 2023,
-    date: "December 3, 2023",
-    title: "International Day for Persons with Disabilities 2023",
-    theme: "United in action to rescue and achieve the Sustainable Development Goals for, with, and by persons with disabilities",
-    description: "The 2023 celebration focused on collective action to achieve the SDGs for persons with disabilities. Nyabondo Centre brought together stakeholders from government, civil society, and the private sector to discuss inclusive development and the role of persons with disabilities in achieving the global goals.",
-    highlights: [
-      "Keynote address by the Administrator on achieving SDGs for persons with disabilities",
-      "Panel discussion with county government officials on inclusive policies",
-      "Assistive technology demonstration and exhibition",
-      "Launch of community awareness campaign on disability inclusion",
-      "Distribution of 40 assistive devices to beneficiaries",
-      "Workshop on disability-inclusive programming for partner organizations",
-      "Cultural performances and testimonies from beneficiaries"
-    ],
-    images: [
-      "/images/events/idpd-2023-1.webp",
-      "/images/events/idpd-2023-2.webp",
-      "/images/events/idpd-2023-3.webp"
-    ],
-    impact: "Over 280 community members attended. 40 assistive devices distributed. 5 county government representatives participated. 8 new partner organizations engaged."
-  },
-  {
-    year: 2022,
-    date: "December 3, 2022",
-    title: "International Day for Persons with Disabilities 2022",
-    theme: "Not all disabilities are visible — Promoting inclusive and accessible communities for all",
-    description: "The 2022 celebration marked Nyabondo Centre's ongoing commitment to inclusion and accessibility. The event raised awareness about invisible disabilities and the importance of creating truly accessible communities where every person, regardless of their disability, can participate fully and thrive.",
-    highlights: [
-      "Opening remarks by the Administrator, Sr. Ludovena Anyango Onyino",
-      "Awareness session on invisible disabilities and mental health",
-      "Medical screening and health check-ups for community members",
-      "Assistive device fitting and distribution to 30 beneficiaries",
-      "Community dialogue on breaking stigma and discrimination",
-      "Art and craft exhibition by persons with disabilities",
-      "Referral services for 25 children with disabilities"
-    ],
-    images: [
-      "/images/events/idpd-2022-1.webp",
-      "/images/events/idpd-2022-2.webp",
-      "/images/events/idpd-2022-3.webp"
-    ],
-    impact: "Over 200 community members reached. 30 assistive devices distributed. 25 children referred for further services. Significant increase in community awareness about invisible disabilities."
-  }
-];
-
-// Helper to get the most recent events first (already sorted desc by year)
-const sortedEvents = [...events].sort((a, b) => b.year - a.year);
 ---
 
-<Layout title="Events | Nyabondo Centre for Persons with Disabilities">
+<Layout
+  title="Events & Updates | Nyabondo Centre for Persons with Disabilities"
+  description="Stay updated with the latest news, events, and announcements from Nyabondo Centre. Read about our community outreaches, project launches, and impact stories."
+>
 
   <!-- BREADCRUMB -->
   <nav class="events-bc" aria-label="Breadcrumb">
@@ -127,109 +79,139 @@ const sortedEvents = [...events].sort((a, b) => b.year - a.year);
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ══════════════════════════════════════════ HERO SECTION ══════════════════════════════════════════ -->
   <section class="events-hero">
-    <div class="events-container">
-      <div class="events-hero-content">
-        <span class="events-eyebrow">Stories &amp; Updates</span>
-        <h1>Events</h1>
-        <p>
-          Explore our events calendar and see how we're engaging with communities,
-          raising awareness, and celebrating the achievements of persons with
-          disabilities across Kenya.
-        </p>
-      </div>
-    </div>
-    <div class="events-hero-wave" aria-hidden="true">
-      <svg viewBox="0 0 1440 40" preserveAspectRatio="none">
-        <path
-          d="M0,40 C240,20 480,0 720,20 C960,40 1200,20 1440,40 L1440,40 L0,40 Z"
-          fill="#f4fcff"
-        ></path>
-      </svg>
+    <div class="events-hero-overlay"></div>
+    <div class="events-hero-content">
+      <span class="hero-eyebrow">
+        <i class="fas fa-newspaper"></i> Stay Informed
+      </span>
+      <h1>Events &amp; <span class="hero-accent">Updates</span></h1>
+      <p>Latest news, announcements, and stories from Nyabondo Centre's programs, community outreaches, and rehabilitation initiatives across Kenya.</p>
     </div>
   </section>
 
-  <!-- EVENTS LIST -->
-  <section class="events-list">
-    <div class="events-container">
-      <div class="events-grid">
-        {sortedEvents.map((event, i) => (
-          <div class="event-card" style={`--delay: ${i * 150}ms`}>
-            <div class="event-header">
-              <div class="event-year-badge">
-                <span class="event-year">{event.year}</span>
-                <span class="event-date">{event.date}</span>
+  <!-- ══════════════════════════════════════════ FEATURED EVENTS ══════════════════════════════════════════ -->
+  {featuredToShow.length > 0 && (
+    <section class="featured-section">
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-eyebrow"><i class="fas fa-star"></i> Featured Updates</div>
+          <h2>What's <span class="accent-primary">New</span></h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle">Recent news and updates from our programs and initiatives</p>
+        </div>
+
+        <div class="featured-grid">
+          {featuredToShow.map((event) => (
+            <a href={`/media/events/${event.id}`} class="featured-card" key={event.id}>
+              <div class="featured-image">
+                <img src={event.data.image || '/images/events/placeholder.webp'} alt={event.data.title} loading="lazy" />
+                <div class="featured-category">
+                  <i class="fas fa-tag"></i> {event.data.category || 'Update'}
+                </div>
+                {event.data.featured && (
+                  <div class="featured-badge">
+                    <i class="fas fa-star"></i> Featured
+                  </div>
+                )}
+              </div>
+              <div class="featured-content">
+                <div class="post-meta">
+                  <span><i class="fas fa-calendar-alt"></i> {formatDate(event.data.date)}</span>
+                  <span><i class="fas fa-clock"></i> {getRelativeTime(event.data.date)}</span>
+                </div>
+                <h3 class="featured-title">{event.data.title}</h3>
+                <p class="featured-excerpt">{event.data.excerpt || event.data.description}</p>
+                <div class="featured-author">
+                  {event.data.authorImage && (
+                    <img src={event.data.authorImage} alt={event.data.author} class="author-avatar" />
+                  )}
+                  <span class="author-name">{event.data.author || 'Nyabondo Editorial'}</span>
+                </div>
+                <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ══════════════════════════════════════════ ALL EVENTS ══════════════════════════════════════════ -->
+  <section class="all-events-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow"><i class="fas fa-list-ul"></i> All Updates</div>
+        <h2>Latest <span class="accent-primary">News &amp; Stories</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Explore all our news, announcements, and impact stories</p>
+      </div>
+
+      <!-- Category Filters -->
+      {categories.length > 1 && (
+        <div class="filter-buttons" id="filterButtons">
+          {categories.map(category => (
+            <button class="filter-btn" data-category={category} key={category}>
+              {category}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <!-- Events Grid -->
+      <div class="events-grid" id="eventsGrid">
+        {allEventsList.map((event, idx) => (
+          <div class="event-card" data-category={event.data.category || 'Uncategorized'} key={event.id}>
+            <div class="event-image">
+              <img src={event.data.image || '/images/events/placeholder.webp'} alt={event.data.title} loading="lazy" />
+              <div class="event-category-badge">
+                <i class="fas fa-tag"></i> {event.data.category || 'Update'}
               </div>
             </div>
-
-            <div class="event-body">
-              <h2>{event.title}</h2>
-              <p class="event-theme">
-                <strong>Theme:</strong> {event.theme}
-              </p>
-              <p class="event-description">{event.description}</p>
-
-              <div class="event-highlights">
-                <h3>Highlights</h3>
-                <ul>
-                  {event.highlights.map((highlight) => (
-                    <li>
-                      <i class="fas fa-check-circle" aria-hidden="true"></i>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
+            <div class="event-content">
+              <div class="post-meta">
+                <span><i class="fas fa-calendar-alt"></i> {formatDate(event.data.date)}</span>
+                <span><i class="fas fa-clock"></i> {getRelativeTime(event.data.date)}</span>
               </div>
-
-              {event.images && event.images.length > 0 && (
-                <div class="event-gallery">
-                  <h3>Gallery</h3>
-                  <div class="event-gallery-grid">
-                    {event.images.map((img) => (
-                      <div class="event-gallery-item">
-                        <picture>
-                          <source srcset={img} type="image/webp" />
-                          <img
-                            src={img}
-                            alt={`${event.title} - event photo`}
-                            loading="lazy"
-                          />
-                        </picture>
-                      </div>
-                    ))}
-                  </div>
+              <h3 class="event-title">{event.data.title}</h3>
+              <p class="event-excerpt">{event.data.excerpt || event.data.description}</p>
+              <div class="event-footer">
+                <div class="event-author">
+                  {event.data.authorImage && (
+                    <img src={event.data.authorImage} alt={event.data.author} class="author-avatar-small" />
+                  )}
+                  <span>{event.data.author || 'Nyabondo Editorial'}</span>
                 </div>
-              )}
-
-              <div class="event-impact">
-                <i class="fas fa-chart-line" aria-hidden="true"></i>
-                <div>
-                  <strong>Impact:</strong> {event.impact}
-                </div>
+                <a href={`/media/events/${event.id}`} class="read-link">Read <i class="fas fa-arrow-right"></i></a>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {allEventsList.length === 0 && (
+        <div class="no-events">
+          <i class="fas fa-newspaper"></i>
+          <h3>No updates yet</h3>
+          <p>Check back soon for the latest news and updates from Nyabondo Centre.</p>
+        </div>
+      )}
     </div>
   </section>
 
-  <!-- CTA BANNER -->
-  <section class="events-cta">
-    <div class="events-container">
-      <div class="events-cta-card">
-        <h2>Stay Updated</h2>
-        <p>
-          Don't miss our upcoming events. Follow us on social media or subscribe
-          to our newsletter to stay informed about our activities and how you can
-          get involved.
-        </p>
-        <div class="events-cta-buttons">
-          <a href="/contact" class="events-btn events-btn-primary">
-            <i class="fas fa-envelope"></i> Contact Us
+  <!-- ══════════════════════════════════════════ CTA SECTION ══════════════════════════════════════════ -->
+  <section class="events-cta-section">
+    <div class="cta-container">
+      <div class="cta-content">
+        <div class="cta-eyebrow">Stay Connected</div>
+        <h2>Get the Latest <span class="cta-highlight">Updates</span> First</h2>
+        <p>Subscribe to our newsletter to receive news, success stories, and updates straight to your inbox.</p>
+        <div class="cta-buttons">
+          <a href="/contact" class="btn-cta-primary">
+            <i class="fas fa-envelope"></i> Subscribe Now
           </a>
-          <a href="/get-involved/donate" class="events-btn events-btn-outline">
+          <a href="/get-involved/donate" class="btn-cta-secondary">
             <i class="fas fa-heart"></i> Support Our Work
           </a>
         </div>
@@ -247,7 +229,7 @@ const sortedEvents = [...events].sort((a, b) => b.year - a.year);
     --events-primary: #0096c7;
     --events-primary-dark: #006d94;
     --events-primary-light: #48b8d8;
-    --events-green: #2e8b57;
+    --events-secondary: #2e8b57;
     --events-text: #0d2b38;
     --events-text-light: #2e5a6b;
     --events-bg: #f4fcff;
@@ -300,361 +282,712 @@ const sortedEvents = [...events].sort((a, b) => b.year - a.year);
     color: var(--events-text-light);
   }
 
-  /* Hero */
+  /* ══════════════════════════════════════════ HERO SECTION ══════════════════════════════════════════ */
   .events-hero {
-    background: linear-gradient(
-      135deg,
-      var(--events-primary-dark) 0%,
-      var(--events-primary) 100%
-    );
-    padding: 80px 0 96px;
     position: relative;
-    color: white;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--events-primary-dark) 0%, var(--events-primary) 100%);
+    overflow: hidden;
   }
+  
+  .events-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hero/hero-community-outreach.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12;
+    filter: blur(2px);
+  }
+  
+  .events-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(0, 109, 148, 0.6) 0%, var(--events-primary-dark) 100%);
+  }
+  
   .events-hero-content {
-    max-width: 720px;
-    text-align: center;
-    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 4rem 5%;
+    margin-left: 5%;
   }
-  .events-eyebrow {
+  
+  .hero-eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    background: rgba(72, 184, 216, 0.2);
+    backdrop-filter: blur(8px);
+    color: var(--events-primary-light);
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--events-primary-light);
-    margin-bottom: 12px;
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(72, 184, 216, 0.3);
   }
-  .events-eyebrow::before,
-  .events-eyebrow::after {
-    content: "";
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: currentColor;
-    opacity: 0.6;
-  }
-  .events-hero h1 {
+  
+  .events-hero-content h1 {
     font-family: "Playfair Display", serif;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: 3rem;
     font-weight: 800;
-    margin-bottom: 16px;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 1.25rem;
   }
-  .events-hero p {
-    font-size: 1.05rem;
-    opacity: 0.9;
-    line-height: 1.6;
+  
+  .hero-accent {
+    color: var(--events-primary-light);
+    font-style: italic;
   }
-  .events-hero-wave {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    line-height: 0;
-  }
-  .events-hero-wave svg {
-    width: 100%;
-    height: 40px;
-    display: block;
+  
+  .events-hero-content p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    max-width: 580px;
   }
 
-  /* Events List */
-  .events-list {
-    padding: 80px 0;
-    background: var(--events-bg);
+  /* ══════════════════════════════════════════ FEATURED SECTION ══════════════════════════════════════════ */
+  .featured-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #fff 0%, var(--events-bg) 100%);
   }
-  .events-grid {
+  
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 150, 199, 0.08);
+    color: var(--events-primary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 40px;
+    margin-bottom: 0.85rem;
+  }
+  
+  .section-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--events-text);
+  }
+  
+  .accent-primary {
+    color: var(--events-primary);
+  }
+  
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--events-primary), var(--events-secondary));
+    margin: 0.75rem auto 1.25rem;
+    border-radius: 3px;
+  }
+  
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--events-text-light);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .featured-card {
+    background: var(--events-surface);
+    border-radius: 28px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s var(--events-ease);
+    border: 1px solid var(--events-border);
     display: flex;
     flex-direction: column;
-    gap: 48px;
   }
-  .event-card {
-    background: var(--events-surface);
-    border-radius: var(--events-radius);
+  
+  .featured-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 150, 199, 0.15);
+    border-color: var(--events-primary);
+  }
+  
+  .featured-image {
+    position: relative;
+    height: 280px;
     overflow: hidden;
-    box-shadow: var(--events-shadow);
-    border: 1px solid var(--events-border);
-    transition: all 0.3s var(--events-ease);
-    opacity: 0;
-    transform: translateY(24px);
-    animation: eventFadeIn 0.7s var(--events-ease) forwards;
-    animation-delay: var(--delay, 0ms);
   }
-  .event-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0, 150, 199, 0.15);
-  }
-  @keyframes eventFadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .event-header {
-    background: linear-gradient(135deg, var(--events-primary), var(--events-primary-dark));
-    padding: 24px 32px;
-    color: white;
-  }
-  .event-year-badge {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .event-year {
-    font-family: "Playfair Display", serif;
-    font-size: 2.4rem;
-    font-weight: 800;
-    line-height: 1;
-  }
-  .event-date {
-    font-size: 0.95rem;
-    opacity: 0.85;
-    padding-left: 16px;
-    border-left: 2px solid rgba(255, 255, 255, 0.3);
-  }
-  .event-body {
-    padding: 32px;
-  }
-  .event-body h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--events-text);
-    margin-bottom: 12px;
-  }
-  .event-theme {
-    font-size: 0.95rem;
-    color: var(--events-primary);
-    margin-bottom: 16px;
-    padding: 8px 16px;
-    background: rgba(0, 150, 199, 0.06);
-    border-radius: 8px;
-    border-left: 3px solid var(--events-primary);
-  }
-  .event-description {
-    font-size: 0.95rem;
-    color: var(--events-text-light);
-    line-height: 1.75;
-    margin-bottom: 24px;
-  }
-  .event-highlights {
-    margin-bottom: 24px;
-  }
-  .event-highlights h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--events-text);
-    margin-bottom: 12px;
-  }
-  .event-highlights ul {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .event-highlights li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: var(--events-text-light);
-    line-height: 1.55;
-  }
-  .event-highlights li i {
-    color: var(--events-green);
-    margin-top: 3px;
-    flex-shrink: 0;
-  }
-  .event-gallery {
-    margin-bottom: 24px;
-  }
-  .event-gallery h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--events-text);
-    margin-bottom: 12px;
-  }
-  .event-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .event-gallery-item {
-    border-radius: 8px;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    transition: transform 0.3s var(--events-ease);
-  }
-  .event-gallery-item:hover {
-    transform: scale(1.03);
-  }
-  .event-gallery-item picture {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .event-gallery-item img {
+  
+  .featured-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    transition: transform 0.6s var(--events-ease);
   }
-  .event-impact {
+  
+  .featured-card:hover .featured-image img {
+    transform: scale(1.08);
+  }
+  
+  .featured-category {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--events-primary);
+    color: white;
+    padding: 0.3rem 0.9rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 700;
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px 20px;
-    background: rgba(0, 150, 199, 0.04);
-    border-radius: 8px;
-    border-left: 4px solid var(--events-primary);
+    align-items: center;
+    gap: 6px;
+    z-index: 1;
   }
-  .event-impact i {
-    color: var(--events-primary);
-    font-size: 1.2rem;
-    margin-top: 2px;
+  
+  .featured-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--events-secondary);
+    color: white;
+    padding: 0.3rem 0.9rem;
+    border-radius: 30px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 1;
   }
-  .event-impact div {
-    font-size: 0.9rem;
+  
+  .featured-content {
+    padding: 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.7rem;
     color: var(--events-text-light);
-    line-height: 1.6;
+    margin-bottom: 0.75rem;
   }
-  .event-impact strong {
+  
+  .post-meta i {
+    margin-right: 4px;
+  }
+  
+  .featured-title {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
     color: var(--events-text);
   }
-
-  /* CTA Banner */
-  .events-cta {
-    padding: 60px 0 80px;
-    background: var(--events-surface);
+  
+  .featured-excerpt {
+    font-size: 0.85rem;
+    color: var(--events-text-light);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex: 1;
   }
-  .events-cta-card {
-    background: linear-gradient(
-      135deg,
-      var(--events-primary-dark) 0%,
-      var(--events-primary) 100%
-    );
-    border-radius: var(--events-radius);
-    padding: 48px 40px;
-    text-align: center;
-    color: white;
-  }
-  .events-cta-card h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-  .events-cta-card p {
-    font-size: 1rem;
-    opacity: 0.9;
-    max-width: 560px;
-    margin: 0 auto 32px;
-  }
-  .events-cta-buttons {
+  
+  .featured-author {
     display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
   }
-
-  .events-btn {
+  
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .author-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--events-text);
+  }
+  
+  .read-more {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 28px;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.2s, background 0.2s;
-    border: 2px solid transparent;
+    color: var(--events-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: gap 0.2s ease;
   }
-  .events-btn:hover {
+  
+  .featured-card:hover .read-more {
+    gap: 12px;
+  }
+
+  /* ══════════════════════════════════════════ ALL EVENTS ══════════════════════════════════════════ */
+  .all-events-section {
+    padding: 5rem 0;
+    background: var(--events-surface);
+  }
+  
+  /* Filter Buttons */
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .filter-btn {
+    padding: 0.5rem 1.25rem;
+    border: 2px solid var(--events-border);
+    background: var(--events-surface);
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--events-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .filter-btn:hover {
+    border-color: var(--events-primary);
+    color: var(--events-primary);
     transform: translateY(-2px);
   }
-  .events-btn-primary {
-    background: white;
-    color: var(--events-primary);
-  }
-  .events-btn-primary:hover {
-    background: #e0f5fc;
-  }
-  .events-btn-outline {
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.6);
+  
+  .filter-btn.active {
+    background: var(--events-primary);
+    border-color: var(--events-primary);
     color: white;
   }
-  .events-btn-outline:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: white;
+  
+  /* Events Grid */
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .event-card {
+    background: var(--events-surface);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--events-border);
+    transition: all 0.4s var(--events-ease);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 150, 199, 0.12);
+    border-color: var(--events-primary);
+  }
+  
+  .event-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--events-ease);
+  }
+  
+  .event-card:hover .event-image img {
+    transform: scale(1.08);
+  }
+  
+  .event-category-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--events-secondary);
+    color: white;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .event-content {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .event-title {
+    font-family: "Playfair Display", serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: var(--events-text);
+  }
+  
+  .event-excerpt {
+    font-size: 0.8rem;
+    color: var(--events-text-light);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+  
+  .event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--events-border);
+  }
+  
+  .event-author {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: var(--events-text-light);
+  }
+  
+  .author-avatar-small {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .read-link {
+    color: var(--events-primary);
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.2s;
+    text-decoration: none;
+  }
+  
+  .read-link:hover {
+    gap: 8px;
+  }
+  
+  .no-events {
+    text-align: center;
+    padding: 4rem;
+    background: var(--events-bg);
+    border-radius: 24px;
+  }
+  
+  .no-events i {
+    font-size: 3rem;
+    color: var(--events-text-light);
+    margin-bottom: 1rem;
+  }
+  
+  .no-events h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--events-text);
+  }
+  
+  .no-events p {
+    color: var(--events-text-light);
   }
 
-  /* Responsive */
+  /* ══════════════════════════════════════════ CTA SECTION ══════════════════════════════════════════ */
+  .events-cta-section {
+    background: linear-gradient(135deg, var(--events-primary) 0%, var(--events-primary-dark) 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .events-cta-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1), transparent);
+    pointer-events: none;
+  }
+  
+  .cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .cta-eyebrow {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.35rem 1.2rem;
+    border-radius: 40px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta-container h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-highlight {
+    color: var(--events-primary-light);
+  }
+  
+  .cta-container p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn-cta-primary {
+    background: white;
+    color: var(--events-primary);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-cta-primary:hover {
+    background: var(--events-primary-light);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  
+  .btn-cta-secondary {
+    border: 2px solid white;
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+  
+  .btn-cta-secondary:hover {
+    background: white;
+    color: var(--events-primary);
+    transform: translateY(-3px);
+  }
+
+  /* ══════════════════════════════════════════ RESPONSIVE ══════════════════════════════════════════ */
   @media (max-width: 1024px) {
-    .event-highlights ul {
+    .featured-grid {
       grid-template-columns: 1fr;
     }
-    .event-gallery-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .event-header {
-      padding: 20px 24px;
-    }
-    .event-year {
-      font-size: 2rem;
-    }
-    .event-body {
-      padding: 24px;
-    }
-    .event-body h2 {
-      font-size: 1.4rem;
-    }
-    .event-gallery-grid {
+    
+    .events-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-    .events-cta-card {
-      padding: 32px 24px;
+    
+    .section-inner {
+      padding: 0 1.5rem;
     }
-    .events-cta-buttons {
+  }
+  
+  @media (max-width: 768px) {
+    .events-hero-content h1 {
+      font-size: 2rem;
+    }
+    
+    .events-hero-content {
+      padding: 3rem 1.5rem;
+      margin-left: 0;
+      text-align: center;
+    }
+    
+    .events-hero-content p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-eyebrow {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .events-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .filter-buttons {
+      gap: 0.5rem;
+    }
+    
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+    }
+    
+    .cta-buttons {
       flex-direction: column;
       align-items: center;
     }
-    .events-btn {
+    
+    .btn-cta-primary,
+    .btn-cta-secondary {
       width: 100%;
       justify-content: center;
+    }
+    
+    .section-header h2 {
+      font-size: 1.6rem;
+    }
+    
+    .featured-title {
+      font-size: 1.1rem;
+    }
+    
+    .section-inner {
+      padding: 0 1rem;
     }
   }
 
   @media (max-width: 480px) {
-    .event-year-badge {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
+    .featured-image {
+      height: 200px;
     }
-    .event-date {
-      padding-left: 0;
-      border-left: none;
-      font-size: 0.85rem;
+    
+    .featured-content {
+      padding: 1.25rem;
     }
-    .event-body h2 {
-      font-size: 1.2rem;
-    }
-    .event-gallery-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .event-gallery-item {
-      aspect-ratio: 4/3;
-    }
-    .event-theme {
-      font-size: 0.85rem;
+    
+    .event-image {
+      height: 180px;
     }
   }
 </style>
+
+<script>
+  // Event Filtering
+  (function() {
+    const filterButtons = document.querySelectorAll('#filterButtons .filter-btn');
+    const eventCards = document.querySelectorAll('#eventsGrid .event-card');
+    
+    if (filterButtons.length && eventCards.length) {
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active button
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const category = btn.getAttribute('data-category');
+          
+          // Filter items
+          eventCards.forEach(card => {
+            if (category === 'All' || card.getAttribute('data-category') === category) {
+              card.style.display = 'flex';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 10);
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+  })();
+  
+  // Intersection Observer for scroll animations
+  (function() {
+    const animatedElements = document.querySelectorAll('.event-card');
+    if (animatedElements.length) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      
+      animatedElements.forEach(el => { 
+        el.style.animationPlayState = 'paused'; 
+        observer.observe(el); 
+      });
+    }
+  })();
+</script>

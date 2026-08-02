@@ -20,6 +20,26 @@ const caseStudies = defineCollection({
   }),
 });
 
+const events = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    excerpt: z.string().optional(),
+    date: z.date(),
+    author: z.string().optional(),
+    authorImage: z.string().optional(),
+    category: z.string().optional(),
+    categoryIcon: z.string().optional(),
+    image: z.string().optional(),
+    featured: z.boolean().default(false),
+    readTime: z.string().optional(),
+    location: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 export const collections = {
   'case-studies': caseStudies,
+  'events': events,
 };

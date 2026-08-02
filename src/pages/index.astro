@@ -1,6 +1,23 @@
 ---
 // src/pages/index.astro
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
+
+// Fetch events from the collection instead of using static data
+const allEvents = await getCollection('events');
+// Sort by date (newest first) and get the 3 most recent
+const newsItems = allEvents
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3)
+  .map(event => ({
+    slug: event.id,
+    data: {
+      title: event.data.title,
+      date: event.data.date,
+      excerpt: event.data.excerpt || event.data.description,
+      image: event.data.image,
+    }
+  }));
 
 const stats = [
   { icon: "fas fa-users", num: "50,000+", label: "Patients Served" },
@@ -459,6 +476,60 @@ const partners = [
       }
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════
+     NEWS AND UPDATES
+═══════════════════════════════════════ -->
+<section class="news-updates" aria-labelledby="news-heading">
+  <div class="container">
+    <div class="section-header reveal-up">
+      <span class="section-eyebrow">News & Updates</span>
+      <h2 id="news-heading" class="section-title">
+        Latest Stories from Nyabondo
+      </h2>
+      <p class="section-subtitle">
+        Stay informed about our recent activities, project launches, community
+        outreach efforts, and the impact we're making across Kenya.
+      </p>
+    </div>
+
+    <div class="news-grid">
+      {
+        newsItems.map((item, i) => (
+          <article class="news-card reveal-up" style={`--delay: ${i * 100}ms`}>
+            <a href={`/media/events/${item.slug}`} class="news-card-link">
+              <div class="news-card-content">
+                <div class="news-card-meta">
+                  <time datetime={item.data.date} class="news-card-date">
+                    {new Date(item.data.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <span class="news-card-read-time" aria-hidden="true">
+                    <i class="fas fa-clock"></i> 3 min read
+                  </span>
+                </div>
+                <h3 class="news-card-title">{item.data.title}</h3>
+                <p class="news-card-excerpt">{item.data.excerpt}</p>
+                <span class="news-card-cta">
+                  Read More <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </span>
+              </div>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="section-cta">
+      <a href="/media/events" class="btn btn-primary">
+        View All Updates <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
 
   <!-- ═══════════════════════
        SERVICES
@@ -1094,7 +1165,7 @@ const partners = [
       if (reduced) return;
       var els = Array.from(
         document.querySelectorAll(
-          ".reveal-up, .reveal-left, .reveal-right, .impact-item, .partner-card",
+          ".reveal-up, .reveal-left, .reveal-right, .impact-item, .partner-card, .news-card",
         ),
       );
       var io = new IntersectionObserver(
@@ -1446,11 +1517,22 @@ const partners = [
         border-color 0.22s ease;
       transition-delay: var(--delay, 0ms);
     }
+    .news-card {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 0.6s var(--ease-out-expo),
+        transform 0.6s var(--ease-out-expo),
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+      transition-delay: var(--delay, 0ms);
+    }
     .reveal-up.is-visible,
     .reveal-left.is-visible,
     .reveal-right.is-visible,
     .impact-item.is-visible,
-    .partner-card.is-visible {
+    .partner-card.is-visible,
+    .news-card.is-visible {
       opacity: 1;
       transform: none;
     }
@@ -2177,6 +2259,103 @@ const partners = [
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.6);
     white-space: nowrap;
+  }
+
+  /* ═══════════════════════════════════════
+     NEWS AND UPDATES
+  ═══════════════════════════════════════ */
+  .news-updates {
+    padding: 88px 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .news-card {
+    background: var(--background);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    transition: all var(--transition-base) var(--ease-out-expo);
+    height: 100%;
+  }
+  .news-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    border-color: var(--primary);
+  }
+  .news-card-link {
+    display: block;
+    padding: 28px 26px;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    transition: all var(--transition-base);
+  }
+  .news-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+  }
+  .news-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .news-card-date {
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .news-card-read-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+  .news-card-read-time i {
+    font-size: 0.6rem;
+  }
+  .news-card-title {
+    font-family: "Playfair Display", serif;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    margin: 0;
+    transition: color var(--transition-fast);
+  }
+  .news-card:hover .news-card-title {
+    color: var(--primary);
+  }
+  .news-card-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    flex-grow: 1;
+    margin: 0;
+  }
+  .news-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--primary);
+    transition: all var(--transition-fast) var(--ease-out-expo);
+    margin-top: auto;
+  }
+  .news-card:hover .news-card-cta {
+    gap: 12px;
   }
 
   /* ═══════════════════════════════════════
@@ -3245,6 +3424,11 @@ const partners = [
       display: none;
     }
 
+    /* News */
+    .news-grid {
+      grid-template-columns: 1fr;
+    }
+
     /* Services */
     .services-grid {
       grid-template-columns: 1fr;
@@ -3347,6 +3531,12 @@ const partners = [
       white-space: normal;
       text-align: center;
     }
+    .news-card-link {
+      padding: 20px;
+    }
+    .news-card-title {
+      font-size: 1rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -3361,7 +3551,8 @@ const partners = [
     .mv-card,
     .about-value,
     .partner-card,
-    .program-item {
+    .program-item,
+    .news-card {
       animation: none !important;
       transition: none !important;
     }
