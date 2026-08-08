@@ -43,69 +43,41 @@ const leadership = [
   }
 ];
 
-// Extended team members (12, starting with Victor Otieno)
-const teamMembers = [
+// Board of Management members
+const boardMembers = [
   {
-    name: "Dr. Victor Otieno",
-    title: "Head of Medical Services",
-    image: "/images/team/victor-otieno.webp",
+    name: "Fr. Alfred Atemo",
+    title: "Board Member",
+    image: "/images/team/fr-alfred-atempo.webp",
   },
   {
-    name: "Mr. Amos Wafula",
-    title: "Physiotherapist",
-    image: "/images/team/amos-wafula.webp",
+    name: "James Odera",
+    title: "Board Member",
+    image: "/images/team/james-odera.webp",
   },
   {
-    name: "Ms. Millicent Achieng",
-    title: "Occupational Therapist",
-    image: "/images/team/millicent-achieng.webp",
+    name: "Bob Godfrey Odhiambo",
+    title: "Board Member",
+    image: "/images/team/bob-godfrey-odhiambo.webp",
   },
   {
-    name: "Mr. John Otieno",
-    title: "Orthopaedic Technologist",
-    image: "/images/team/john-otieno.webp",
+    name: "Kennedy Odongo",
+    title: "Board Member",
+    image: "/images/team/kennedy-odongo.webp",
   },
   {
-    name: "Ms. Everlyne Akinyi",
-    title: "Community Outreach Coordinator",
-    image: "/images/team/everlyne-akinyi.webp",
+    name: "Sr. Maryanne Odinga",
+    title: "Board Member",
+    image: "/images/team/sr-maryanne-odinga.webp",
   },
   {
-    name: "Mr. Bernard Omondi",
-    title: "Social Worker",
-    image: "/images/team/bernard-omondi.webp",
-  },
-  {
-    name: "Sr. Mary Goretti",
-    title: "Head Nurse",
-    image: "/images/team/mary-goretti.webp",
-  },
-  {
-    name: "Ms. Vivian Achieng",
-    title: "Administrative Assistant",
-    image: "/images/team/vivian-achieng.webp",
-  },
-  {
-    name: "Mr. Samuel Ochieng",
-    title: "Vocational Trainer",
-    image: "/images/team/samuel-ochieng.webp",
-  },
-  {
-    name: "Mr. Peter Odhiambo",
-    title: "Driver / Logistics",
-    image: "/images/team/peter-odhiambo.webp",
-  },
-  {
-    name: "Ms. Florence Atieno",
-    title: "Cook / Catering",
-    image: "/images/team/florence-atieno.webp",
-  },
-  {
-    name: "Mr. James Oloo",
-    title: "Security Supervisor",
-    image: "/images/team/james-oloo.webp",
+    name: "Philip Nyaswa",
+    title: "Board Member",
+    image: "/images/team/philip-nyaswa.webp",
   }
 ];
+
+
 ---
 
 <Layout title="Administration | Nyabondo Centre for Persons with Disabilities">
@@ -217,7 +189,42 @@ const teamMembers = [
     </div>
   </section>
 
- 
+  <!-- BOARD OF MANAGEMENT SECTION -->
+  <section class="admin-board">
+    <div class="admin-container">
+      <div class="admin-section-header">
+        <h2>Board of Management</h2>
+        <p>
+          The Board of Management provides strategic oversight and governance, ensuring Nyabondo Centre remains accountable to its mission and the communities we serve. Sr. Ludovena serves as the Secretary to the Board.
+        </p>
+      </div>
+      <div class="admin-board-grid">
+        {
+          boardMembers.map((member) => (
+            <div class="admin-board-card">
+              <div class="admin-board-image">
+                <picture>
+                  <source srcset={member.image} type="image/webp" />
+                  <img
+                    src={member.image}
+                    alt={`${member.name}, ${member.title}`}
+                    loading="lazy"
+                    width="300"
+                    height="300"
+                  />
+                </picture>
+              </div>
+              <div class="admin-board-info">
+                <h3 class="admin-board-name">{member.name}</h3>
+                <p class="admin-board-title">{member.title}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- CORE VALUES QUICK STATS -->
   <section class="admin-values">
     <div class="admin-container">
@@ -393,7 +400,7 @@ const teamMembers = [
 
   /* Leadership Grid – 3 columns for 5 cards */
   .admin-leadership {
-    padding: 96px 0;
+    padding: 96px 0 80px 0;
     background: var(--admin-bg);
   }
   .admin-leadership-grid {
@@ -477,10 +484,59 @@ const teamMembers = [
     text-decoration-color: var(--admin-primary-light);
   }
 
+  /* Board of Management Section */
+  .admin-board {
+    padding: 80px 0;
+    background: var(--admin-surface);
+  }
+  .admin-board-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+  .admin-board-card {
+    background: var(--admin-bg);
+    border-radius: var(--admin-radius);
+    overflow: hidden;
+    box-shadow: var(--admin-shadow);
+    transition:
+      transform 0.3s var(--admin-ease),
+      box-shadow 0.3s;
+    border: 1px solid var(--admin-border);
+  }
+  .admin-board-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 150, 199, 0.15);
+  }
+  .admin-board-image img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+  }
+  .admin-board-info {
+    padding: 24px;
+    text-align: center;
+  }
+  .admin-board-name {
+    font-family: "Playfair Display", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--admin-text);
+    margin-bottom: 4px;
+  }
+  .admin-board-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--admin-primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
   /* Extended Team */
   .admin-team {
     padding: 80px 0;
-    background: var(--admin-surface);
+    background: var(--admin-bg);
   }
   .admin-section-header {
     text-align: center;
@@ -504,7 +560,7 @@ const teamMembers = [
     gap: 28px;
   }
   .admin-team-card {
-    background: var(--admin-bg);
+    background: var(--admin-surface);
     border-radius: var(--admin-radius);
     padding: 20px;
     text-align: center;
@@ -573,7 +629,7 @@ const teamMembers = [
   /* CTA */
   .admin-cta {
     padding: 80px 0;
-    background: var(--admin-bg);
+    background: var(--admin-surface);
   }
   .admin-cta-card {
     background: linear-gradient(
@@ -639,6 +695,10 @@ const teamMembers = [
       grid-template-columns: repeat(2, 1fr);
       gap: 32px;
     }
+    .admin-board-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
     .admin-team-grid {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -651,7 +711,13 @@ const teamMembers = [
     .admin-leadership-grid {
       grid-template-columns: 1fr;
     }
-    .admin-leader-image img {
+    .admin-board-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .admin-leader-image img,
+    .admin-board-image img {
       height: 260px;
     }
     .admin-team-grid {
@@ -684,11 +750,16 @@ const teamMembers = [
     .admin-team-info p {
       font-size: 0.7rem;
     }
-    .admin-leader-name {
+    .admin-leader-name,
+    .admin-board-name {
       font-size: 1.2rem;
     }
-    .admin-leader-info {
+    .admin-leader-info,
+    .admin-board-info {
       padding: 20px;
+    }
+    .admin-board-grid {
+      max-width: 100%;
     }
   }
 </style>

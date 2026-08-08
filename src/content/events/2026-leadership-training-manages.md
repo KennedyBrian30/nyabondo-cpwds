@@ -178,10 +178,7 @@ The program will utilize a blended learning approach to ensure maximum engagemen
 - Continuous feedback and evaluation
 - Action planning and follow-up support
 
-<div class="event-image">
-  <img src="/images/events/leadership-training-group.webp" alt="Group discussion during leadership training" />
-  <p class="image-caption">Senior managers engaged in group discussions during a previous leadership development program at Strathmore University.</p>
-</div>
+
 
 ## Key Outcomes
 
